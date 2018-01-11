@@ -13,5 +13,3 @@ public class WalletModel {
 
 
 }
-
-class ArtifactModel{}
