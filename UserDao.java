@@ -28,7 +28,6 @@ public class UserDao {
                 UserModel user = new UserModel(firstName, lastName, email, password, status);
                 
                 this.usersList.add(user);
-                //System.out.println(usersList);
             }
     
         } catch (FileNotFoundException e) {         
@@ -47,7 +46,7 @@ public class UserDao {
             if(this.usersList.get(i).getEmail().equals(login) && this.usersList.get(i).getPassword().equals(password)) {
                 //System.out.println(this.usersList.get(i).getEmail());
                 return usersList.get(i);      
-        }
+            }
       
         }    
         return null;

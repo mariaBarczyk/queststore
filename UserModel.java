@@ -46,7 +46,6 @@ public class UserModel {
         return this.password;
     }
 
-
     public String getStatus() {
         return this.status;
     }

@@ -16,7 +16,7 @@ public class AdminView {
         }
         return mentorData;
     }
-    public String getUserInput(Strin text) {
+    public String getUserInput(String text) {
         Scanner scanner = new Scanner(System.in);
         String data = scanner.nextLine();
         scanner.close();
