@@ -8,7 +8,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class UserDao {
 
+<<<<<<< HEAD
     private List<String> usersList = new ArrayList<String>();
+=======
+    public static ArrayList<UserModel> usersList = new ArrayList<UserModel>();
+>>>>>>> login
 
     public UserDao(String fileName){
         
@@ -24,13 +28,11 @@ public class UserDao {
                 String email = details[2];
                 String password = details[3];
                 String status = details[4];
-    
-                this.usersList.add(details[0]);
-                this.usersList.add(details[1]);
-                this.usersList.add(details[2]);
-                this.usersList.add(details[3]);
-                this.usersList.add(details[4]);
-                System.out.println(Arrays.toString(details));
+
+                UserModel user = new UserModel(firstName, lastName, email, password, status);
+                
+                this.usersList.add(user);
+                //System.out.println(usersList);
             }
     
         } catch (FileNotFoundException e) {         
@@ -38,9 +40,34 @@ public class UserDao {
         }
     }
 
+<<<<<<< HEAD
     public List<String> getUsersList() {
+=======
+
+    public ArrayList<UserModel> getUsersList() {
+>>>>>>> login
         return usersList;
     }
 
 
-}    
+    public String checkIfUserExist(){
+        for (int i = 0; i<this.usersList.size(); i++) {
+            if(this.usersList.get(2).equals("kasia@gmai.com") && this.usersList.get(3).equals("kitka")) {
+                return this.usersList.get(4).toString();        
+        }
+      
+        }    
+        return null;
+    } 
+
+    public String toString(){
+        String usersString = "";
+        for (int i=0; i<usersList.size(); i++){
+            usersString = usersString + usersList.get(i).getFirstName() + " " + usersList.get(i).getLastName() + " " + usersList.get(i).getEmail() + " " + usersList.get(i).getPassword() + " " + usersList.get(i).getStatus()+ "\n";
+        }
+
+        return usersString;
+
+    }   
+}     
+
