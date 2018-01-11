@@ -1,24 +1,29 @@
 import java.util.Scanner;
 
 public class UserView {
-    String userInput;
-    Scanner scanner;
 
-    public void displayLoginPanel(String email, String password){}
-
-    public void displayWelcomeMessage(){}
-
-    public String getUserInput(){
-        boolean inputReceived = false;
-        scanner = new Scanner(System.in);
-        while(!inputReceived){
-        if(scanner.hasNext()){
-            userInput = scanner.nextLine();
-            inputReceived = true;
-        }else{
-            System.out.println("Invalid input");}
+        public void displayWelcomeMessage () {
+            System.out.println("Welcome to the Codecool Queststore!");
         }
-        return userInput;
-    }
 
+        public String getLogin (){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter your email: ");
+            String login = scanner.nextLine();
+            return login;
+        }
+
+        public String getPassword () {
+            System.out.println("Enter your password: ");
+            Scanner scanner = new Scanner(System.in);
+            String password = scanner.nextLine();
+            return password;
+        }
+
+        public static void main(String[] args) {
+            UserView user = new UserView();
+            user.displayWelcomeMessage();
+            System.out.println(user.getLogin());
+            System.out.println(user.getPassword());
+    }
 }
