@@ -11,16 +11,5 @@ public class WalletModel {
         this.artifactCollection = new ArrayList<ArtifactModel>();
     }
 
-    public int getBalance() {
-        return balance;
-    }
 
-    public int getTotalCoolcoins() {
-        return totalCoolcoins;
-    }
-
-    public ArrayList<ArtifactModel> getArtifactCollection() {
-        return artifactCollection;
-    }
 }
-

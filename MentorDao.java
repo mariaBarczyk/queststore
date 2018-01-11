@@ -13,9 +13,9 @@ public class MentorDao implements MentorModelInterface {
     }
 
     public void addMentor() {
-        MentorModel mentor1 = new MentorModel(1, "Karol", "Słon", "karol@gmail.com", "slon");
-        MentorModel mentor2 = new MentorModel(2, "Paweł", "Koń", "pawel@gmail.com", "kon");
-        MentorModel mentor3 = new MentorModel(3, "Marcin", "Kot", "marcin@gmail.com", "kot");
+        MentorModel mentor1 = new MentorModel("Karol", "Słon", "karol@gmail.com", "slon", "Mentor");
+        MentorModel mentor2 = new MentorModel("Paweł", "Koń", "pawel@gmail.com", "kon", "Mentor");
+        MentorModel mentor3 = new MentorModel("Marcin", "Kot", "marcin@gmail.com", "kot", "Mentor");
         this.mentorsList.add(mentor1);
         this.mentorsList.add(mentor2);
         this.mentorsList.add(mentor3);

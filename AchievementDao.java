@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class AchievementDao {
 
-    ArrayList achievementList;
+    ArrayList<AchievementModel> achievementList;
 
     public AchievementDao() {
         achievementList = new ArrayList<>();
@@ -10,7 +11,7 @@ public class AchievementDao {
     public void createAchievement(char type) {
         
     }
-    public ArrayList getAllAchievements() {
+    public List getAllAchievements() {
         return achievementList;
     }
     // public ArrayList getStudentAchievments() {
