@@ -8,11 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class UserDao {
 
-<<<<<<< HEAD
-    private List<String> usersList = new ArrayList<String>();
-=======
     public static ArrayList<UserModel> usersList = new ArrayList<UserModel>();
->>>>>>> login
 
     public UserDao(String fileName){
         
@@ -40,12 +36,8 @@ public class UserDao {
         }
     }
 
-<<<<<<< HEAD
-    public List<String> getUsersList() {
-=======
 
     public ArrayList<UserModel> getUsersList() {
->>>>>>> login
         return usersList;
     }
 

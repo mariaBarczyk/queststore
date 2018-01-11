@@ -1,3 +1,5 @@
+//import java.util.Scanner;
+
 public class Application {
 
     public static void main(String[] args){
@@ -13,10 +15,6 @@ public class Application {
         System.out.println(mdao.getMentorsList());
         System.out.println("***** Users List*****\n");
         UserDao udao = new UserDao("user_data.txt");
-<<<<<<< HEAD
-        //System.out.println(udao.getUsersList());
- 
-=======
         System.out.println(udao.getUsersList());
         System.out.println("***** Users List ----- STRING*****");
         System.out.println(udao.toString());
@@ -24,6 +22,8 @@ public class Application {
         AdminDao adao = new AdminDao();
         adao.addAdmin();
         System.out.println(adao.getAdminsList());
->>>>>>> login
+        UserView view = new UserView();
+        String login = view.getLogin();
+        System.out.println(login);
     }
 }
