@@ -1,16 +1,17 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class AchievementDao {
 
     ArrayList achievementList;
 
     public AchievementDao() {
-        achievementList = new ArrayList<>();
+        achievementList = new List<>();
     }
     public void createAchievement(char type) {
         
     }
-    public ArrayList getAllAchievements() {
+    public List getAllAchievements() {
         return achievementList;
     }
     // public ArrayList getStudentAchievments() {
