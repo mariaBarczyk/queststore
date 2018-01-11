@@ -42,9 +42,9 @@ public class UserDao {
     }
 
 
-    public String checkIfUserExist(){
+    public String checkIfUserExist(String login, String password){
         for (int i = 0; i<this.usersList.size(); i++) {
-            if(this.usersList.get(2).equals("kasia@gmai.com") && this.usersList.get(3).equals("kitka")) {
+            if(this.usersList.get(i).equals("kasia@gmai.com") && this.usersList.get(3).equals("kitka")) {
                 return this.usersList.get(4).toString();        
         }
       

@@ -3,10 +3,10 @@ import java.util.List;
 
 public class AchievementDao {
 
-    ArrayList achievementList;
+    ArrayList<AchievementModel> achievementList;
 
     public AchievementDao() {
-        achievementList = new List<>();
+        achievementList = new ArrayList<>();
     }
     public void createAchievement(char type) {
         

@@ -24,6 +24,6 @@ public class Application {
         System.out.println(adao.getAdminsList());
         UserView view = new UserView();
         String login = view.getLogin();
-        System.out.println(login);
+        //System.out.println(login);
     }
 }
