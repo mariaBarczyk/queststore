@@ -8,11 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class UserDao {
 
-<<<<<<< HEAD
-    private List<String> usersList = new ArrayList<String>();
-=======
     public static ArrayList<UserModel> usersList = new ArrayList<UserModel>();
->>>>>>> login
 
     public UserDao(String fileName){
         
@@ -40,20 +36,17 @@ public class UserDao {
         }
     }
 
-<<<<<<< HEAD
-    public List<String> getUsersList() {
-=======
 
     public ArrayList<UserModel> getUsersList() {
->>>>>>> login
         return usersList;
     }
 
 
-    public String checkIfUserExist(){
+    public UserModel checkIfUserExist(String login, String password){
         for (int i = 0; i<this.usersList.size(); i++) {
-            if(this.usersList.get(2).equals("kasia@gmai.com") && this.usersList.get(3).equals("kitka")) {
-                return this.usersList.get(4).toString();        
+            if(this.usersList.get(i).getEmail().equals(login) && this.usersList.get(i).getPassword().equals(password)) {
+                //System.out.println(this.usersList.get(i).getEmail());
+                return usersList.get(i);      
         }
       
         }    

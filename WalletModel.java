@@ -20,7 +20,5 @@ public class WalletModel {
         return totalCoolcoins;
     }
 
-    public ArrayList<ArtifactModel> getArtifactCollection() {
-        return artifactCollection;
-    }
 }
+git
