@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class UserDao {
 
-    private ArrayList<String> usersList = new ArrayList<String>();
+    private List<String> usersList = new ArrayList<String>();
 
     public UserDao(String fileName){
         
@@ -38,7 +38,7 @@ public class UserDao {
         }
     }
 
-    public ArrayList<String> getUsersList() {
+    public List<String> getUsersList() {
         return usersList;
     }
 

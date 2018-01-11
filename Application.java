@@ -12,7 +12,7 @@ public class Application {
         System.out.println(mdao.getMentorsList());
         System.out.println("***** Users List*****\n");
         UserDao udao = new UserDao("user_data.txt");
-        System.out.println(udao.getUsersList());
+        //System.out.println(udao.getUsersList());
  
     }
 }
