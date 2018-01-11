@@ -1,11 +1,15 @@
 public class StudentModel extends UserModel {
-    //ClassModel myClass;
-    //WalletModel wallet;
+    ClassModel myClass;
+    WalletModel myWallet;
     
     
-    public StudentModel(String firstName, String lastName, String email, String password, String status) {
+    public StudentModel(String firstName, String lastName, String email, String password, String status, ClassModel myClass, WalletModel myWallet) {
+
         super(firstName, lastName, email, password, status);
-        // TODO
+        this.myClass = myClass;
+        this.myWallet = myWallet;
+
+
     } 
     
 }
