@@ -11,7 +11,9 @@ public class Application {
 
         System.out.println("***** Mentors List*****\n");
         MentorDao mdao = new MentorDao();
-        mdao.addMentor();
+        mdao.importMentorsData();
+        MentorModel mentor = mdao.getMentor(0);
+        mdao.addMentor(mentor);
         System.out.println(mdao.getMentorsList());
         System.out.println("***** Users List*****\n");
         UserDao udao = new UserDao("user_data.txt");
