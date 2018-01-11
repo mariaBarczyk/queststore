@@ -12,7 +12,7 @@ public class MentorView {
                     + "8 - See student's wallet");
         }
 
-        
+
         public int getInput() {
             int option = 0;
             boolean optionNotSelected = true;
