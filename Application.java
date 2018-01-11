@@ -24,6 +24,8 @@ public class Application {
         System.out.println(adao.getAdminsList());
         UserView view = new UserView();
         String login = view.getLogin();
+        String password = view.getPassword();
+        System.out.println(udao.checkIfUserExist(login, password));
         //System.out.println(login);
     }
 }
