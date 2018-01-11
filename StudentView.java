@@ -31,7 +31,7 @@ public class StudentView {
     public void seeYourWallet(){
         WalletModel myWallet = new WalletModel();
         System.out.println("CURRENTLY IN YOUR WALLET:");
-        System.out.println(myWallet.getTotalCoolcoins());
+        //System.out.println(myWallet.getTotalCoolcoins());
 
     }
 }
