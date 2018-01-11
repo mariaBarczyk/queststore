@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class MentorDao {
+public class MentorDao implements MentorModelInterface {
     private List<MentorModel> mentorsList;
 
     public MentorDao() {
@@ -19,6 +19,17 @@ public class MentorDao {
         this.mentorsList.add(mentor1);
         this.mentorsList.add(mentor2);
         this.mentorsList.add(mentor3);
+    }
+    public void getMentor() {
+    
+    }
+    public void createMentor(String mentorData) {
+        String firstName = details[0];
+        String lastName = details[1];
+        String email = details[2];
+        String password = details[3];
+        String status = details[4];
+        MentorModel newMentor = new MentorModel(ID, firstName, lastName, email, password)
     }
 
     
