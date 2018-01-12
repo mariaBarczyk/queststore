@@ -5,16 +5,16 @@ public class AdminDao {
     public static List<AdminModel> adminsList;
 
     public AdminDao() {
-        this.adminsList = new ArrayList<AdminModel>();
+        adminsList = new ArrayList<AdminModel>();
     }
 
     public List<AdminModel> getAdminsList() {
-        return this.adminsList;
+        return adminsList;
     }
 
     public void addAdmin() {
         AdminModel admin = new AdminModel("Karol", "Kwiatek", "admin@gmail.com", "admin", "Admin");
-        this.adminsList.add(admin);
+        adminsList.add(admin);
     }
     
 }    

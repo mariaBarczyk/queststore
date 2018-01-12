@@ -5,7 +5,7 @@ public abstract class AchievementModel {
     String description;
     int value;
     
-    public AchievementModel(char type, String name, String description, int value) {  //zmienic na protected
+    public AchievementModel(char type, String name, String description, int value) {
         this.type = type;
         this.name = name;
         this.description = description;

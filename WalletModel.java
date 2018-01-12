@@ -14,10 +14,7 @@ public class WalletModel {
     public int getBalance() {
         return balance;
     }
-
-
     public int getTotalCoolcoins() {
         return totalCoolcoins;
     }
-
 }

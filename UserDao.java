@@ -27,7 +27,7 @@ public class UserDao {
 
                 UserModel user = new UserModel(firstName, lastName, email, password, status);
                 
-                this.usersList.add(user);
+                usersList.add(user);
             }
     
         } catch (FileNotFoundException e) {         
@@ -42,9 +42,9 @@ public class UserDao {
 
 
     public UserModel checkIfUserExist(String login, String password){
-        for (int i = 0; i<this.usersList.size(); i++) {
-            if(this.usersList.get(i).getEmail().equals(login) && this.usersList.get(i).getPassword().equals(password)) {
-                //System.out.println(this.usersList.get(i).getEmail());
+        for (int i = 0; i<usersList.size(); i++) {
+            if(usersList.get(i).getEmail().equals(login) && usersList.get(i).getPassword().equals(password)) {
+                //System.out.println(usersList.get(i).getEmail());
                 return usersList.get(i);      
             }
       
