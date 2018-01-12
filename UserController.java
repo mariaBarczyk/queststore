@@ -14,9 +14,9 @@ public class UserController {
     }
     public void start(UserModel user) {
         if (user.getStatus().equals("Student")) {
-            // StudentController studentController = new StudentController();
+            StudentView.displayStudentMenu();
         } else if (user.getStatus().equals("Mentor")) {
-            // MentorController mentorController = new MentorController();
+            MentorView.displayMentorMenu();
         } else if (user.getStatus().equals("Admin")) {
             AdminController adminController = new AdminController();
             adminController.start();
