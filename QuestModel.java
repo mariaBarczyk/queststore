@@ -5,6 +5,5 @@ public class QuestModel extends AchievementModel {
     public QuestModel(char type, String name, String description, int value) {
         super(type, name, description, value);
         this.used = false;
-
     }
 }

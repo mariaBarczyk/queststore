@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class StudentView {
-    public void displayStudentMenu(){
+    public static void displayStudentMenu(){
         System.out.println("1 - See your wallet.\n"
                 + "2 - Buy artifact.\n"
                 + "3 - Buy artifact together with teammates.\n"

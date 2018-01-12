@@ -10,8 +10,5 @@ public class StudentModel extends UserModel {
         super(firstName, lastName, email, password, status);
         this.myClass = myClass;
         this.myWallet = myWallet;
-
-
-    } 
-    
+    }  
 }

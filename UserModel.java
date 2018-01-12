@@ -7,7 +7,6 @@ public class UserModel {
     private String email;
     private String password;
     private String status;
- 
 
     public UserModel() {
         this.ID = 0;
@@ -15,10 +14,8 @@ public class UserModel {
         this.lastName = null;
         this.email = null;
         this.password = null;
-        this.status = null;
-        
+        this.status = null;       
     }
-
     public UserModel(String firstName, String lastName, String email, String password, String status) {
         this.ID = LastID;
         LastID += 1;
@@ -27,31 +24,26 @@ public class UserModel {
         this.email = email;
         this.password = password;
         this.status = status;    
-
     } 
-
     public String getFirstName() {
         return this.firstName;
     }
-
     public String getLastName() {
         return this.lastName;
     }
- 
     public String getEmail() {
         return this.email;
     }
-
     public String getPassword() {
         return this.password;
     }
-
     public String getStatus() {
         return this.status;
     }
-
     public String toString(){
         return this.firstName + " " + this.lastName + " " + this.email + " " + this.password + " " + this.status;
     }
-    
+    public Integer getID() {
+        return this.ID;
+    }
 }

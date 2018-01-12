@@ -6,24 +6,19 @@ public class UserIterator implements Iterator {
     private List<StudentModel> studentsList;
 
     public UserIterator(List<StudentModel> studentsList){
-        this.studentsList = studentsList;
-        
+        this.studentsList = studentsList;      
     }
-    
-
     @Override
-    public boolean hasNext() {
-    
+    public boolean hasNext() { 
         if(index < studentsList.size()) {
             return true;
         } else {
             return false;
         }
     }
-
     @Override
     public Object next() {
-    
+   
         if(this.hasNext()){
             return studentsList.get(index++);
         } else {
