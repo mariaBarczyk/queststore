@@ -17,10 +17,4 @@ public class UserView {
         String password = scanner.nextLine();
         return password;
     }
-    public static void main(String[] args) {
-        UserView user = new UserView();
-        user.displayWelcomeMessage();
-        System.out.println(user.getLogin());
-        System.out.println(user.getPassword());
-    }
 }
