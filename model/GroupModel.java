@@ -7,4 +7,7 @@ public class GroupModel {
     public GroupModel(String name) {
         this.groupName = name;
     }
+    public String getGroupName() {
+        return this.groupName;
+    }
 }
