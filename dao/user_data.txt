@@ -1,3 +1,0 @@
-Kasia,Drobna,kasia@gmail.com,kitka,Student
-Maria,Barszczyk,maria@gmail.com,kawa,Mentor
-Justyna,Fornalik,justyna@gmail.com,latte,Admin
