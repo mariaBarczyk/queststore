@@ -18,7 +18,6 @@ public class AdminController {
     public GroupModel selectGroup() {
         // List<GroupModel> allGroups = AdminModel.getGroupList();
         return new GroupModel("A");
-
     }
 
     public void createMentor() {
@@ -33,5 +32,8 @@ public class AdminController {
     public void createGroup() {
         String groupName = getDataFromGetInput("Enter group name: ");
         GroupModel newGroup = new GroupModel(groupName);
+    }
+    public void addGroupToCollection(GroupModel group) {
+        AdminModel.addToGroupList(group);
     }
 }
