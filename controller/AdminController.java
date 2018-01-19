@@ -4,6 +4,12 @@ import queststore.model.MentorModel;
 
 public class AdminController {
 
+    private String getDataFromGetInput(String text) {
+        InputController inputController = new InputController();
+        String data = inputController.getStringInput(text);
+        return data;
+    }
+
     public void createMentor() {
         String mentorName = getDataFromGetInput("Enter mentor name: ");
         String mentorLastName = getDataFromGetInput("Enter mentor last name: ");
@@ -12,9 +18,8 @@ public class AdminController {
         MentorModel newMentor = new MentorModel(mentorName, mentorLastName, mentorEmail, mentorPassword);
     }
 
-    private String getDataFromGetInput(String text) {
-        InputController inputController = new InputController();
-        String data = inputController.getStringInput(text);
-        return data;
+    public void createGroup() {
+        String groupName = getDataFromGetInput("Enter group name: ");
+        GroupModel newGroup = new GroupModel(groupName);
     }
 }
