@@ -1,3 +1,5 @@
+package queststore-kryptonimjava.controller;
+
 import java.util.Scanner;
 import java.util.List;
 

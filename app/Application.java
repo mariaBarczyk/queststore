@@ -1,3 +1,4 @@
+package queststore-kryptonimjava.app;
 //import java.util.Scanner;
 
 public class Application {
@@ -10,7 +11,7 @@ public class Application {
         System.out.println(udao.toString());
         AdminDao adao = new AdminDao();
         adao.addAdmin();
-        System.out.println(adao.getAdminsList());
+        // System.out.println(adao.getAdminsList());
         UserController controller = new UserController();
         UserModel user = controller.logIn(); 
         controller.start(user);  

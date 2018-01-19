@@ -1,3 +1,5 @@
+package queststore-kryptonimjava.controller;
+
 public class UserController {
 
     UserView view;
