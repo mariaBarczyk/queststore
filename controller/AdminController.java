@@ -1,16 +1,24 @@
 package queststore.controller;
 
+import java.security.acl.Group;
 import java.util.List;
 
-import queststore.model.*;
+import queststore.controller.InputController;
+import queststore.view.AdminView;
+import queststore.model.MentorModel;
+import queststore.model.GroupModel;
 
 public class AdminController {
 
+    private AdminView view;
+    private InputController inputController;
+
     public AdminController() {
+        view = new AdminView();
+        inputController = new InputController();
     }
 
-    private String getDataFromGetInput(String text) {
-        InputController inputController = new InputController();
+    private String getStringFromInputController(String text) {
         String data = inputController.getStringInput(text);
         return data;
     }
@@ -21,19 +29,59 @@ public class AdminController {
     }
 
     public void createMentor() {
-        String mentorName = getDataFromGetInput("Enter mentor name: ");
-        String mentorLastName = getDataFromGetInput("Enter mentor last name: ");
-        String mentorEmail = getDataFromGetInput("Enter mentor email: ");
-        String mentorPassword = getDataFromGetInput("Enter mentor password: ");
+        String mentorName = inputController.getStringInput("Enter mentor name: ");
+        String mentorLastName = inputController.getStringInput("Enter mentor last name: ");
+        String mentorEmail = inputController.getStringInput("Enter mentor email: ");
+        String mentorPassword = inputController.getStringInput("Enter mentor password: ");
         GroupModel group = selectGroup();
         MentorModel newMentor = new MentorModel(mentorName, mentorLastName, mentorEmail, mentorPassword, group);
     }
 
     public void createGroup() {
-        String groupName = getDataFromGetInput("Enter group name: ");
+        String groupName = inputController.getStringInput("Enter group name: ");
         GroupModel newGroup = new GroupModel(groupName);
     }
-    public void addGroupToCollection(GroupModel group) {
-        AdminModel.addToGroupList(group);
+
+    public MentorModel selectMentor() {
+
+        List<MentorModel> allMentors = MentorModel.getMentorsCollection();
+        view.displayAllMentors(allMentors);
+        String mentorId = inputController.getStringInput("Enter mentor full name: ");
+        MentorModel matchedMentor = null;
+        for (MentorModel mentor: allMentors) {
+            if (mentor.getFullName().equals(mentorId)) {
+                matchedMentor = mentor;
+            }
+        } 
+        return matchedMentor;
+    }
+    public void editMentorData() {
+        MentorModel mentorToEdit = selectMentor();        
+        boolean exit = false;
+        while (!exit) {
+            view.displayEditMentorMenu();
+            int userChoice = inputController.getIntInput(" ");
+            switch(userChoice) {
+                case 1:
+                    mentorToEdit.setName(inputController.getStringInput("Enter mentor name:"));
+                    break;
+                case 2:
+                    mentorToEdit.setLastName(inputController.getStringInput("Enter mentor last name"));
+                    break;
+                case 3:
+                    mentorToEdit.setEmail(inputController.getStringInput("Enter mentor email"));
+                    break;
+                case 4:
+                    mentorToEdit.setLastName(inputController.getStringInput("Enter mentor password"));
+                    break;
+                case 5:
+                    GroupModel group = selectGroup();
+                    mentorToEdit.setGroup(group);
+                    break;
+                default:
+                    exit = true;
+                    break;
+            }
+        }
     }
 }
