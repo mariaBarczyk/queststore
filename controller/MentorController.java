@@ -39,10 +39,10 @@ public class MentorController {
                     createArtifact();
                     break;
                 case 4:
-                    changePriceOfItem();
+                    changePriceOfItem("Quest");
                     break;
                 case 5:
-                    changePriceOfItem();
+                    changePriceOfItem("Artifact");
                     break; 
                 case 6:
                     // Mark student's achieved quests\n"
@@ -51,7 +51,7 @@ public class MentorController {
                     // Mark student's bought artifacts\n"
                     break;    
                 case 8:
-                    // See student's wallet\n"
+                    displayStudentWallet();
                     break;                                                            
                 case 9:
                     exit = true;
@@ -90,21 +90,36 @@ public class MentorController {
         ArtifactModel newArtifact = new ArtifactModel("Artifact", artifactName, artifactDescription, artifactValue);        
     }
 
-    private ItemModel selectItem() {
+    private ItemModel selectItem(String type) {
         List<ItemModel> itemCollection = ItemModel.getItemCollection();
         view.displayItemCollection(itemCollection);
-        String chosenType = inputController.getStringInput("Enter Type of item: ");
         String chosenName = inputController.getStringInput("Enter name of item: ");
         ItemModel matchedItem = null;
         for (ItemModel item: itemCollection) 
-            if (item.getType().equals(chosenType) && item.getName().equals(chosenName))
+            if (item.getType().equals(type) && item.getName().equals(chosenName))
                 matchedItem = item;
         return matchedItem;
     }
 
-    public void changePriceOfItem() {
-        ItemModel item = selectItem();
+    public void changePriceOfItem(String type) {
+        ItemModel item = selectItem(type);
         int newPrice = inputController.getIntInput("Enter new price: ");
         item.setValue(newPrice);
+    }
+
+    public StudentModel selectStudent() {
+        List<StudentModel> allStudents = StudentModel.getStudentsCollection();
+        view.displayAllStudents(allStudents);
+        String fullName = inputController.getStringInput("Enter student full name: ");
+        StudentModel matchedStudent = null;
+        for (StudentModel student: allStudents)
+            if (student.getFullName().equals(fullName)) 
+                matchedStudent = student;
+        return matchedStudent;
+    }
+    public void displayStudentWallet() {
+        StudentModel student = selectStudent();
+        WalletModel wallet = student.getWallet();
+        view.displayStudentWallet(wallet);
     }   
 }
