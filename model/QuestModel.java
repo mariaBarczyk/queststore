@@ -5,13 +5,16 @@ import java.util.ArrayList;
 
 public class QuestModel extends ItemModel { 
     
-        boolean used;
-        private static List<QuestModel> questCollection = new ArrayList<>(); 
-    
-        public QuestModel(char type, String name, String description, int value) {
-            super(type, name, description, value);
-            this.used = false;
-        }
+    boolean used;
+    private static List<QuestModel> questCollection = new ArrayList<>(); 
+
+    public QuestModel(String type, String name, String description, int value) {
+        super(type, name, description, value);
+        this.used = false;
     }
+    public String getName() {
+        return this.name;
+    }
+}
     
 
