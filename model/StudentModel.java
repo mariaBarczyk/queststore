@@ -12,7 +12,7 @@ public class StudentModel extends UserModel {
         this.myGroup = group;
         // this.myWallet = myWallet;
     }
-    public void getGroup() {
+    public GroupModel getGroup() {
         return this.myGroup;
     }  
 }
