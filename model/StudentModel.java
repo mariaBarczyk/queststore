@@ -11,5 +11,8 @@ public class StudentModel extends UserModel {
         super(firstName, lastName, email, password, status);
         this.myGroup = group;
         // this.myWallet = myWallet;
+    }
+    public void getGroup() {
+        return this.myGroup;
     }  
 }
