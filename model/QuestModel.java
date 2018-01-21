@@ -12,8 +12,8 @@ public class QuestModel extends ItemModel {
         super(type, name, description, value);
         this.used = false;
     }
-    public String getName() {
-        return this.name;
+    public boolean getIsUsed() {
+        return this.used;
     }
 }
     

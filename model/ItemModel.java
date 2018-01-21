@@ -13,4 +13,13 @@ public abstract class ItemModel {
         this.description = description;
         this.value = value;
     }
+    public String getName() {
+        return this.name;
+    }
+    public String getDescription() {
+        return this.name;
+    }
+    public String getValue() {
+        return this.name;
+    }
 }
