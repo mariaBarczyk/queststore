@@ -18,10 +18,14 @@ public class StudentModel extends UserModel {
         this.myWallet = myWallet;
         studentCollection.add(this);
     }
+
     public GroupModel getGroup() {
         return this.myGroup;
     }  
     public WalletModel getWallet() {
         return this.myWallet;
+    }
+    public static List<StudentModel> getStudentsCollection() {
+        return studentCollection;
     }
 }
