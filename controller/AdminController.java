@@ -35,6 +35,9 @@ public class AdminController {
                 case 4:
                     displayMentorData();
                     break;
+                case 5:
+                    exit = true;
+                    break;
                 default:
                     System.out.println("Wrong number!");
             }
@@ -61,7 +64,6 @@ public class AdminController {
     }
 
     public MentorModel selectMentor() {
-
         List<MentorModel> allMentors = MentorModel.getMentorsCollection();
         view.displayAllMentors(allMentors);
         String fullName = inputController.getStringInput("Enter mentor full name: ");
@@ -106,4 +108,5 @@ public class AdminController {
         MentorModel mentor = selectMentor();
         view.displayMentorData(mentor);
     }
+
 }
