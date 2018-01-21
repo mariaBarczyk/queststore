@@ -54,8 +54,8 @@ public class AdminController {
         String mentorLastName = inputController.getStringInput("Enter mentor last name: ");
         String mentorEmail = inputController.getStringInput("Enter mentor email: ");
         String mentorPassword = inputController.getStringInput("Enter mentor password: ");
-        GroupModel group = selectGroup();
-        MentorModel newMentor = new MentorModel(mentorName, mentorLastName, mentorEmail, mentorPassword, group);
+        GroupModel mentorGroup = selectGroup();
+        MentorModel newMentor = new MentorModel(mentorName, mentorLastName, mentorEmail, mentorPassword, mentorGroup);
     }
 
     public void createGroup() {
