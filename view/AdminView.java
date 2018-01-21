@@ -7,11 +7,12 @@ import java.util.List;
 public class AdminView {
 
     public void displayAdminMenu(){
-        System.out.println("MENU: \n" +
+        System.out.println("\nMENU: \n" +
                             "1 - Create mentor\n" +
-                            "2 - Create class\n" + 
+                            "2 - Create new group\n" + 
                             "3 - Edit mentor\n" +
-                            "4 - Display mentor data\n");
+                            "4 - Display mentor data\n" +
+                            "5 - Exit\n");
     }
 
     public void displayEditMentorMenu() {
@@ -29,6 +30,10 @@ public class AdminView {
         }
     }
     public void displayMentorData(MentorModel mentor) {
-        System.out.println(mentor.toString());
+        System.out.println("\n===MENTOR DATA==\n"
+                         + mentor.getFullName() 
+                         + "\nemail: " + mentor.getEmail() 
+                         + "\npassword: " + mentor.getPassword()
+                         + "\ngroup name: " + mentor.getGroup().getGroupName() + '\n');
     }
 }
