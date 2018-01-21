@@ -8,17 +8,16 @@ public class UserModel {
     private String lastName;
     private String email;
     private String password;
-    private String status;
 
 
-    public UserModel(String firstName, String lastName, String email, String password, String status) {
+    public UserModel(String firstName, String lastName, String email, String password) {
             this.ID = LastID;
             LastID += 1;
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
             this.password = password;
-            this.status = status;    
+
     } 
     public String getFirstName() {
         return this.firstName;
@@ -32,14 +31,8 @@ public class UserModel {
     public String getPassword() {
         return this.password;
     }
-    public String getStatus() {
-        return this.status;
-    }
     public String getFullName() {
         return this.firstName + " " + this.lastName;
-    }
-    public String toString(){
-        return this.firstName + " " + this.lastName + " " + this.email + " " + this.password + " " + this.status;
     }
     public Integer getID() {
         return this.ID;

@@ -8,9 +8,10 @@ import java.util.ArrayList;
 public class AdminModel extends UserModel {
 
     private static final List<GroupModel> allGroups = new ArrayList<>();
+    private static String status = "Admin";
     
-    public AdminModel(String firstName, String lastName, String email, String password, String status) {
-        super(firstName, lastName, email, password, status);
+    public AdminModel(String firstName, String lastName, String email, String password) {
+        super(firstName, lastName, email, password);
     }   
     
     public static List<GroupModel> getGroupList() {

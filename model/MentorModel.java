@@ -7,11 +7,12 @@ import java.util.ArrayList;
 
 public class MentorModel extends UserModel {
 
+    private static String status = "Mentor";
     private GroupModel group;
     private static List<MentorModel> mentorsCollection = new ArrayList<>(); 
 
     public MentorModel(String firstName, String lastName, String email, String password, GroupModel group) {
-        super(firstName, lastName, email, password, "Mentor");
+        super(firstName, lastName, email, password);
         this.group = group; 
         mentorsCollection.add(this);
     }
