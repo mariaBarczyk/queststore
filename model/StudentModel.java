@@ -1,10 +1,14 @@
 package queststore.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentModel extends UserModel {
 
     private static String status = "Student";
     private GroupModel myGroup;
     private WalletModel myWallet;
+    private static List<StudentModel> studentCollection = new ArrayList<>();
     
     public StudentModel(String firstName, String lastName, String email, String password,
                         GroupModel group, WalletModel myWallet) {
@@ -12,6 +16,7 @@ public class StudentModel extends UserModel {
         super(firstName, lastName, email, password);
         this.myGroup = group;
         this.myWallet = myWallet;
+        studentCollection.add(this);
     }
     public GroupModel getGroup() {
         return this.myGroup;
