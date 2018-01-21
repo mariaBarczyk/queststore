@@ -1,12 +1,11 @@
 package queststore.controller;
 
-import java.security.acl.Group;
 import java.util.List;
-
 import queststore.controller.InputController;
 import queststore.view.AdminView;
 import queststore.model.MentorModel;
 import queststore.model.GroupModel;
+
 
 public class AdminController {
 
@@ -18,9 +17,28 @@ public class AdminController {
         inputController = new InputController();
     }
 
-    private String getStringFromInputController(String text) {
-        String data = inputController.getStringInput(text);
-        return data;
+    public void controlMenuOptions() {
+        boolean exit = false;
+        while (!exit) {
+            view.displayAdminMenu();
+            int userChoice = inputController.getIntInput("SELECT AN OPTION: ");
+            switch (userChoice) {
+                case 1:
+                    createMentor();
+                    break;
+                case 2:
+                    createGroup();
+                    break;
+                case 3:
+                    editMentorData();
+                    break;
+                case 4:
+                    displayMentorData();
+                    break;
+                default:
+                    System.out.println("Wrong number!");
+            }
+        }
     }
 
     public GroupModel selectGroup() {
@@ -46,15 +64,14 @@ public class AdminController {
 
         List<MentorModel> allMentors = MentorModel.getMentorsCollection();
         view.displayAllMentors(allMentors);
-        String mentorId = inputController.getStringInput("Enter mentor full name: ");
+        String fullName = inputController.getStringInput("Enter mentor full name: ");
         MentorModel matchedMentor = null;
-        for (MentorModel mentor: allMentors) {
-            if (mentor.getFullName().equals(mentorId)) {
+        for (MentorModel mentor: allMentors)
+            if (mentor.getFullName().equals(fullName)) 
                 matchedMentor = mentor;
-            }
-        } 
         return matchedMentor;
     }
+
     public void editMentorData() {
         MentorModel mentorToEdit = selectMentor();        
         boolean exit = false;
@@ -83,5 +100,10 @@ public class AdminController {
                     break;
             }
         }
+    }
+
+    public void displayMentorData() {
+        MentorModel mentor = selectMentor();
+        view.displayMentorData(mentor);
     }
 }
