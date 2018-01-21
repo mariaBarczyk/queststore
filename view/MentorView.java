@@ -1,7 +1,11 @@
 package queststore.view;
 
 import queststore.model.ItemModel;
+import queststore.model.StudentModel;
+import queststore.model.WalletModel;
+
 import java.util.List;
+
 
 public class MentorView {
 
@@ -21,5 +25,15 @@ public class MentorView {
     public void displayItemCollection(List<ItemModel> itemCollection) {
         for (ItemModel item: itemCollection) 
             System.out.println("TYPE: " + item.getType() + " NAME: " +item.getName());
+    }
+
+    public void displayAllStudents(List<StudentModel> studentsCollection) {
+        for (StudentModel student: studentsCollection) {
+            System.out.println(student.getFullName());
+        }
+    }
+    public void displayStudentWallet(WalletModel wallet) {
+        System.out.println("\nBALANCE: " + wallet.getBalance() +
+                           "\nTOTAL COOLCOINS: " + wallet.getTotalCoolcoins());
     }
 }
