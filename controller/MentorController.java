@@ -45,7 +45,7 @@ public class MentorController {
                     changePriceOfItem("Artifact");
                     break; 
                 case 6:
-                    // Mark student's achieved quests\n"
+                    markQuest();
                     break;  
                 case 7:
                     // Mark student's bought artifacts\n"
@@ -121,5 +121,10 @@ public class MentorController {
         StudentModel student = selectStudent();
         WalletModel wallet = student.getWallet();
         view.displayStudentWallet(wallet);
+    }
+    public void markQuest() {
+        StudentModel selectedStudent = selectStudent();
+        QuestModel selectedQuest = selectItem("Quest");
+        selectedStudent.setValuesInWallet(selectedQuest.getValue());
     }   
 }
