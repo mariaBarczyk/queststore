@@ -7,12 +7,12 @@ public class WalletModel {
 
     private int totalCoolcoins;
     private int balance;
-    private List<ArtifactModel> artifactCollection;
+    private List<ItemModel> artifactCollection;
 
     public WalletModel() {
         this.totalCoolcoins = 0;
         this.balance = 0;
-        this.artifactCollection = new ArrayList<ArtifactModel>();
+        this.artifactCollection = new ArrayList<>();
     }
     public int getBalance() {
         return balance;
@@ -26,7 +26,7 @@ public class WalletModel {
     public void setBalance(int value) {
         this.balance += value;
     }
-    public  List<ArtifactModel> getArtifactCollection() {
+    public  List<ItemModel> getArtifactCollection() {
         return artifactCollection;
     }
 }
