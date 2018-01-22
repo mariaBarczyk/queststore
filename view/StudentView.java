@@ -2,21 +2,21 @@ package queststore.view;
 
 import queststore.model.WalletModel;
 import queststore.model.ArtifactModel;
+import queststore.model.ItemModel;
 
 import java.util.List;
 
 public class StudentView {
 
-    private void displayArtifacts(WalletModel wallet) {
-        List<ArtifactModel> artifactsCollection = wallet.getArtifactCollection();
-        for (ArtifactModel artifact: artifactsCollection) {
-            System.out.println(artifact.getName());
+    public void displayCollectionOfItem(List<ItemModel> itemCollection) {
+        for (ItemModel item: itemCollection) {
+            System.out.println(item.getName() + item.getValue());
         }
     }
 
     public void displayWallet(WalletModel wallet) {
         System.out.println("\nBALANCE: " + wallet.getBalance() +
                            "\nTOTAL COOLCOINS: " + wallet.getTotalCoolcoins());
-        displayArtifacts(wallet);
+        displayCollectionOfItem(wallet.getArtifactCollection());
     }
 }
