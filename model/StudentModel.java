@@ -28,4 +28,8 @@ public class StudentModel extends UserModel {
     public static List<StudentModel> getStudentsCollection() {
         return studentCollection;
     }
+    public void setValuesInWallet(int value) {
+        this.myWallet.setTotalCoolcoins(value);
+        this.myWallet.setBalance(value);
+    }
 }

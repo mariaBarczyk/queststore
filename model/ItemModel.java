@@ -28,7 +28,7 @@ public abstract class ItemModel {
     public String getDescription() {
         return this.name;
     }
-    public String getValue() {
+    public int getValue() {
         return this.name;
     }
     public void setValue(int newValue) {
