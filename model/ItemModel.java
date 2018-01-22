@@ -26,10 +26,10 @@ public abstract class ItemModel {
         return this.type;
     }
     public String getDescription() {
-        return this.name;
+        return this.description;
     }
     public int getValue() {
-        return this.name;
+        return this.value;
     }
     public void setValue(int newValue) {
         this.value = newValue;

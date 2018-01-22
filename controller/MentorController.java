@@ -124,7 +124,7 @@ public class MentorController {
     }
     public void markQuest() {
         StudentModel selectedStudent = selectStudent();
-        QuestModel selectedQuest = selectItem("Quest");
+        ItemModel selectedQuest = selectItem("Quest");
         selectedStudent.setValuesInWallet(selectedQuest.getValue());
     }   
 }
