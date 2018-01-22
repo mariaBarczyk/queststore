@@ -26,4 +26,7 @@ public class WalletModel {
     public void setBalance(int value) {
         this.balance += value;
     }
+    public  List<ArtifactModel> getArtifactCollection() {
+        return artifactCollection;
+    }
 }
