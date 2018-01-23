@@ -1,7 +1,6 @@
 package controller;
 
 import view.UserView;
-import model.UserModel;
 import dao.QueststoreDao;
 
 
@@ -16,8 +15,9 @@ public class UserController {
     public void logIn() {
         String login = inputController.getStringInput("Enter login: ");
         String password = inputController.getStringInput("Enter password: ");
-        QueststoreDao dao = new QueststoreDao("user_data.txt");
-//        UserModel user = userDao.checkIfUserExist(login, password);
-//        return user;
+        QueststoreDao dao = new QueststoreDao();
+        dao.checkIfUserExist(login,password);
+        dao.getAllDataFromTable("Login");
+        return user;
     }
 }

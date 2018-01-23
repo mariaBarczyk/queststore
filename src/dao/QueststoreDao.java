@@ -15,17 +15,18 @@ public class QueststoreDao {
         }
         return connection;
     }
+
     private void closeConnection(Connection connection) {
         try {
             connection.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
     }
 
     public void insertDataIntoTable(String tableName, String columns, String values) {
+        Connection connection = getConnection();
         try {
-            Connection connection = getConnection();
             Statement statement = connection.createStatement();
             String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + values + ");";
             statement.executeUpdate(sql);
@@ -33,18 +34,20 @@ public class QueststoreDao {
             e.printStackTrace();
         }
     }
+
     public ResultSet selectDataFromTable(String tableName, String columns, String values) {
         ResultSet result = null;
         try {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
             String sql = "SELECT " + tableName + " FROM " + columns;
-            result = statement.executeQuery();
+            result = statement.executeQuery(sql);
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
         return result;
     }
+
     public ResultSet getAllDataFromTable(String tableName) {
         ResultSet result = null;
         try {
@@ -52,11 +55,10 @@ public class QueststoreDao {
             Statement statement = connection.createStatement();
             String sql = "SELECT * FROM " + tableName;
             statement.executeUpdate(sql);
-            result = statement.executeQuery();
+            result = statement.executeQuery(sql);
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
         return result;
     }
 }
-
