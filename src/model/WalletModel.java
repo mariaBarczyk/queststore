@@ -29,4 +29,7 @@ public class WalletModel {
     public  List<ItemModel> getArtifactCollection() {
         return artifactCollection;
     }
+    public void addArtifact(ItemModel artifact) {
+        this.artifactCollection.add(artifact);
+    }
 }
