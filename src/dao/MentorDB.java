@@ -12,8 +12,16 @@ public class MentorDB {
         SqlDB dataBase = new SqlDB();
         String table = "Mentor";
         String columns = "(first_name, last_name, email, password, id_status, id_group)";
-        String values = "'" + mentorName + "', '" + mentorLastName + "', '" + mentorEmail + "','" + mentorPassword + "', " + 2 + ", " + 1";
+        String values = "'" + mentorName + "', '" + mentorLastName + "', '" + mentorEmail + "','" + mentorPassword + "', " + 2 + ", " + 1 + "";
         dataBase.insertDataIntoTable(table, columns, values);
+    }
+
+    public void updateMentorData(int mentorsId, String column, String input ) {
+        SqlDB dataBase = new SqlDB();
+        String table = "Mentor";
+        String sqlQuery = "UPDATE"+ table +" SET " + column +"='"+input+"' WHERE id ="+mentorsId+";";
+        dataBase.updateData(table, sqlQuery);
+
     }
 
 }
