@@ -1,4 +1,4 @@
-package queststore.controller;
+package controller;
 
 import java.util.List;
 import queststore.controller.InputController;

@@ -1,4 +1,4 @@
-package queststore.model;
+package model;
 
 public class GroupModel {
 

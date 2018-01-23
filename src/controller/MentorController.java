@@ -1,4 +1,4 @@
-package queststore.controller;
+package controller;
 
 import queststore.view.MentorView;
 import queststore.model.StudentModel;

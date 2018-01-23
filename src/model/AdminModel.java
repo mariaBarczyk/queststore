@@ -1,13 +1,13 @@
-package queststore.model;
+package model;
 
-import queststore.model.MentorModel;
-import queststore.model.GroupModel;
+
 import java.util.List;
 import java.util.ArrayList;
 
 public class AdminModel extends UserModel {
 
-    private static final List<GroupModel> allGroups = new ArrayList<>();
+    private static UserModel model;
+    private static List<GroupModel> allGroups = new ArrayList<>();
     private static String status = "Admin";
     
     public AdminModel(String firstName, String lastName, String email, String password) {
