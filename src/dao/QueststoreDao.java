@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.*;
 
+
 public class QueststoreDao {
 
     private Connection getConnection() {
@@ -15,6 +16,7 @@ public class QueststoreDao {
         }
         return connection;
     }
+
     private void closeConnection(Connection connection) {
         try {
             connection.close();
@@ -36,6 +38,7 @@ public class QueststoreDao {
             closeConnection(connection);
         }
     }
+
     public ResultSet selectDataFromTable(String tableName, String columns) {
         ResultSet result = null;
         Connection connection = getConnection();
@@ -51,6 +54,7 @@ public class QueststoreDao {
         }
         return result;
     }
+
     public ResultSet selectDataFromTable(String tableName, String columns, String condition) {
         ResultSet result = null;
         Connection connection = getConnection();
@@ -82,15 +86,15 @@ public class QueststoreDao {
         return result;
     }
     public boolean checkIfUserExist(String login, String password) {
-        boolean result = false;
+        boolean userExist = false;
         String loginData = login + " " + password;
-         = selectDataFromTable("Login", "email||' '|||password ASS full_login", "full_login=" + loginData);
+        ResultSet result = selectDataFromTable("Login", "email||' '|||password AS full_login", "full_login=" + loginData);
         try {
-            loginData = result.next();
+            userExist = result.next();
         } catch (SQLException e) {
             System.out.println(e.getStackTrace());
         }
-
+        return userExist;
     }
 }
 
