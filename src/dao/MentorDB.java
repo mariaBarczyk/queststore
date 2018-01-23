@@ -12,7 +12,7 @@ public class MentorDB {
         SqlDB dataBase = new SqlDB();
         String table = "Mentor";
         String columns = "(first_name, last_name, email, password, id_status, id_group)";
-        String values = "('" + mentorName + "', '" + mentorLastName + "', '" + mentorEmail + "','" + mentorPassword + "', " + 2 + ", " + 1 + ");";
+        String values = "'" + mentorName + "', '" + mentorLastName + "', '" + mentorEmail + "','" + mentorPassword + "', " + 2 + ", " + 1";
         dataBase.insertDataIntoTable(table, columns, values);
     }
 
