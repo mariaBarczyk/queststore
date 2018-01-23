@@ -23,26 +23,40 @@ public class QueststoreDao {
         }
     }
 
-    public void insertDataIntoTable(String table, String columns, String values) {
+    public void insertDataIntoTable(String tableName, String columns, String values) {
         try {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
-            String sql = "INSERT INTO " + table + " " + columns + " VALUES " + values + ");";
+            String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + values + ");";
             statement.executeUpdate(sql);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void selectDataFromTable(String table, String columns, String values) {
+    public ResultSet selectDataFromTable(String tableName, String columns, String values) {
+        ResultSet result = null;
         try {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT " + table + " FROM " + columns;
-            statement.executeUpdate(sql);
+            String sql = "SELECT " + tableName + " FROM " + columns;
+            result = statement.executeQuery();
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
-
+        return result;
+    }
+    public ResultSet getAllDataFromTable(String tableName) {
+        ResultSet result = null;
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM " + tableName;
+            statement.executeUpdate(sql);
+            result = statement.executeQuery();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+        return result;
     }
 }
 
