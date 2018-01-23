@@ -33,5 +33,16 @@ public class QueststoreDao {
             e.printStackTrace();
         }
     }
+    public void selectDataFromTable(String table, String columns, String values) {
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT " + table + " FROM " + columns;
+            statement.executeUpdate(sql);
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+
+    }
 }
 
