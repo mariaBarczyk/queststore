@@ -1,5 +1,5 @@
 public class GroupDB{
-    
+
     public void addNewGroup(String groupName){
         SqlDB dataBase = new SqlDB();
         String table = "Group";
