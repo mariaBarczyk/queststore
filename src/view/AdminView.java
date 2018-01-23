@@ -1,7 +1,8 @@
-package queststore.view;
+package view;
 
 
-import queststore.model.MentorModel;
+import model.MentorModel;
+
 import java.util.List; 
 
 public class AdminView {

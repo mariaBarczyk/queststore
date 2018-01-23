@@ -1,23 +1,23 @@
 package controller;
 
-import queststore.view.UserView;
-//import queststore.view.UserModel;
+import view.UserView;
+import model.UserModel;
 
 
 public class UserController {
+    InputController inputController = new InputController();
 
     public UserController() {
         UserView view = new UserView();
-        InputController inputController = new InputController();
+
+
     }
+
     public void logIn() {
         String login = inputController.getStringInput("Enter login: ");
         String password = inputController.getStringInput("Enter password: ");
 //        UserDao userDao = new UserDao("user_data.txt");
 //        UserModel user = userDao.checkIfUserExist(login, password);
 //        return user;
-    }
-    public static void main() {
-
     }
 }

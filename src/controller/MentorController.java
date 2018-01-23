@@ -1,13 +1,12 @@
 package controller;
 
-import queststore.view.MentorView;
-import queststore.model.StudentModel;
-import queststore.model.WalletModel;
-import queststore.controller.InputController;
-import queststore.model.GroupModel;
-import queststore.model.ItemModel;
-import queststore.model.QuestModel;
-import queststore.model.ArtifactModel;
+import view.MentorView;
+import model.StudentModel;
+import model.WalletModel;
+import model.GroupModel;
+import model.ItemModel;
+import model.QuestModel;
+import model.ArtifactModel;
 
 import java.util.List;
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
-package queststore.view;
+package view;
 
-import queststore.model.ItemModel;
-import queststore.model.StudentModel;
-import queststore.model.WalletModel;
+import model.ItemModel;
+import model.StudentModel;
+import model.WalletModel;
 
 import java.util.List;
 

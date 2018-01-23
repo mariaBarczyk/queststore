@@ -1,10 +1,9 @@
 package controller;
 
 import java.util.List;
-import queststore.controller.InputController;
-import queststore.view.AdminView;
-import queststore.model.MentorModel;
-import queststore.model.GroupModel;
+import view.AdminView;
+import model.MentorModel;
+import model.GroupModel;
 
 
 public class AdminController {

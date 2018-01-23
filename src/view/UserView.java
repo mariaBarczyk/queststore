@@ -1,4 +1,4 @@
-package queststore.view;
+package view;
 
 
 public class UserView {

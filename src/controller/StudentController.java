@@ -2,9 +2,8 @@ package controller;
 
 import java.util.List;
 
-import queststore.controller.InputController;
-import queststore.model.ItemModel;
-import queststore.view.StudentView;
+import model.ItemModel;
+import view.StudentView;
 
 public class StudentController {
 
