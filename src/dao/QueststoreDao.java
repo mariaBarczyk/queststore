@@ -5,6 +5,18 @@ import java.sql.*;
 
 public class QueststoreDao {
 
+    private Statement statement;
+    private Connection connection;
+
+    public QueststoreDao(){
+        this.connection = getConnection();
+        try {
+            this.statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Connection getConnection() {
         Connection connection = null;
         try {
@@ -20,81 +32,54 @@ public class QueststoreDao {
     private void closeConnection(Connection connection) {
         try {
             connection.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
     }
 
-    public void insertDataIntoTable(String tableName, String columns, String values) {
-        Connection connection = getConnection();
+    public ResultSet selectDataFromTable( String tableName, String columns, String condition) {
+        ResultSet result = null;
         try {
-
-            Statement statement = connection.createStatement();
+            String sql = "SELECT " + columns + " FROM " + tableName + " WHERE " + condition + ";";
+            System.out.println(sql);
+            result = statement.executeQuery(sql);
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+        return result;
+    }
+    public void insertDataIntoTable(String tableName, String columns, String values) {
+        try {
             String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + values + ");";
             statement.executeUpdate(sql);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            closeConnection(connection);
         }
     }
 
-    public ResultSet selectDataFromTable(String tableName, String columns) {
-        ResultSet result = null;
-        Connection connection = getConnection();
+    private int findUserId(String login, String password) {
+        int idStatus = 0;
+        ResultSet result = selectDataFromTable("Login", "id_status", "email='" + login + "' AND password='" + password + "'");
         try {
-            Statement statement = connection.createStatement();
-            String sql = "SELECT " + columns + " FROM " + tableName;
-
-            result = statement.executeQuery(sql);
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-        } finally {
-            closeConnection(connection);
-        }
-        return result;
-    }
-
-    public ResultSet selectDataFromTable(String tableName, String columns, String condition) {
-        ResultSet result = null;
-        Connection connection = getConnection();
-        try {
-            Statement statement = connection.createStatement();
-            String sql = "SELECT " + columns + " FROM " + tableName + "WHERE" + condition;
-            result = statement.executeQuery(sql);
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-        } finally {
-            closeConnection(connection);
-        }
-        return result;
-    }
-
-
-    public ResultSet getAllDataFromTable(String tableName) {
-        ResultSet result = null;
-        Connection connection = getConnection();
-        try {
-            Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM " + tableName;
-            result = statement.executeQuery(sql);
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-        } finally {
-            closeConnection(connection);
-        }
-        return result;
-    }
-    public boolean checkIfUserExist(String login, String password) {
-        boolean userExist = false;
-        String loginData = login + " " + password;
-        ResultSet result = selectDataFromTable("Login", "email||' '|||password AS full_login", "full_login=" + loginData);
-        try {
-            userExist = result.next();
+            while (result.next())
+                idStatus = result.getInt("id_status");
+                System.out.println(idStatus);
         } catch (SQLException e) {
-            System.out.println(e.getStackTrace());
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        return userExist;
+        return idStatus;
+    }
+
+    public String findStatus(String login, String password) {
+        int idStatus = findUserId(login, password);
+        ResultSet result = selectDataFromTable("status", "name", "id_status=" + idStatus);
+        String statusName = null;
+        try {
+            statusName = result.getString("name");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println(statusName);
+        return statusName;
     }
 }
-
