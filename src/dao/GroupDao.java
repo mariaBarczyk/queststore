@@ -1,6 +1,6 @@
 package dao;
 
-public class GroupDB{
+public class GroupDao{
 
     public void addNewGroup(String groupName){
         QuestStoreDao dao = new QueststoreDao();
