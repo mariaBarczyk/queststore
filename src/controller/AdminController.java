@@ -4,6 +4,7 @@ import java.util.List;
 import view.AdminView;
 import model.MentorModel;
 import model.GroupModel;
+import dao.*;
 
 
 public class AdminController {
@@ -53,8 +54,10 @@ public class AdminController {
         String mentorLastName = inputController.getStringInput("Enter mentor last name: ");
         String mentorEmail = inputController.getStringInput("Enter mentor email: ");
         String mentorPassword = inputController.getStringInput("Enter mentor password: ");
-        GroupModel mentorGroup = selectGroup();
-        MentorModel newMentor = new MentorModel(mentorName, mentorLastName, mentorEmail, mentorPassword, mentorGroup);
+        //GroupModel mentorGroup = selectGroup();
+        MentorDao mentorDao = new MentorDao();
+        mentorDao.insertNewMentor(mentorName, mentorLastName, mentorEmail, mentorPassword);
+        //MentorModel newMentor = new MentorModel(mentorName, mentorLastName, mentorEmail, mentorPassword, mentorGroup);
     }
 
     public void createGroup() {
