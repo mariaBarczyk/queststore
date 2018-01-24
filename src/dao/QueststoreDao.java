@@ -29,7 +29,7 @@ public class QueststoreDao {
         Connection connection = getConnection();
         try {
             Statement statement = connection.createStatement();
-            String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + values + ");";
+            String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + "("+ values + ");";
             statement.executeUpdate(sql);
         } catch (Exception e) {
             e.printStackTrace();
