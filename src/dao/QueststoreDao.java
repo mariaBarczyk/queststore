@@ -48,6 +48,23 @@ public class QueststoreDao {
         return result;
     }
 
+    public int getMaxValueInTable(String tableName, String columnName) {
+        ResultSet result = null;
+        int resultInt = 0;
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT MAX("+ columnName + ") FROM " + tableName + ";";
+            statement.executeUpdate(sql);
+            result = statement.executeQuery(sql);
+            resultInt = result.getInt(0);
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+        return resultInt;
+    }
+
+
     public ResultSet getAllDataFromTable(String tableName) {
         ResultSet result = null;
         try {
