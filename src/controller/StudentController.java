@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.ItemModel;
 import view.StudentView;
+import model.StudentModel;
 
 
 public class StudentController {

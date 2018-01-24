@@ -2,6 +2,8 @@
 *.class
 *.db
 *.idea
+*.db-journal
+*.db.sql
 
 # Log file
 *.log
