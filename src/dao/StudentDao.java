@@ -8,7 +8,7 @@ public class StudentDao{
         QueststoreDao dao = new QueststoreDao();
         String tableName = "Wallet";
         String columns = "(totalCoolcoins, balance, id_artifact)";
-        String values = (0+", "+0+", "+null);
+        String values = (0 +", "+ 0 +", " + null);
         dao.insertDataIntoTable(tableName, columns, values);
 
 
