@@ -1,7 +1,7 @@
 package dao;
 
 
-public class MentorDB {
+public class MentorDao {
 
     public void insertNewMentor(String mentorName, String mentorLastName, String mentorEmail, String mentorPassword, String mentorGroup) {
         QueststoreDao dao = new Queststore();
@@ -14,8 +14,9 @@ public class MentorDB {
     public void updateMentorData(int mentorsId, String column, String input ) {
         QueststoreDao dao = new Queststore();
         String table = "Mentor";
-        String sqlQuery = "UPDATE"+ table +" SET " + column +"='"+input+"' WHERE id ="+mentorsId+";";
-        dao.updateDataInTable(table, sqlQuery);
+        String setQuery = column +"='"+input+"'";
+        String condition = ("id_mentor = " + mentorsId);
+        dao.updateDataInTable(table, setQuery, condition);
 
     }
 
