@@ -29,7 +29,7 @@ public class QueststoreDao {
         return connection;
     }
 
-    private void closeConnection(Connection connection) {
+    public void closeConnection() {
         try {
             connection.close();
         } catch (Exception e) {
@@ -98,8 +98,10 @@ public class QueststoreDao {
             statusName = result.getString("name");
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            closeConnection();
+        } System.out.println(statusName);
+            return statusName;
         }
-        System.out.println(statusName);
-        return statusName;
     }
-}
+
