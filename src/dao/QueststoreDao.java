@@ -52,12 +52,10 @@ public class QueststoreDao {
     
     public void insertDataIntoTable(String tableName, String columns, String values) {
         try {
-            String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + values + ");";
+            String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + values;
             statement.executeUpdate(sql);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-        closeConnection();
         }
     }
 
@@ -69,7 +67,6 @@ public class QueststoreDao {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
             String sql = "SELECT MAX("+ columnName + ") FROM " + tableName + ";";
-            statement.executeUpdate(sql);
             result = statement.executeQuery(sql);
             resultInt = result.getInt(0);
         } catch (Exception e) {
