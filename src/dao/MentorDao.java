@@ -20,9 +20,7 @@ public class MentorDao {
         System.out.println(idLoginResult);
         try{
             idLogin = idLoginResult.getInt("id_login");
-            System.out.println(idLogin);
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
         }
         System.out.println(idLogin);
 
