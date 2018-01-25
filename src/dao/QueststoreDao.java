@@ -53,6 +53,7 @@ public class QueststoreDao {
     public void insertDataIntoTable(String tableName, String columns, String values) {
         try {
             String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + values;
+            System.out.println(sql);
             statement.executeUpdate(sql);
         } catch (Exception e) {
             e.printStackTrace();

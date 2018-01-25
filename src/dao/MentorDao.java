@@ -10,18 +10,21 @@ public class MentorDao {
 
         String loginTable = "Login";
         int idStatus = 2;
-        String loginColumns = "(id_status, email, password)";
-        String loginValues = "("+idStatus + "', '"+mentorEmail+"', '"+ mentorPassword + ");" ;
+        String loginColumns = "(email, password, id_status)";
+        String loginValues = "('"+mentorEmail+"', '"+ mentorPassword + "', " + idStatus + ");";
         dao.insertDataIntoTable(loginTable, loginColumns, loginValues);
 
-        String condition = "email =" + mentorEmail + "AND password = "+mentorPassword;
+        String condition = "email = '" + mentorEmail + "' AND password = '"+mentorPassword+"'";
         int idLogin = 0;
         ResultSet idLoginResult = dao.selectDataFromTable("Login","id_login", condition);
+        System.out.println(idLoginResult);
         try{
-            idLogin = idLoginResult.getInt(0);
+            idLogin = idLoginResult.getInt("id_login");
+            System.out.println(idLogin);
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
+        System.out.println(idLogin);
 
         int id_group = 1;
         String table = "Mentor";
