@@ -1,7 +1,5 @@
 package controller;
 
-import dao.QueststoreDao;
-
 public class RootController {
 
     UserController userController;

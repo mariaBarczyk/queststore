@@ -27,13 +27,13 @@ public class MentorDao extends QueststoreDao{
         insertDataIntoTable(table, columns, values);
     }
 
-    public void updateMentorData(int mentorsId, String column, String input ) {
+    /*public void updateMentorData(int mentorsId, String column, String input ) {
         String table = "Mentor";
         String setQuery = column +"='"+input+"'";
         String condition = ("id_mentor = " + mentorsId);
         //updateDataInTable(table, setQuery, condition);
 
-    }
+    }*/
 
 }
 
