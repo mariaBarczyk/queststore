@@ -56,6 +56,8 @@ public class QueststoreDao {
             statement.executeUpdate(sql);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+        closeConnection();
         }
     }
 
