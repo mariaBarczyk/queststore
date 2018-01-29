@@ -80,7 +80,6 @@ fabric.properties
 
 # *.iml
 *.iml
-queststore-kryptonimjava.iml
 # modules.xml
 # .idea/misc.xml
 # *.ipr
