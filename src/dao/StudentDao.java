@@ -15,8 +15,8 @@ public class StudentDao extends QueststoreDao{
         }
 
         String tableName = "Wallet";
-        String columns = "(totalCoolcoins, balance, id_student)";
-        String values = (0 +", "+ 0 +", " + idStudent);
+        String columns = "(total_coolcoins, balance, id_student)";
+        String values = "("+0 +", "+ 0 +", " + idStudent + ")";
         insertDataIntoTable(tableName, columns, values);
 
 
