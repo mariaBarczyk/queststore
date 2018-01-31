@@ -1,5 +1,6 @@
 package controller;
 
+import dao.StudentDao;
 import view.MentorView;
 import model.StudentModel;
 import model.WalletModel;
@@ -70,9 +71,11 @@ public class MentorController {
         String studentLastName = inputController.getStringInput("Enter student last name: ");
         String studentEmail = inputController.getStringInput("Enter student email: ");
         String studentPassword = inputController.getStringInput("Enter student password: ");
-        GroupModel group = selectGroup();
-        WalletModel wallet = new WalletModel();
-        StudentModel newStudent = new StudentModel(studentName, studentLastName, studentEmail, studentPassword, group, wallet);
+        StudentDao studentDao = new StudentDao();
+        studentDao.insertNewStudent(studentName, studentLastName, studentEmail, studentPassword);
+        //GroupModel group = selectGroup();
+        //WalletModel wallet = new WalletModel();
+        //StudentModel newStudent = new StudentModel(studentName, studentLastName, studentEmail, studentPassword, group, wallet);
     }
 
     public void createQuest() {

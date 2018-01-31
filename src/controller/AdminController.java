@@ -30,7 +30,7 @@ public class AdminController {
                     createGroup();
                     break;
                 case 3:
-                    editMentorData();
+                    editMentorDataPanel();
                     break;
                 case 4:
                     displayMentorData();
@@ -44,71 +44,122 @@ public class AdminController {
         }
     }
 
-    public GroupModel selectGroup() {
+    private GroupModel selectGroup() {
         // List<GroupModel> allGroups = AdminModel.getGroupList();
         return new GroupModel("A");
     }
 
-    public void createMentor() {
+    private void createMentor() {
         String mentorName = inputController.getStringInput("Enter mentor name: ");
         String mentorLastName = inputController.getStringInput("Enter mentor last name: ");
         String mentorEmail = inputController.getStringInput("Enter mentor email: ");
         String mentorPassword = inputController.getStringInput("Enter mentor password: ");
-        //GroupModel mentorGroup = selectGroup();
         MentorDao mentorDao = new MentorDao();
         mentorDao.insertNewMentor(mentorName, mentorLastName, mentorEmail, mentorPassword);
-        //MentorModel newMentor = new MentorModel(mentorName, mentorLastName, mentorEmail, mentorPassword, mentorGroup);
     }
 
-    public void createGroup() {
+    private void createGroup() {
         String groupName = inputController.getStringInput("Enter group name: ");
-        GroupModel newGroup = new GroupModel(groupName);
+        GroupDao groupDao = new GroupDao();
+        groupDao.addNewGroup(groupName);
     }
 
-    public MentorModel selectMentor() {
-        List<MentorModel> allMentors = MentorModel.getMentorsCollection();
+    private MentorModel selectMentor() {
+        MentorDao mentorDao = new MentorDao();
+        List<MentorModel> allMentors = mentorDao.getAllMentorsCollection();
         view.displayAllMentors(allMentors);
-        String fullName = inputController.getStringInput("Enter mentor full name: ");
+        int id = inputController.getIntInput("Enter mentor id to edit: ");
         MentorModel matchedMentor = null;
         for (MentorModel mentor: allMentors)
-            if (mentor.getFullName().equals(fullName)) 
+            if (mentor.getID().equals(id))
                 matchedMentor = mentor;
         return matchedMentor;
     }
 
-    public void editMentorData() {
-        MentorModel mentorToEdit = selectMentor();        
-        boolean exit = false;
-        while (!exit) {
+    private void editMentorDataPanel() {
+        MentorModel mentorToEdit = selectMentor();
+        int userChoice = 0;
+        while (userChoice != 5) {
             view.displayEditMentorMenu();
-            int userChoice = inputController.getIntInput(" ");
-            switch(userChoice) {
+            userChoice = inputController.getIntInput("Select field number to edit: ");
+            switch (userChoice) {
                 case 1:
-                    mentorToEdit.setName(inputController.getStringInput("Enter mentor name:"));
+                    String name = inputController.getStringInput("Enter mentor name:");
+                    mentorToEdit.setName(name);
                     break;
                 case 2:
-                    mentorToEdit.setLastName(inputController.getStringInput("Enter mentor last name"));
+                    String lastName = inputController.getStringInput("Enter mentor last name");
+                    mentorToEdit.setLastName(lastName);
                     break;
                 case 3:
-                    mentorToEdit.setEmail(inputController.getStringInput("Enter mentor email"));
+                    String email = inputController.getStringInput("Enter mentor email");
+                    mentorToEdit.setEmail(email);
                     break;
                 case 4:
-                    mentorToEdit.setLastName(inputController.getStringInput("Enter mentor password"));
-                    break;
-                case 5:
-                    GroupModel group = selectGroup();
-                    mentorToEdit.setGroup(group);
+                    String password = inputController.getStringInput("Enter mentor password");
+                    mentorToEdit.setPassword(password);
                     break;
                 default:
-                    exit = true;
                     break;
             }
         }
+        MentorDao mentorDao = new MentorDao();
+        mentorDao.updateMentorData(mentorToEdit);
     }
 
-    public void displayMentorData() {
+    private void displayMentorData() {
         MentorModel mentor = selectMentor();
         view.displayMentorData(mentor);
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

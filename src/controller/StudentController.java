@@ -17,7 +17,7 @@ public class StudentController {
         inputController = new InputController();
     }
 
-    public void controlMenuOptions() {
+    public void controlMenuOptions(int loginId) {
         boolean exit = false;
         while (!exit) {
             view.displayStudentMenu();
@@ -30,10 +30,10 @@ public class StudentController {
                     //buyArtifact(student);
                     break;
                 case 3:
-                    //Buy artifact together with teammates;
+                    //Buy artifact together with teammates; CHYBA TNIEMY
                     break;
                 case 4:
-                    //4 - See your level of experience\n";
+                    //4 - See your level of experience\n"; TEŻ MIELIŚMY CIĄĆ
                     break;                                                         
                 case 9:
                     exit = true;

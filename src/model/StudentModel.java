@@ -10,10 +10,10 @@ public class StudentModel extends UserModel {
     private WalletModel myWallet;
     private static List<StudentModel> studentCollection = new ArrayList<>();
     
-    public StudentModel(String firstName, String lastName, String email, String password,
+    public StudentModel(int id, String firstName, String lastName, String email, String password,
                         GroupModel group, WalletModel myWallet) {
 
-        super(firstName, lastName, email, password);
+        super(id, firstName, lastName, email, password);
         this.myGroup = group;
         this.myWallet = myWallet;
         studentCollection.add(this);

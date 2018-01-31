@@ -33,7 +33,7 @@ public class QueststoreDao {
         try {
             connection.close();
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
 
@@ -44,7 +44,18 @@ public class QueststoreDao {
             System.out.println(sql);
             result = statement.executeQuery(sql);
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return result;
+    }
+    public ResultSet selectFromJoinedTables(String columns, String tableName, String joinTable, String joinStatement) {
+        ResultSet result = null;
+        try {
+            String sql = "SELECT " + columns + " FROM " + tableName + " JOIN " + joinTable + " ON " + joinStatement + ";";
+            System.out.println(sql);
+            result = statement.executeQuery(sql);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         return result;
     }
@@ -52,15 +63,25 @@ public class QueststoreDao {
     
     public void insertDataIntoTable(String tableName, String columns, String values) {
         try {
-            String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + values;
+            String sql = "INSERT INTO " + tableName + " (" + columns + ") VALUES (" + values+ ")";
             System.out.println(sql);
             statement.executeUpdate(sql);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
 
-    private int findUserId(String login, String password) {
+    public void updateDataInTable(String table, String setQuerry, String condition) {
+        try {
+            String sql = "UPDATE " + table + " SET " + setQuerry + " WHERE " + condition;
+            System.out.println(sql);
+            statement.executeUpdate(sql);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+    }
+
+    public int findStatusId(String login, String password) {
         int idStatus = 0;
         ResultSet result = selectDataFromTable("Login", "id_status", "email='" + login + "' AND password='" + password + "'");
         try {
@@ -73,18 +94,30 @@ public class QueststoreDao {
         return idStatus;
     }
 
-    public String findStatus(String login, String password) {
-        int idStatus = findUserId(login, password);
+    public String findStatus(int idStatus) {
         ResultSet result = selectDataFromTable("status", "name", "id_status=" + idStatus);
         String statusName = null;
         try {
             statusName = result.getString("name");
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
         } finally {
             closeConnection();
-        } System.out.println(statusName);
-            return statusName;
         }
+        return statusName;
     }
+
+    public int findLoginId(String login, String password) {
+        int loginId = 0;
+        ResultSet result = selectDataFromTable("Login", "id_login", " email='" + login + "' AND password='" + password + "'");
+        try {
+            loginId = result.getInt("id_login");
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        } finally {
+            closeConnection();
+        }
+        return loginId;
+    }
+}
 
