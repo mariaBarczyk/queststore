@@ -30,7 +30,7 @@ public class AdminController {
                     createGroup();
                     break;
                 case 3:
-                    editMentorData();
+                    editMentorDataPanel();
                     break;
                 case 4:
                     displayMentorData();
@@ -54,10 +54,8 @@ public class AdminController {
         String mentorLastName = inputController.getStringInput("Enter mentor last name: ");
         String mentorEmail = inputController.getStringInput("Enter mentor email: ");
         String mentorPassword = inputController.getStringInput("Enter mentor password: ");
-        //GroupModel mentorGroup = selectGroup();
         MentorDao mentorDao = new MentorDao();
         mentorDao.insertNewMentor(mentorName, mentorLastName, mentorEmail, mentorPassword);
-        //MentorModel newMentor = new MentorModel(mentorName, mentorLastName, mentorEmail, mentorPassword, mentorGroup);
     }
 
     public void createGroup() {
@@ -67,44 +65,56 @@ public class AdminController {
     }
 
     public MentorModel selectMentor() {
-        List<MentorModel> allMentors = MentorModel.getMentorsCollection();
+        MentorDao mentorDao = new MentorDao();
+        List<MentorModel> allMentors = mentorDao.getAllMentorsCollection();
         view.displayAllMentors(allMentors);
-        String fullName = inputController.getStringInput("Enter mentor full name: ");
+        int id = inputController.getIntInput("Enter mentor id to edit: ");
         MentorModel matchedMentor = null;
         for (MentorModel mentor: allMentors)
-            if (mentor.getFullName().equals(fullName)) 
+            if (mentor.getID().equals(id))
                 matchedMentor = mentor;
         return matchedMentor;
     }
 
-    public void editMentorData() {
-        MentorModel mentorToEdit = selectMentor();        
-        boolean exit = false;
-        while (!exit) {
+    public void updateMentor(MentorModel mentor) {
+        QueststoreDao dao = new QueststoreDao();
+        String name = mentor.getFirstName();
+        String lastName = mentor.getLastName();
+        int id = mentor.getID();
+//        String email = mentor.getEmail();
+//        String password = mentor.getPassword();
+        dao.updateDataInTable("Mentor", "first_name='"+name+"', last_name='"+lastName+"'", "id_mentor=" + id);
+//        dao.updateDataInTable("Login", "first_name='"+name+" 'last_name='"+lastName+"'", "id_mentor=" + id);
+    }
+
+    public void editMentorDataPanel() {
+        MentorModel mentorToEdit = selectMentor();
+        int userChoice = 0;
+        while (userChoice != 5) {
             view.displayEditMentorMenu();
-            int userChoice = inputController.getIntInput(" ");
-            switch(userChoice) {
+            userChoice = inputController.getIntInput("Select field number to edit: ");
+            switch (userChoice) {
                 case 1:
-                    mentorToEdit.setName(inputController.getStringInput("Enter mentor name:"));
+                    String name = inputController.getStringInput("Enter mentor name:");
+                    mentorToEdit.setName(name);
                     break;
                 case 2:
-                    mentorToEdit.setLastName(inputController.getStringInput("Enter mentor last name"));
+                    String lastName = inputController.getStringInput("Enter mentor last name");
+                    mentorToEdit.setLastName(lastName);
                     break;
                 case 3:
-                    mentorToEdit.setEmail(inputController.getStringInput("Enter mentor email"));
+                    String email = inputController.getStringInput("Enter mentor email");
+                    mentorToEdit.setEmail(email);
                     break;
                 case 4:
-                    mentorToEdit.setLastName(inputController.getStringInput("Enter mentor password"));
-                    break;
-                case 5:
-                    GroupModel group = selectGroup();
-                    mentorToEdit.setGroup(group);
+                    String password = inputController.getStringInput("Enter mentor password");
+                    mentorToEdit.setPassword(password);
                     break;
                 default:
-                    exit = true;
                     break;
             }
         }
+        updateMentor(mentorToEdit);
     }
 
     public void displayMentorData() {
@@ -113,3 +123,53 @@ public class AdminController {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
