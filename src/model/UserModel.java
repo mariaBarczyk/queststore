@@ -2,17 +2,15 @@ package model;
 
 public class UserModel {
 
-    private int ID;
-    private static int LastID = 0; 
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
 
 
-    public UserModel(String firstName, String lastName, String email, String password) {
-            this.ID = LastID;
-            LastID += 1;
+    public UserModel(int id, String firstName, String lastName, String email, String password) {
+            this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
@@ -35,7 +33,7 @@ public class UserModel {
         return this.firstName + " " + this.lastName;
     }
     public Integer getID() {
-        return this.ID;
+        return this.id;
     }
     public void setName(String name) {
         this.firstName = name;
