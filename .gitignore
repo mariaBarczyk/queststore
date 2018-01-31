@@ -4,7 +4,7 @@
 *.idea
 *.db-journal
 *.db.sql
-
+*.iml
 # Log file
 *.log
 out
