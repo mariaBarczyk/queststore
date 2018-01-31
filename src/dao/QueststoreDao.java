@@ -45,11 +45,21 @@ public class QueststoreDao {
             result = statement.executeQuery(sql);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//        } finally {
-//            closeConnection();
         }
         return result;
     }
+    public ResultSet selectFromJoinedTables(String columns, String tableName, String joinTable, String joinStatement) {
+        ResultSet result = null;
+        try {
+            String sql = "SELECT " + columns + " FROM " + tableName + " JOIN " + joinTable + " ON " + joinStatement + ";";
+            System.out.println(sql);
+            result = statement.executeQuery(sql);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return result;
+    }
+
     
     public void insertDataIntoTable(String tableName, String columns, String values) {
         try {
@@ -58,8 +68,16 @@ public class QueststoreDao {
             statement.executeUpdate(sql);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//        } finally {
-//            closeConnection();
+        }
+    }
+
+    public void updateDataInTable(String table, String setQuerry, String condition) {
+        try {
+            String sql = "UPDATE " + table + " SET " + setQuerry + " WHERE " + condition;
+            System.out.println(sql);
+            statement.executeUpdate(sql);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
 
