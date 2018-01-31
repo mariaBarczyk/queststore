@@ -44,12 +44,12 @@ public class AdminController {
         }
     }
 
-    public GroupModel selectGroup() {
+    private GroupModel selectGroup() {
         // List<GroupModel> allGroups = AdminModel.getGroupList();
         return new GroupModel("A");
     }
 
-    public void createMentor() {
+    private void createMentor() {
         String mentorName = inputController.getStringInput("Enter mentor name: ");
         String mentorLastName = inputController.getStringInput("Enter mentor last name: ");
         String mentorEmail = inputController.getStringInput("Enter mentor email: ");
@@ -58,13 +58,13 @@ public class AdminController {
         mentorDao.insertNewMentor(mentorName, mentorLastName, mentorEmail, mentorPassword);
     }
 
-    public void createGroup() {
+    private void createGroup() {
         String groupName = inputController.getStringInput("Enter group name: ");
         GroupDao groupDao = new GroupDao();
         groupDao.addNewGroup(groupName);
     }
 
-    public MentorModel selectMentor() {
+    private MentorModel selectMentor() {
         MentorDao mentorDao = new MentorDao();
         List<MentorModel> allMentors = mentorDao.getAllMentorsCollection();
         view.displayAllMentors(allMentors);
@@ -76,18 +76,7 @@ public class AdminController {
         return matchedMentor;
     }
 
-    public void updateMentor(MentorModel mentor) {
-        QueststoreDao dao = new QueststoreDao();
-        String name = mentor.getFirstName();
-        String lastName = mentor.getLastName();
-        int id = mentor.getID();
-//        String email = mentor.getEmail();
-//        String password = mentor.getPassword();
-        dao.updateDataInTable("Mentor", "first_name='"+name+"', last_name='"+lastName+"'", "id_mentor=" + id);
-//        dao.updateDataInTable("Login", "first_name='"+name+" 'last_name='"+lastName+"'", "id_mentor=" + id);
-    }
-
-    public void editMentorDataPanel() {
+    private void editMentorDataPanel() {
         MentorModel mentorToEdit = selectMentor();
         int userChoice = 0;
         while (userChoice != 5) {
@@ -114,10 +103,11 @@ public class AdminController {
                     break;
             }
         }
-        updateMentor(mentorToEdit);
+        MentorDao mentorDao = new MentorDao();
+        mentorDao.updateMentorData(mentorToEdit);
     }
 
-    public void displayMentorData() {
+    private void displayMentorData() {
         MentorModel mentor = selectMentor();
         view.displayMentorData(mentor);
     }
