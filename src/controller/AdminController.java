@@ -62,7 +62,8 @@ public class AdminController {
 
     public void createGroup() {
         String groupName = inputController.getStringInput("Enter group name: ");
-        GroupModel newGroup = new GroupModel(groupName);
+        GroupDao groupDao = new GroupDao();
+        groupDao.addNewGroup(groupName);
     }
 
     public MentorModel selectMentor() {
