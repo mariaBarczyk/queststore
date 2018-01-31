@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 
+
 import model.MentorModel;
 
 public class MentorDao extends QueststoreDao{
@@ -32,14 +33,33 @@ public class MentorDao extends QueststoreDao{
         insertDataIntoTable(table, columns, values);
     }
 
-    public void updateMentorData(int mentorsId, String column, String newData ) {
-        String table = "Mentor";
-        String setQuery = column +"='"+ newData +"'";
-        String condition = ("id_mentor = " + mentorsId);
-        QueststoreDao dao = new QueststoreDao();
-        dao.updateDataInTable(table, setQuery, condition);
-
+    private int getIdLogin(int id_mentor) {
+        int id = 0;
+        try {
+            ResultSet result = selectDataFromTable("Mentor", "id_login", "id_mentor=" + id_mentor);
+            while (result.next()) {
+                id = result.getInt("id_login");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
     }
+
+    public void updateMentorData(MentorModel mentor) {
+
+        QueststoreDao dao = new QueststoreDao();
+        String name = mentor.getFirstName();
+        String lastName = mentor.getLastName();
+        String email = mentor.getEmail();
+        String password = mentor.getPassword();
+        int idMentor = mentor.getID();
+        int idLogin = getIdLogin(idMentor);
+        dao.updateDataInTable("Mentor", "first_name='"+name+"', last_name='"+lastName+"'", "id_mentor=" + idMentor);
+        dao.updateDataInTable("Login", "email='"+email+"', password='"+password+"'", "id_login="+idLogin);
+    }
+
+
     public List<MentorModel> getAllMentorsCollection() {
 
         List<MentorModel> mentorCollection = new ArrayList<>();
