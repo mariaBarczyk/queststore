@@ -1,5 +1,6 @@
 package controller;
 
+import dao.ItemDao;
 import dao.StudentDao;
 import view.MentorView;
 import model.StudentModel;
@@ -62,11 +63,11 @@ public class MentorController {
         }
     }
 
-    public GroupModel selectGroup() { //HARDCODED
+    private GroupModel selectGroup() { //HARDCODED
         return new GroupModel("A");
     }
 
-    public void createStudent() {
+    private void createStudent() {
         String studentName = inputController.getStringInput("Enter student name: ");
         String studentLastName = inputController.getStringInput("Enter student last name: ");
         String studentEmail = inputController.getStringInput("Enter student email: ");
@@ -78,18 +79,22 @@ public class MentorController {
         //StudentModel newStudent = new StudentModel(studentName, studentLastName, studentEmail, studentPassword, group, wallet);
     }
 
-    public void createQuest() {
+    private void createQuest() {
         String questName = inputController.getStringInput("Enter quest name: ");
         String questDescription = inputController.getStringInput("Enter quest description: ");
         int questValue = inputController.getIntInput("Enter quest value: ");
-        QuestModel newQuest = new QuestModel("Quest", questName, questDescription, questValue);        
+        QuestModel newQuest = new QuestModel("Quest", questName, questDescription, questValue);
+        ItemDao itemDao = new ItemDao();
+        itemDao.insertNewItem(newQuest);
     }
 
-    public void createArtifact() {
+    private void createArtifact() {
         String artifactName = inputController.getStringInput("Enter artifact name: ");
         String artifactDescription = inputController.getStringInput("Enter artifact description: ");
         int artifactValue = inputController.getIntInput("Enter artifact value: ");
-        ArtifactModel newArtifact = new ArtifactModel("Artifact", artifactName, artifactDescription, artifactValue);        
+        ArtifactModel newArtifact = new ArtifactModel("Artifact", artifactName, artifactDescription, artifactValue);
+        ItemDao itemDao = new ItemDao();
+        itemDao.insertNewItem(newArtifact);
     }
 
     private ItemModel selectItem(String type) {
@@ -103,13 +108,13 @@ public class MentorController {
         return matchedItem;
     }
 
-    public void changePriceOfItem(String type) {
+    private void changePriceOfItem(String type) {
         ItemModel item = selectItem(type);
         int newPrice = inputController.getIntInput("Enter new price: ");
         item.setValue(newPrice);
     }
 
-    public StudentModel selectStudent() {
+    private StudentModel selectStudent() {
         List<StudentModel> allStudents = StudentModel.getStudentsCollection();
         view.displayAllStudents(allStudents);
         String fullName = inputController.getStringInput("Enter student full name: ");
@@ -119,12 +124,12 @@ public class MentorController {
                 matchedStudent = student;
         return matchedStudent;
     }
-    public void displayStudentWallet() {
+    private void displayStudentWallet() {
         StudentModel student = selectStudent();
         WalletModel wallet = student.getWallet();
         view.displayStudentWallet(wallet);
     }
-    public void markQuest() {
+    private void markQuest() {
         StudentModel selectedStudent = selectStudent();
         ItemModel selectedQuest = selectItem("Quest");
         selectedStudent.setValuesInWallet(selectedQuest.getValue());
