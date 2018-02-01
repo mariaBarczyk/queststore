@@ -130,5 +130,12 @@ public class QueststoreDao {
         }
         return loginId;
     }
+
+    public void insertNewLogin(String email, String password, int idStatus){
+        String loginTable = "Login";
+        String loginColumns = "(email, password, id_status)";
+        String loginValues = "('"+email+"', '"+ password + "', " + idStatus + ");";
+        insertDataIntoTable(loginTable, loginColumns, loginValues);
+    }
 }
 

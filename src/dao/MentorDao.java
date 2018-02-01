@@ -24,13 +24,6 @@ public class MentorDao extends QueststoreDao{
         newDao.insertDataIntoTable(table, columns, values);
     }
 
-    private void insertNewLogin(String mentorEmail, String mentorPassword, int idStatus){
-        String loginTable = "Login";
-        String loginColumns = "(email, password, id_status)";
-        String loginValues = "('"+mentorEmail+"', '"+ mentorPassword + "', " + idStatus + ");";
-        insertDataIntoTable(loginTable, loginColumns, loginValues);
-    }
-
     private int getIdLogin(int id_mentor) {
         int id = 0;
         try {
