@@ -67,9 +67,8 @@ public class QueststoreDao {
         int idStatus = 0;
         ResultSet result = selectDataFromTable("Login", "id_status", "email='" + login + "' AND password='" + password + "'");
         try {
-            while (result.next())
-                idStatus = result.getInt("id_status");
-                System.out.println(idStatus);
+            while (result.next()) return result.getInt("id_status");
+            System.out.println(idStatus);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -87,6 +86,18 @@ public class QueststoreDao {
             closeConnection();
         }
         return statusName;
+    }
+
+    public int findStatusIdByName(String name) {
+        int idStatus = 0;
+        ResultSet result = selectDataFromTable("status", "id_status", "name='" + name + "'");
+        try {
+            while (result.next()) return result.getInt("id_status");
+            System.out.println(idStatus);
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return idStatus;
     }
 
     public int findLoginId(String login, String password) {
