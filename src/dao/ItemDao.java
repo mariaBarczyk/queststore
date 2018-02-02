@@ -13,8 +13,8 @@ public class ItemDao extends QueststoreDao {
 
     public void insertNewItem(ItemModel item) {
         String table = "Item";
-        String columns = "'name', 'description', 'value', 'id_type'";
-        String values = "'"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType());
+        String columns = " ('item_name', 'description', 'price', 'id_type')";
+        String values = "('"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType())+")";
         QueststoreDao dao = new QueststoreDao();
         dao.insertDataIntoTable(table, columns, values);
     }
