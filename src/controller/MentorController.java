@@ -40,19 +40,19 @@ public class MentorController {
                     createArtifact();
                     break;
                 case 4:
-                    changePriceOfItem("Quest");
+//                    changePriceOfItem("Quest");
                     break;
                 case 5:
-                    changePriceOfItem("Artifact");
+//                    changePriceOfItem("Artifact");
                     break; 
                 case 6:
-                    markQuest();
+//                    markQuest();
                     break;  
                 case 7:
                     // Mark student's bought artifacts\n"
                     break;    
                 case 8:
-                    displayStudentWallet();
+//                    displayStudentWallet();
                     break;                                                            
                 case 9:
                     exit = true;
@@ -97,41 +97,41 @@ public class MentorController {
         itemDao.insertNewItem(newArtifact);
     }
 
-    private ItemModel selectItem(String type) {
-        List<ItemModel> itemCollection = ItemModel.getItemCollection();
-        view.displayItemCollection(itemCollection);
-        String chosenName = inputController.getStringInput("Enter name of item: ");
-        ItemModel matchedItem = null;
-        for (ItemModel item: itemCollection) 
-            if (item.getType().equals(type) && item.getName().equals(chosenName))
-                matchedItem = item;
-        return matchedItem;
-    }
+//    private ItemModel selectItem(String type) {
+//        List<ItemModel> itemCollection = ItemModel.getItemCollection();
+//        view.displayItemCollection(itemCollection);
+//        String chosenName = inputController.getStringInput("Enter name of item: ");
+//        ItemModel matchedItem = null;
+//        for (ItemModel item: itemCollection)
+//            if (item.getType().equals(type) && item.getName().equals(chosenName))
+//                matchedItem = item;
+//        return matchedItem;
+//    }
 
-    private void changePriceOfItem(String type) {
-        ItemModel item = selectItem(type);
-        int newPrice = inputController.getIntInput("Enter new price: ");
-        item.setValue(newPrice);
-    }
+//    private void changePriceOfItem(String type) {
+//        ItemModel item = selectItem(type);
+//        int newPrice = inputController.getIntInput("Enter new price: ");
+//        item.setValue(newPrice);
+//    }
 
-    private StudentModel selectStudent() {
-        List<StudentModel> allStudents = StudentModel.getStudentsCollection();
-        view.displayAllStudents(allStudents);
-        String fullName = inputController.getStringInput("Enter student full name: ");
-        StudentModel matchedStudent = null;
-        for (StudentModel student: allStudents)
-            if (student.getFullName().equals(fullName)) 
-                matchedStudent = student;
-        return matchedStudent;
-    }
-    private void displayStudentWallet() {
-        StudentModel student = selectStudent();
-        WalletModel wallet = student.getWallet();
-        view.displayStudentWallet(wallet);
-    }
-    private void markQuest() {
-        StudentModel selectedStudent = selectStudent();
-        ItemModel selectedQuest = selectItem("Quest");
-        selectedStudent.setValuesInWallet(selectedQuest.getValue());
-    }   
+//    private StudentModel selectStudent() {
+//        List<StudentModel> allStudents = StudentModel.getStudentsCollection();
+//        view.displayAllStudents(allStudents);
+//        String fullName = inputController.getStringInput("Enter student full name: ");
+//        StudentModel matchedStudent = null;
+//        for (StudentModel student: allStudents)
+//            if (student.getFullName().equals(fullName))
+//                matchedStudent = student;
+//        return matchedStudent;
+//    }
+//    private void displayStudentWallet() {
+//        StudentModel student = selectStudent();
+//        WalletModel wallet = student.getWallet();
+//        view.displayStudentWallet(wallet);
+//    }
+//    private void markQuest() {
+//        StudentModel selectedStudent = selectStudent();
+//        ItemModel selectedQuest = selectItem("Quest");
+//        selectedStudent.setValuesInWallet(selectedQuest.getValue());
+//    }
 }
