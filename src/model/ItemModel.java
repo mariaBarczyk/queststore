@@ -1,24 +1,29 @@
 package model;
 
-import java.util.List;
-import java.util.ArrayList;
 
 public abstract class ItemModel {
     
-    String type;
-    String name;
-    String description;
-    int value;
-    private static List<ItemModel> itemCollection = new ArrayList<>(); 
+    private String type;
+    private String name;
+    private String description;
+    private int ID;
+    private int value;
     
+    public ItemModel(int ID, String type, String name, String description, int value) {
+        this.ID = ID;
+        this.type = type;
+        this.name = name;
+        this.description = description;
+        this.value = value;
+    }
+
     public ItemModel(String type, String name, String description, int value) {
         this.type = type;
         this.name = name;
         this.description = description;
         this.value = value;
-        itemCollection.add(this);
-
     }
+
     public String getName() {
         return this.name;
     }
@@ -34,14 +39,5 @@ public abstract class ItemModel {
     public void setValue(int newValue) {
         this.value = newValue;
     }
-    public static List<ItemModel> getItemCollection() {
-        return itemCollection;
-    }
-    public static List<ItemModel> getCollectionByType(String type) {
-        List<ItemModel> collectionByType = new ArrayList<>();
-        for (ItemModel item: itemCollection) 
-            if (item.getType().equals(type)) 
-                collectionByType.add(item);
-        return collectionByType;
-    }
+    public int getID() {return this.ID; }
 }
