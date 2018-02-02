@@ -1,29 +1,24 @@
 package model;
 
+import java.util.List;
+import java.util.ArrayList;
 
-public abstract class ItemModel {
+public class ItemModel {
+
+    int id;
+    String type;
+    String name;
+    String description;
+    int value;
     
-    private String type;
-    private String name;
-    private String description;
-    private int ID;
-    private int value;
-    
-    public ItemModel(int ID, String type, String name, String description, int value) {
-        this.ID = ID;
+    public ItemModel(int id, String type, String name, String description, int value) {
+        this.id = id;
         this.type = type;
         this.name = name;
         this.description = description;
         this.value = value;
-    }
 
-    public ItemModel(String type, String name, String description, int value) {
-        this.type = type;
-        this.name = name;
-        this.description = description;
-        this.value = value;
     }
-
     public String getName() {
         return this.name;
     }
@@ -39,5 +34,6 @@ public abstract class ItemModel {
     public void setValue(int newValue) {
         this.value = newValue;
     }
-    public int getID() {return this.ID; }
+
+    public int getID() {return this.id;}
 }
