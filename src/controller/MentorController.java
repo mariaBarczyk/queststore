@@ -40,10 +40,10 @@ public class MentorController {
                     createArtifact();
                     break;
                 case 4:
-//                    changePriceOfItem("Quest");
+                    changePriceOfItem("Quest");
                     break;
                 case 5:
-//                    changePriceOfItem("Artifact");
+                    changePriceOfItem("Artifact");
                     break; 
                 case 6:
 //                    markQuest();
@@ -97,22 +97,30 @@ public class MentorController {
         itemDao.insertNewItem(newArtifact);
     }
 
-//    private ItemModel selectItem(String type) {
-//        List<ItemModel> itemCollection = ItemModel.getItemCollection();
-//        view.displayItemCollection(itemCollection);
-//        String chosenName = inputController.getStringInput("Enter name of item: ");
-//        ItemModel matchedItem = null;
-//        for (ItemModel item: itemCollection)
-//            if (item.getType().equals(type) && item.getName().equals(chosenName))
-//                matchedItem = item;
-//        return matchedItem;
-//    }
+    private ItemModel selectItem(String type) {
+        ItemDao itemDao = new ItemDao();
+        List<ItemModel> itemCollection = itemDao.getItemCollectionByType(type);
+        view.displayItemCollection(itemCollection);
+        int id = inputController.getIntInput("Enter id of item: ");
+        ItemModel matchedItem = null;
+        for (ItemModel item: itemCollection)
+            if (item.getID() == id)
+                matchedItem = item;
+        return matchedItem;
+    }
 
 //    private void changePriceOfItem(String type) {
 //        ItemModel item = selectItem(type);
 //        int newPrice = inputController.getIntInput("Enter new price: ");
 //        item.setValue(newPrice);
 //    }
+    private void changePriceOfItem(String type) {
+        ItemModel item = selectItem(type);
+        int newPrice = inputController.getIntInput("Enter new price: ");
+        item.setValue(newPrice);
+        ItemDao itemDao = new ItemDao();
+        itemDao.updateValueOfItem(item);
+    }
 
 //    private StudentModel selectStudent() {
 //        List<StudentModel> allStudents = StudentModel.getStudentsCollection();
