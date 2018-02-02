@@ -32,7 +32,6 @@ public class ItemDao extends QueststoreDao {
     }
 
     private ItemModel createItemObject(int idItem, String typeName, String itemName, String description, int price) {
-
         if (typeName.equals("Quest")) {
             return new QuestModel(idItem, typeName, itemName, description, price);
         } else {
@@ -60,4 +59,54 @@ public class ItemDao extends QueststoreDao {
         }
         return itemCollection;
     }
+
+    public void updateValueOfItem(ItemModel item) {
+        QueststoreDao dao = new QueststoreDao();
+        int value = item.getValue();
+        String name = item.getName();
+        dao.updateDataInTable("Item", "value='"+value +"'", "name ='" + name+"'");
+    }
+
+//    public List<ItemModel> getAllItemsCollection() {
+//        List<ItemModel> itemCollection = new ArrayList<>();
+//        QueststoreDao dao = new QueststoreDao();
+//        String columns = "ItemType.type_name, Item.name, Item.description, Item.value";
+//        String joinStatement = "ItemType.id_type = Item.id_type";
+//        ResultSet result = dao.selectFromJoinedTables(columns, "ItemType", "Item", joinStatement);
+//        try{
+//            while (result.next()) {
+//                String typeName = result.getString("type_name");
+//                String name = result.getString("name");
+//                String description = result.getString("description");
+//                int value = result.getInt("value");
+//                ItemModel item = new ItemModel(typeName, name, description, value );
+//                itemCollection.add(item);
+//                }
+//            }
+//            catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return itemCollection;}
+//
+//
+//    public List<ItemModel> getItemsCollectionByType(String type) {
+//        List<ItemModel> itemCollection = new ArrayList<>();
+//        QueststoreDao dao = new QueststoreDao();
+//        String columns = "ItemType.type_name, Item.name, Item.description, Item.value";
+//        String joinStatement = "ItemType.id_type = Item.id_type";
+//        ResultSet result = dao.selectFromJoinedTables(columns, "ItemType", "Item", joinStatement);
+//        try{
+//            while (result.next()) {
+//                String typeName = result.getString("type_name");
+//                String name = result.getString("name");
+//                String description = result.getString("description");
+//                int value = result.getInt("value");
+//                ItemModel item = new ItemModel(typeName, name, description, value );
+//                if (typeName.equals(type)) itemCollection.add(item);
+//            }
+//        }
+//        catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return itemCollection;}
 }
