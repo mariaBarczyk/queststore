@@ -62,6 +62,15 @@ public class ItemDao {
             e.printStackTrace();
         }
         return itemCollection;}
+
+    public List<ItemModel> getCollectionByType(String type) {
+        List<ItemModel> itemCollection = new ArrayList<>();
+        List<ItemModel> collectionByType = new ArrayList<>();
+        for (ItemModel item: itemCollection)
+            if (item.getType().equals(type))
+                collectionByType.add(item);
+        return collectionByType;
+    }
 }
 
 

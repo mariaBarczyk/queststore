@@ -33,14 +33,5 @@ public class ItemModel {
     public void setValue(int newValue) {
         this.value = newValue;
     }
-    /*public static List<ItemModel> getItemCollection() {
-        return itemCollection;
-    }
-    public static List<ItemModel> getCollectionByType(String type) {
-        List<ItemModel> collectionByType = new ArrayList<>();
-        for (ItemModel item: itemCollection) 
-            if (item.getType().equals(type)) 
-                collectionByType.add(item);
-        return collectionByType;
-    }*/
+
 }

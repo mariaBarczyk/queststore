@@ -99,7 +99,9 @@ public class MentorController {
 
     private ItemModel selectItem(String type) {
         ItemDao itemDao = new ItemDao();
-        List<ItemModel> itemCollection =itemDao.getAllItemsCollection();
+        List<ItemModel> itemCollection;
+        itemCollection = itemDao.getAllItemsCollection();
+        //itemCollection = itemDao.getCollectionByType(type); Czemu nie działa? :(
         view.displayItemCollection(itemCollection);
         String chosenName = inputController.getStringInput("Enter name of item: ");
         ItemModel matchedItem = null;
