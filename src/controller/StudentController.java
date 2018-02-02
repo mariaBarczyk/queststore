@@ -44,7 +44,7 @@ public class StudentController {
         }
     }
       
-    private void displayAvailableArtifacts() {
+    /*private void displayAvailableArtifacts() {
          List<ItemModel>  artifactCollection = ItemModel.getCollectionByType("Artifact");
          view.displayCollectionOfItem(artifactCollection);
     }
@@ -55,5 +55,5 @@ public class StudentController {
         for (ItemModel artifact: availableArtifacts)
             if(artifact.getName().equals(artifactName))
                 student.setValuesInWallet(artifact.getValue());
-    }
+    }*/
 }

@@ -98,7 +98,8 @@ public class MentorController {
     }
 
     private ItemModel selectItem(String type) {
-        List<ItemModel> itemCollection = ItemModel.getItemCollection();
+        ItemDao itemDao = new ItemDao();
+        List<ItemModel> itemCollection =itemDao.getAllItemsCollection();
         view.displayItemCollection(itemCollection);
         String chosenName = inputController.getStringInput("Enter name of item: ");
         ItemModel matchedItem = null;
@@ -110,8 +111,11 @@ public class MentorController {
 
     private void changePriceOfItem(String type) {
         ItemModel item = selectItem(type);
+        System.out.println(item.getName());
         int newPrice = inputController.getIntInput("Enter new price: ");
         item.setValue(newPrice);
+        ItemDao itemDao = new ItemDao();
+        itemDao.updateValueOfItem(item);
     }
 
     private StudentModel selectStudent() {

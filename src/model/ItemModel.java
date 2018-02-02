@@ -3,22 +3,21 @@ package model;
 import java.util.List;
 import java.util.ArrayList;
 
-public abstract class ItemModel {
-    
+public class ItemModel {
+
     String type;
     String name;
     String description;
     int value;
-    private static List<ItemModel> itemCollection = new ArrayList<>(); 
     
     public ItemModel(String type, String name, String description, int value) {
         this.type = type;
         this.name = name;
         this.description = description;
         this.value = value;
-        itemCollection.add(this);
 
     }
+
     public String getName() {
         return this.name;
     }
@@ -34,7 +33,7 @@ public abstract class ItemModel {
     public void setValue(int newValue) {
         this.value = newValue;
     }
-    public static List<ItemModel> getItemCollection() {
+    /*public static List<ItemModel> getItemCollection() {
         return itemCollection;
     }
     public static List<ItemModel> getCollectionByType(String type) {
@@ -43,5 +42,5 @@ public abstract class ItemModel {
             if (item.getType().equals(type)) 
                 collectionByType.add(item);
         return collectionByType;
-    }
+    }*/
 }
