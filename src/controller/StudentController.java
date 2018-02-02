@@ -25,10 +25,6 @@ public class StudentController {
         return studentDao.selectStudent(idLogin);
     }
 
-    //Ja nie dawałam id do aretefaktModel, bo bardziej mi przeszkadzało, niż pomagało, a teraz widzę,
-    // że tu Ci potrzebne. To co robimy z tym fantem? Na razie wykomentowałam poniższe, żeby sprawdzić
-    //czy działa reszta...
-
     private ItemModel selectArtifact() {
         ItemDao itemDao = new ItemDao();
         List<ItemModel> itemCollection  = itemDao.getItemCollectionByType("Artifact");
@@ -58,7 +54,7 @@ public class StudentController {
                     //view.displayWallet();
                     break;
                 case 2:
-                    //buyArtifact(student);
+                    buyArtifact(student);
                     break;
                 case 3:
                     //Buy artifact together with teammates; CHYBA TNIEMY
