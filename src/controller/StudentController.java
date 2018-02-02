@@ -2,6 +2,9 @@ package controller;
 
 import java.util.List;
 
+import dao.ItemDao;
+import dao.StudentDao;
+import dao.TransactionDao;
 import model.ItemModel;
 import view.StudentView;
 import model.StudentModel;
@@ -12,12 +15,36 @@ public class StudentController {
     private StudentView view;
     private InputController inputController;
 
-    public StudentController() {
+    protected StudentController() {
         view = new StudentView();
         inputController = new InputController();
     }
 
+    private StudentModel getStudent(int idLogin) {
+        StudentDao studentDao = new StudentDao();
+        return studentDao.selectStudent(idLogin);
+    }
+
+    private ItemModel selectArtifact() {
+        ItemDao itemDao = new ItemDao();
+        List<ItemModel> itemCollection  = itemDao.getItemCollectionByType("Artifact");
+        view.displayCollectionOfItem(itemCollection);
+        int idArtifact = inputController.getIntInput("Enter artifact id to buy: ");
+        ItemModel matchedArtifact = null;
+        for (ItemModel artifact: itemCollection)
+            if(artifact.getID() == idArtifact)
+                matchedArtifact = artifact;
+        return matchedArtifact;
+    }
+
+    private void buyArtifact(StudentModel student) {
+        ItemModel artifact = selectArtifact();
+        TransactionDao transactionDao = new TransactionDao();
+        transactionDao.insertTransaction(student.getID(), artifact.getID());
+    }
+
     public void controlMenuOptions(int loginId) {
+        StudentModel student = getStudent(loginId);
         boolean exit = false;
         while (!exit) {
             view.displayStudentMenu();
@@ -27,7 +54,7 @@ public class StudentController {
                     //view.displayWallet();
                     break;
                 case 2:
-                    //buyArtifact(student);
+                    buyArtifact(student);
                     break;
                 case 3:
                     //Buy artifact together with teammates; CHYBA TNIEMY
@@ -42,18 +69,5 @@ public class StudentController {
                     System.out.println("Wrong number!");
             }
         }
-    }
-      
-    private void displayAvailableArtifacts() {
-         List<ItemModel>  artifactCollection = ItemModel.getCollectionByType("Artifact");
-         view.displayCollectionOfItem(artifactCollection);
-    }
-    public void buyArtifact(StudentModel student) {
-        displayAvailableArtifacts();
-        String artifactName = inputController.getStringInput("Enter artifact name to buy: ");
-        List<ItemModel> availableArtifacts = ItemModel.getCollectionByType("Artifact");
-        for (ItemModel artifact: availableArtifacts)
-            if(artifact.getName().equals(artifactName))
-                student.setValuesInWallet(artifact.getValue());
     }
 }
