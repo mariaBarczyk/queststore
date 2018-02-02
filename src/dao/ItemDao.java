@@ -27,8 +27,6 @@ public class ItemDao extends QueststoreDao {
             idType = result.getInt("id_type");
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
         return idType;
     }
