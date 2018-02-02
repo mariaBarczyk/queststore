@@ -100,8 +100,7 @@ public class MentorController {
     private ItemModel selectItem(String type) {
         ItemDao itemDao = new ItemDao();
         List<ItemModel> itemCollection;
-        itemCollection = itemDao.getAllItemsCollection();
-        //itemCollection = itemDao.getCollectionByType(type); Czemu nie działa? :(
+        itemCollection = itemDao.getItemsCollectionByType(type);
         view.displayItemCollection(itemCollection);
         String chosenName = inputController.getStringInput("Enter name of item: ");
         ItemModel matchedItem = null;
@@ -113,7 +112,6 @@ public class MentorController {
 
     private void changePriceOfItem(String type) {
         ItemModel item = selectItem(type);
-        System.out.println(item.getName());
         int newPrice = inputController.getIntInput("Enter new price: ");
         item.setValue(newPrice);
         ItemDao itemDao = new ItemDao();

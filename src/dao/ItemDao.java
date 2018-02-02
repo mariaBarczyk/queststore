@@ -63,14 +63,27 @@ public class ItemDao {
         }
         return itemCollection;}
 
-    public List<ItemModel> getCollectionByType(String type) {
+
+    public List<ItemModel> getItemsCollectionByType(String type) {
         List<ItemModel> itemCollection = new ArrayList<>();
-        List<ItemModel> collectionByType = new ArrayList<>();
-        for (ItemModel item: itemCollection)
-            if (item.getType().equals(type))
-                collectionByType.add(item);
-        return collectionByType;
-    }
+        QueststoreDao dao = new QueststoreDao();
+        String columns = "ItemType.type_name, Item.name, Item.description, Item.value";
+        String joinStatement = "ItemType.id_type = Item.id_type";
+        ResultSet result = dao.selectFromJoinedTables(columns, "ItemType", "Item", joinStatement);
+        try{
+            while (result.next()) {
+                String typeName = result.getString("type_name");
+                String name = result.getString("name");
+                String description = result.getString("description");
+                int value = result.getInt("value");
+                ItemModel item = new ItemModel(typeName, name, description, value );
+                if (typeName.equals(type)) itemCollection.add(item);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return itemCollection;}
 }
 
 
