@@ -5,7 +5,7 @@ import model.WalletModel;
 
 import java.sql.*;
 
-public class StudentDao extends UserDao{
+public class StudentDao extends UserDao implements StudentDaoInterface {
 
     private void insertNewWallet(int idLogin){
         UserDao newDao = new UserDao();

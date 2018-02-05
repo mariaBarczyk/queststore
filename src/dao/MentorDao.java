@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import model.MentorModel;
 
-public class MentorDao extends UserDao{
+public class MentorDao extends UserDao implements MentorDaoInterface {
 
     public void insertNewMentor(String mentorName, String mentorLastName, String mentorEmail, String mentorPassword) {
         int idStatus = findStatusIdByName("Mentor");

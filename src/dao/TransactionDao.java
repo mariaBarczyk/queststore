@@ -1,6 +1,6 @@
 package dao;
 
-public class TransactionDao extends UserDao {
+public class TransactionDao extends UserDao implements TransationDaoInterface {
 
     public void insertTransaction(int idStudent, int idItem) {
         String values =  "("+ idStudent +", " + idItem+ "," + 0 + ")";
