@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.sql.SQLException;
 
-public class ItemDao extends QueststoreDao {
+public class ItemDao extends QueststoreDao implements ItemDaoInterface {
 
     public void insertNewItem(ItemModel item) {
         String table = "Item";
