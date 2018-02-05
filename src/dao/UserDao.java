@@ -2,14 +2,13 @@ package dao;
 
 import java.sql.*;
 
-
-public class QueststoreDao {
+public class UserDao {
 
     private DatabaseConnection database = DatabaseConnection.getInstance();
     public Connection connection;
     private Statement statement;
 
-    public QueststoreDao(){
+    public UserDao(){
         connection = database.getConnection();
         try {
             this.statement = connection.createStatement();

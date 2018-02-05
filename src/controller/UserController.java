@@ -2,7 +2,7 @@ package controller;
 
 import dao.StudentDao;
 import view.UserView;
-import dao.QueststoreDao;
+import dao.UserDao;
 
 
 public class UserController {
@@ -14,7 +14,7 @@ public class UserController {
     }
 
     private String loginUser(String login, String password) {
-        QueststoreDao dao = new QueststoreDao();
+        UserDao dao = new UserDao();
         int idStatus = dao.findStatusId(login, password);
         if (idStatus == 0) {
             view.displayLoginFailed();
@@ -25,7 +25,7 @@ public class UserController {
     }
 
     private int getLoginId(String login, String password) {
-        QueststoreDao dao = new QueststoreDao();
+        UserDao dao = new UserDao();
         return dao.findLoginId(login, password);
     }
 
