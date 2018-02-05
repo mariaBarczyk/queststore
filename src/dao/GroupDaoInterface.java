@@ -1,4 +1,6 @@
 package dao;
 
-public class GroupDaoInterface {
+public interface GroupDaoInterface {
+
+    void addNewGroup(String groupName);
 }
