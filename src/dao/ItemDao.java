@@ -67,6 +67,13 @@ public class ItemDao extends QueststoreDao {
         dao.updateDataInTable("Item", "value='"+value +"'", "name ='" + name+"'");
     }
 
+    public void updateStatusOfItem(ItemModel item) {
+        QueststoreDao dao = new QueststoreDao();
+        int itemId = item.getID();
+
+        dao.updateDataInTable("Transaction", "status = used", "id_item="+itemId);
+    }
+
 //    public List<ItemModel> getAllItemsCollection() {
 //        List<ItemModel> itemCollection = new ArrayList<>();
 //        QueststoreDao dao = new QueststoreDao();

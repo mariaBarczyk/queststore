@@ -109,6 +109,7 @@ public class MentorController {
         return matchedItem;
     }
 
+
 //    private void changePriceOfItem(String type) {
 //        ItemModel item = selectItem(type);
 //        int newPrice = inputController.getIntInput("Enter new price: ");
@@ -122,16 +123,16 @@ public class MentorController {
         itemDao.updateValueOfItem(item);
     }
 
-//    private StudentModel selectStudent() {
-//        List<StudentModel> allStudents = StudentModel.getStudentsCollection();
-//        view.displayAllStudents(allStudents);
-//        String fullName = inputController.getStringInput("Enter student full name: ");
-//        StudentModel matchedStudent = null;
-//        for (StudentModel student: allStudents)
-//            if (student.getFullName().equals(fullName))
-//                matchedStudent = student;
-//        return matchedStudent;
-//    }
+    private StudentModel selectStudent() {
+        List<StudentModel> allStudents = StudentModel.getStudentsCollection();
+        view.displayAllStudents(allStudents);
+        String fullName = inputController.getStringInput("Enter student full name: ");
+        StudentModel matchedStudent = null;
+        for (StudentModel student: allStudents)
+            if (student.getFullName().equals(fullName))
+                matchedStudent = student;
+        return matchedStudent;
+    }
 //    private void displayStudentWallet() {
 //        StudentModel student = selectStudent();
 //        WalletModel wallet = student.getWallet();
@@ -140,6 +141,14 @@ public class MentorController {
 //    private void markQuest() {
 //        StudentModel selectedStudent = selectStudent();
 //        ItemModel selectedQuest = selectItem("Quest");
-//        selectedStudent.setValuesInWallet(selectedQuest.getValue());
+//        selectedStudent.setValuesInWallet(select edQuest.getValue());
 //    }
+
+    private ArtifactModel selectArtifactToMark(){
+        StudentModel selectedStudent = selectStudent();
+        int selectedStudentId = selectedStudent.getID();
+        ItemDao itemDao = new ItemDao();
+        int id_type = itemDao.findIdType("Artifact");
+        ArtifactModel selectedArtifact = selectFromJoinedTables();
+    }
 }

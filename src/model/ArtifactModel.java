@@ -5,7 +5,7 @@ public class ArtifactModel extends ItemModel {
     
     private boolean used;
 
-    public ArtifactModel(int id, String type, String name, String description, int value) {
+    public ArtifactModel(int id, String type, String name, String description, int value, boolean used) {
         super(id, type, name, description, value);
         this.used = false;    
     }
@@ -16,5 +16,9 @@ public class ArtifactModel extends ItemModel {
     
     public boolean getIsUsed() {
         return this.used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
     }
 }
