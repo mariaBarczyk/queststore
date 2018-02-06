@@ -13,8 +13,8 @@ public class ItemDao extends UserDao {
 
     public void insertNewItem(ItemModel item) {
         String table = "Item";
-        String columns = " ('item_name', 'description', 'price', 'id_type')";
-        String values = "('"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType())+")";
+        String columns = " ('item_name', 'description', 'price', 'id_type', 'used')";
+        String values = "('"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType())+ "," + item.getUsed() +")";
         UserDao dao = new UserDao();
         dao.insertDataIntoTable(table, columns, values);
     }
@@ -31,11 +31,11 @@ public class ItemDao extends UserDao {
         return idType;
     }
 
-    private ItemModel createItemObject(int idItem, String typeName, String itemName, String description, int price) {
+    private ItemModel createItemObject(int idItem, String typeName, String itemName, String description, int price, int used) {
         if (typeName.equals("Quest")) {
-            return new QuestModel(idItem, typeName, itemName, description, price);
+            return new QuestModel(idItem, typeName, itemName, description, price, used);
         } else {
-            return new ArtifactModel(idItem, typeName, itemName, description, price);
+            return new ArtifactModel(idItem, typeName, itemName, description, price, used);
         }
     }
 
@@ -51,7 +51,8 @@ public class ItemDao extends UserDao {
                 String name = result.getString("item_name");
                 String description = result.getString("description");
                 int price = result.getInt("price");
-                ItemModel item = createItemObject(idItem, typeName, name, description, price);
+                int used = result.getInt("used");
+                ItemModel item = createItemObject(idItem, typeName, name, description, price,used);
                 itemCollection.add(item);
                 }
         } catch (SQLException e) {

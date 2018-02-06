@@ -83,7 +83,8 @@ public class MentorController {
         String questName = inputController.getStringInput("Enter quest name: ");
         String questDescription = inputController.getStringInput("Enter quest description: ");
         int questValue = inputController.getIntInput("Enter quest value: ");
-        QuestModel newQuest = new QuestModel("Quest", questName, questDescription, questValue);
+        int questUsed = inputController.getIntInput("Enter quest used");
+        QuestModel newQuest = new QuestModel("Quest", questName, questDescription, questValue, questUsed);
         ItemDao itemDao = new ItemDao();
         itemDao.insertNewItem(newQuest);
     }
@@ -92,7 +93,8 @@ public class MentorController {
         String artifactName = inputController.getStringInput("Enter artifact name: ");
         String artifactDescription = inputController.getStringInput("Enter artifact description: ");
         int artifactValue = inputController.getIntInput("Enter artifact value: ");
-        ArtifactModel newArtifact = new ArtifactModel("Artifact", artifactName, artifactDescription, artifactValue);
+        int artifactUsed = inputController.getIntInput("Enter artifact used");
+        ArtifactModel newArtifact = new ArtifactModel("Artifact", artifactName, artifactDescription, artifactValue,artifactUsed);
         ItemDao itemDao = new ItemDao();
         itemDao.insertNewItem(newArtifact);
     }

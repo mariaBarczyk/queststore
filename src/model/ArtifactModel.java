@@ -3,18 +3,24 @@ package model;
 
 public class ArtifactModel extends ItemModel { 
     
-    private boolean used;
+    //private int used;
 
-    public ArtifactModel(int id, String type, String name, String description, int value) {
-        super(id, type, name, description, value);
-        this.used = false;    
+    public ArtifactModel(int id, String type, String name, String description, int value, int used) {
+        super(id, type, name, description, value,used);
+        //this.used = used;
     }
 
-    public ArtifactModel(String type, String name, String description, int value) {
-        super(type, name, description, value);
+    public ArtifactModel(String type, String name, String description, int value,int used) {
+        super(type, name, description, value, used);
+        //this.used = 0;
+
     }
     
-    public boolean getIsUsed() {
-        return this.used;
-    }
+   // public int getIsUsed() {
+     //   return this.used;
+   // }
+
+    //public void setUsed(int used) {
+      //  this.used = used;
+    //}
 }
