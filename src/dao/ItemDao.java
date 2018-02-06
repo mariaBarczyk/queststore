@@ -20,15 +20,8 @@ public class ItemDao extends UserDao {
     }
 
     public int findIdType(String typeName) {
-        UserDao dao = new UserDao();
-        ResultSet result = dao.selectDataFromTable("ItemType", "id_type", "name='"+typeName+"'");
-        int idType = 0;
-        try {
-            idType = result.getInt("id_type");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return idType;
+        ResultSet result = selectDataFromTable("ItemType", "id_type", "name='"+typeName+"'");
+        return getIntFromResult(result, "id_type");
     }
 
     private ItemModel createItemObject(int idItem, String typeName, String itemName, String description, int price) {
@@ -61,10 +54,9 @@ public class ItemDao extends UserDao {
     }
 
     public void updateValueOfItem(ItemModel item) {
-        UserDao dao = new UserDao();
         int value = item.getValue();
         String name = item.getName();
-        dao.updateDataInTable("Item", "value='"+value +"'", "name ='" + name+"'");
+        updateDataInTable("Item", "value='"+value +"'", "name ='" + name+"'");
     }
 
 //    public List<ItemModel> getAllItemsCollection() {

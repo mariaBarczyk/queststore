@@ -24,9 +24,11 @@ public class StudentDao extends UserDao{
     }
 
     public void insertNewStudent(String studentName, String studentLastName, String studentEmail, String studentPassword) {
-        int idStatus = findStatusIdByName("Student");
-        insertNewLogin(studentEmail, studentPassword, idStatus);
-        int idLogin = findLoginId(studentEmail, studentPassword);
+
+        LoginDao loginDao = new LoginDao();
+        int idStatus = loginDao.findStatusIdByName("Student");
+        loginDao.insertNewLogin(studentEmail, studentPassword, idStatus);
+        int idLogin = loginDao.findLoginId(studentEmail, studentPassword);
         UserDao newDao = new UserDao();
         int id_group = 1;
         String table = "Student";
@@ -64,9 +66,9 @@ public class StudentDao extends UserDao{
                 int id = result.getInt("id_student");
                 String firstName = result.getString("first_name");
                 String lastName = result.getString("last_name");
-                int idWallet = result.getInt("id_wallet");
-                WalletModel wallet = getStudentWallet(idWallet);
-                student = new StudentModel(id, firstName, lastName, email, password, wallet);
+//                int idWallet = result.getInt("id_wallet");
+//                WalletModel wallet = getStudentWallet(idWallet);
+//                student = new StudentModel(id, firstName, lastName, email, password, wallet);
             }
         }catch (SQLException e) {
                 e.printStackTrace();
