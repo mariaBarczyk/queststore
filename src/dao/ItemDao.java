@@ -67,11 +67,36 @@ public class ItemDao extends QueststoreDao {
         dao.updateDataInTable("Item", "value='"+value +"'", "name ='" + name+"'");
     }
 
+    public ArtifactModel selectArtifact(int selectedStudentId) {
+        String columns = "Login.email, Login.password, id_student, first_name, last_name, id_wallet";
+        String joinStatement = "Login.id_login=Student.id_login";
+        // CREATE NEW SELET JOIN WITH WHERE (idLogin ==)
+        ResultSet result = selectFromJoinedTables(columns, "Student", "Login", joinStatement);
+        ArtifactModel artifact = null;
+        try {
+            while (result.next()) {
+                String email = result.getString("email");
+                String password = result.getString("password");
+                int id = result.getInt("id_student");
+                String firstName = result.getString("first_name");
+                String lastName = result.getString("last_name");
+                int idWallet = result.getInt("id_wallet");
+                WalletModel wallet = getStudentWallet(idWallet);
+                artifact = new ArtifactModel(id, firstName, lastName, email, password, wallet);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return artifact;
+    }
+}
+
     public void updateStatusOfItem(ItemModel item) {
         QueststoreDao dao = new QueststoreDao();
         int itemId = item.getID();
 
-        dao.updateDataInTable("Transaction", "status = used", "id_item="+itemId);
+
+        dao.updateDataInTable("Transaction", "used = 1", "id_item="+itemId);
     }
 
 //    public List<ItemModel> getAllItemsCollection() {

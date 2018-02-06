@@ -149,6 +149,7 @@ public class MentorController {
         int selectedStudentId = selectedStudent.getID();
         ItemDao itemDao = new ItemDao();
         int id_type = itemDao.findIdType("Artifact");
-        ArtifactModel selectedArtifact = selectFromJoinedTables();
+        return ArtifactModel selectedArtifact = itemDao.selectItem(selectedStudentId);
+
     }
 }
