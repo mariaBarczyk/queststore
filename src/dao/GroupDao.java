@@ -3,7 +3,7 @@ package dao;
 public class GroupDao{
 
     public void addNewGroup(String groupName){
-        QueststoreDao dao = new QueststoreDao();
+        UserDao dao = new UserDao();
         String table = "Groups";
         String columns = "('name')";
         String values = "('"+groupName+"')";

@@ -3,24 +3,25 @@ package dao;
 import model.ArtifactModel;
 import model.ItemModel;
 import model.QuestModel;
+import model.WalletModel;
 
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.SQLException;
 
-public class ItemDao extends QueststoreDao {
+public class ItemDao extends UserDao {
 
     public void insertNewItem(ItemModel item) {
         String table = "Item";
-        String columns = " ('item_name', 'description', 'price', 'id_type')";
-        String values = "('"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType())+")";
-        QueststoreDao dao = new QueststoreDao();
+        String columns = " ('item_name', 'description', 'price', 'id_type', 'used')";
+        String values = "('"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType())+ "," + item.getUsed() +")";
+        UserDao dao = new UserDao();
         dao.insertDataIntoTable(table, columns, values);
     }
 
     public int findIdType(String typeName) {
-        QueststoreDao dao = new QueststoreDao();
+        UserDao dao = new UserDao();
         ResultSet result = dao.selectDataFromTable("ItemType", "id_type", "name='"+typeName+"'");
         int idType = 0;
         try {
@@ -31,11 +32,11 @@ public class ItemDao extends QueststoreDao {
         return idType;
     }
 
-    private ItemModel createItemObject(int idItem, String typeName, String itemName, String description, int price) {
+    private ItemModel createItemObject(int idItem, String typeName, String itemName, String description, int price, int used) {
         if (typeName.equals("Quest")) {
-            return new QuestModel(idItem, typeName, itemName, description, price);
+            return new QuestModel(idItem, typeName, itemName, description, price, used);
         } else {
-            return new ArtifactModel(idItem, typeName, itemName, description, price);
+            return new ArtifactModel(idItem, typeName, itemName, description, price, used);
         }
     }
 
@@ -51,7 +52,8 @@ public class ItemDao extends QueststoreDao {
                 String name = result.getString("item_name");
                 String description = result.getString("description");
                 int price = result.getInt("price");
-                ItemModel item = createItemObject(idItem, typeName, name, description, price);
+                int used = result.getInt("used");
+                ItemModel item = createItemObject(idItem, typeName, name, description, price,used);
                 itemCollection.add(item);
                 }
         } catch (SQLException e) {
@@ -61,7 +63,7 @@ public class ItemDao extends QueststoreDao {
     }
 
     public void updateValueOfItem(ItemModel item) {
-        QueststoreDao dao = new QueststoreDao();
+        UserDao dao = new UserDao();
         int value = item.getValue();
         String name = item.getName();
         dao.updateDataInTable("Item", "value='"+value +"'", "name ='" + name+"'");
@@ -81,18 +83,18 @@ public class ItemDao extends QueststoreDao {
                 String firstName = result.getString("first_name");
                 String lastName = result.getString("last_name");
                 int idWallet = result.getInt("id_wallet");
-                WalletModel wallet = getStudentWallet(idWallet);
-                artifact = new ArtifactModel(id, firstName, lastName, email, password, wallet);
+//                WalletModel wallet = getStudentWallet(idWallet);
+//                artifact = new ArtifactModel(id, firstName, lastName, email, password, wallet);
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
         return artifact;
     }
-}
+
 
     public void updateStatusOfItem(ItemModel item) {
-        QueststoreDao dao = new QueststoreDao();
+        UserDao dao = new UserDao();
         int itemId = item.getID();
 
 
@@ -101,7 +103,7 @@ public class ItemDao extends QueststoreDao {
 
 //    public List<ItemModel> getAllItemsCollection() {
 //        List<ItemModel> itemCollection = new ArrayList<>();
-//        QueststoreDao dao = new QueststoreDao();
+//        UserDao dao = new UserDao();
 //        String columns = "ItemType.type_name, Item.name, Item.description, Item.value";
 //        String joinStatement = "ItemType.id_type = Item.id_type";
 //        ResultSet result = dao.selectFromJoinedTables(columns, "ItemType", "Item", joinStatement);
@@ -123,7 +125,7 @@ public class ItemDao extends QueststoreDao {
 //
 //    public List<ItemModel> getItemsCollectionByType(String type) {
 //        List<ItemModel> itemCollection = new ArrayList<>();
-//        QueststoreDao dao = new QueststoreDao();
+//        UserDao dao = new UserDao();
 //        String columns = "ItemType.type_name, Item.name, Item.description, Item.value";
 //        String joinStatement = "ItemType.id_type = Item.id_type";
 //        ResultSet result = dao.selectFromJoinedTables(columns, "ItemType", "Item", joinStatement);
