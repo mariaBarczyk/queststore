@@ -14,8 +14,8 @@ public class ItemDao extends UserDao {
 
     public void insertNewItem(ItemModel item) {
         String table = "Item";
-        String columns = " ('item_name', 'description', 'price', 'id_type', 'used')";
-        String values = "('"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType())+ "," + item.getUsed() +")";
+        String columns = " ('item_name', 'description', 'price', 'id_type')";
+        String values = "('"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType()) +")";
         UserDao dao = new UserDao();
         dao.insertDataIntoTable(table, columns, values);
     }
@@ -32,11 +32,11 @@ public class ItemDao extends UserDao {
         return idType;
     }
 
-    private ItemModel createItemObject(int idItem, String typeName, String itemName, String description, int price, int used) {
+    private ItemModel createItemObject(int idItem, String typeName, String itemName, String description, int price) {
         if (typeName.equals("Quest")) {
-            return new QuestModel(idItem, typeName, itemName, description, price, used);
+            return new QuestModel(idItem, typeName, itemName, description, price);
         } else {
-            return new ArtifactModel(idItem, typeName, itemName, description, price, used);
+            return new ArtifactModel(idItem, typeName, itemName, description, price);
         }
     }
 
@@ -52,8 +52,7 @@ public class ItemDao extends UserDao {
                 String name = result.getString("item_name");
                 String description = result.getString("description");
                 int price = result.getInt("price");
-                int used = result.getInt("used");
-                ItemModel item = createItemObject(idItem, typeName, name, description, price,used);
+                ItemModel item = createItemObject(idItem, typeName, name, description, price);
                 itemCollection.add(item);
                 }
         } catch (SQLException e) {

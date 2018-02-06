@@ -83,8 +83,7 @@ public class MentorController {
         String questName = inputController.getStringInput("Enter quest name: ");
         String questDescription = inputController.getStringInput("Enter quest description: ");
         int questValue = inputController.getIntInput("Enter quest value: ");
-        int questUsed = inputController.getIntInput("Enter quest used");
-        QuestModel newQuest = new QuestModel("Quest", questName, questDescription, questValue, questUsed);
+        QuestModel newQuest = new QuestModel("Quest", questName, questDescription, questValue);
         ItemDao itemDao = new ItemDao();
         itemDao.insertNewItem(newQuest);
     }
@@ -93,8 +92,7 @@ public class MentorController {
         String artifactName = inputController.getStringInput("Enter artifact name: ");
         String artifactDescription = inputController.getStringInput("Enter artifact description: ");
         int artifactValue = inputController.getIntInput("Enter artifact value: ");
-        int artifactUsed = inputController.getIntInput("Enter artifact used");
-        ArtifactModel newArtifact = new ArtifactModel("Artifact", artifactName, artifactDescription, artifactValue,artifactUsed);
+        ArtifactModel newArtifact = new ArtifactModel("Artifact", artifactName, artifactDescription, artifactValue);
         ItemDao itemDao = new ItemDao();
         itemDao.insertNewItem(newArtifact);
     }
@@ -125,16 +123,16 @@ public class MentorController {
         itemDao.updateValueOfItem(item);
     }
 
-    private StudentModel selectStudent() {
-        List<StudentModel> allStudents = StudentModel.getStudentsCollection();
-        view.displayAllStudents(allStudents);
-        String fullName = inputController.getStringInput("Enter student full name: ");
-        StudentModel matchedStudent = null;
-        for (StudentModel student: allStudents)
-            if (student.getFullName().equals(fullName))
-                matchedStudent = student;
-        return matchedStudent;
-    }
+//    private StudentModel selectStudent() {
+//        //List<StudentModel> allStudents = StudentModel.getStudentsCollection();
+//        view.displayAllStudents(allStudents);
+//        String fullName = inputController.getStringInput("Enter student full name: ");
+//        StudentModel matchedStudent = null;
+//        for (StudentModel student: allStudents)
+//            if (student.getFullName().equals(fullName))
+//                matchedStudent = student;
+//        return matchedStudent;
+//    }
 //    private void displayStudentWallet() {
 //        StudentModel student = selectStudent();
 //        WalletModel wallet = student.getWallet();
@@ -146,12 +144,12 @@ public class MentorController {
 //        selectedStudent.setValuesInWallet(select edQuest.getValue());
 //    }
 
-    private ArtifactModel selectArtifactToMark(){
-        StudentModel selectedStudent = selectStudent();
-        int selectedStudentId = selectedStudent.getID();
-        ItemDao itemDao = new ItemDao();
-        int id_type = itemDao.findIdType("Artifact");
-        return ArtifactModel selectedArtifact = itemDao.selectItem(selectedStudentId);
-
-    }
+//    private ArtifactModel selectArtifactToMark(){
+//        StudentModel selectedStudent = selectStudent();
+//        int selectedStudentId = selectedStudent.getID();
+//        ItemDao itemDao = new ItemDao();
+//        int id_type = itemDao.findIdType("Artifact");
+//        return ArtifactModel selectedArtifact = itemDao.selectItem(selectedStudentId);
+//
+//    }
 }
