@@ -1,8 +1,7 @@
 package controller;
 
-import dao.StudentDao;
+import dao.LoginDao;
 import view.UserView;
-import dao.UserDao;
 
 
 public class UserController {
@@ -14,19 +13,19 @@ public class UserController {
     }
 
     private String loginUser(String login, String password) {
-        UserDao dao = new UserDao();
-        int idStatus = dao.findStatusId(login, password);
+        LoginDao loginDao = new LoginDao();
+        int idStatus = loginDao.findStatusId(login, password);
         if (idStatus == 0) {
             view.displayLoginFailed();
             System.exit(0);
         }
-        String userStatus = dao.findStatus(idStatus);
+        String userStatus = loginDao.findStatus(idStatus);
         return userStatus;
     }
 
     private int getLoginId(String login, String password) {
-        UserDao dao = new UserDao();
-        return dao.findLoginId(login, password);
+        LoginDao loginDao = new LoginDao();
+        return loginDao.findLoginId(login, password);
     }
 
     public void startApplication() {
