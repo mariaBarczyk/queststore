@@ -50,7 +50,7 @@ public class MentorController {
 //                    markQuest();
                     break;  
                 case 7:
-                    // Mark student's bought artifacts\n"
+                    markArtifact();
                     break;    
                 case 8:
                     displayStudentWallet();
@@ -110,6 +110,13 @@ public class MentorController {
         return matchedItem;
     }
 
+
+//    private void changePriceOfItem(String type) {
+//        ItemModel item = selectItem(type);
+//        int newPrice = inputController.getIntInput("Enter new price: ");
+//        item.setValue(newPrice);
+//    }
+
     private StudentModel selectStudent() {
         StudentDao studentDao = new StudentDao();
         List<StudentModel> allStudents = studentDao.getStudentsCollection();
@@ -130,6 +137,51 @@ public class MentorController {
         itemDao.updateValueOfItem(item);
     }
 
+//    private StudentModel selectStudent() {
+//        //List<StudentModel> allStudents = StudentModel.getStudentsCollection();
+//        view.displayAllStudents(allStudents);
+//        String fullName = inputController.getStringInput("Enter student full name: ");
+//        StudentModel matchedStudent = null;
+//        for (StudentModel student: allStudents)
+//            if (student.getFullName().equals(fullName))
+//                matchedStudent = student;
+//        return matchedStudent;
+//    }
+//    private void displayStudentWallet() {
+//        StudentModel student = selectStudent();
+//        WalletModel wallet = student.getWallet();
+//        view.displayStudentWallet(wallet);
+//    }
+//    private void markQuest() {
+//        StudentModel selectedStudent = selectStudent();
+//        ItemModel selectedQuest = selectItem("Quest");
+//        selectedStudent.setValuesInWallet(select edQuest.getValue());
+//    }
+
+    private ItemModel chooseArtifactToMark(){
+        List<ItemModel> artifactCollection = new ArrayList<>();
+        //StudentModel selectedStudent = selectStudent();
+        //int selectedStudentId = selectedStudent.getID();
+        int selectedStudentId = 7;
+        ItemDao itemDao = new ItemDao();
+        int id_type = itemDao.findIdType("Artifact");
+        artifactCollection = itemDao.selectStudentsItems(selectedStudentId, id_type);
+        view.displayItemCollection(artifactCollection);
+        int id = inputController.getIntInput("Enter id of item: ");
+        ItemModel matchedItem = null;
+        for (ItemModel item: artifactCollection)
+            if (item.getID() == id)
+                matchedItem = item;
+        return matchedItem;
+    }
+
+    private void markArtifact() {
+        ItemModel artifactToMark = chooseArtifactToMark();
+        TransactionDao transactionDao = new TransactionDao();
+        transactionDao.updateStatusOfTransaction(artifactToMark);
+
+    }
+  
     private List<ArtifactModel> getStudentArtifacts(int id) {
         TransactionDao transactionDao = new TransactionDao();
         return transactionDao.getStudentArtifact(id);
@@ -141,4 +193,5 @@ public class MentorController {
         List<ArtifactModel> studentArtifacts = getStudentArtifacts(student.getID());
         view.displayStudentWallet(student.getWallet());
     }
+
 }

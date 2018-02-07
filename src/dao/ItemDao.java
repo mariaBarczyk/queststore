@@ -14,14 +14,14 @@ public class ItemDao extends UserDao implements ItemDaoInterface {
     public void insertNewItem(ItemModel item) {
         String table = "Item";
         String columns = " ('item_name', 'description', 'price', 'id_type')";
-        String values = "('"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType())+")";
+        String values = "('"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType()) +")";
         UserDao dao = new UserDao();
         dao.insertDataIntoTable(table, columns, values);
     }
 
     public int findIdType(String typeName) {
         UserDao dao = new UserDao();
-        ResultSet result = dao.selectDataFromTable("ItemType", "id_type", "name='"+typeName+"'");
+        ResultSet result = dao.selectDataFromTable("ItemType", "id_type", "type_name='"+typeName+"'");
         int idType = 0;
         try {
             idType = result.getInt("id_type");
@@ -66,6 +66,31 @@ public class ItemDao extends UserDao implements ItemDaoInterface {
         String name = item.getName();
         dao.updateDataInTable("Item", "value='"+value +"'", "name ='" + name+"'");
     }
+
+    public List<ItemModel> selectStudentsItems(int selectedStudentId, int id_type) {
+        List<ItemModel> studentsItemsList = new ArrayList<>();
+        String columns = "Transactions.id_item, Transactions.id_student, Transactions.used, name, description, price, id_type";
+        String joinStatement = "Transactions.id_item = Item.id_item";
+        String condition = "id_student = " + selectedStudentId + " AND id_type =" + id_type ;
+        //Created new method to getFromJoinedTables  with condition
+        ResultSet result = selectFromJoinedTablesWithCondition(columns, "Item", "Transactions", joinStatement, condition);
+        ItemModel item = null;
+        try {
+            while (result.next()) {
+                int id = result.getInt("id_item");
+                String type = "Artifact"; //zmienic
+                String name = result.getString("name");
+                String description = result.getString("description");
+                int price = result.getInt("price");
+                item = createItemObject(id, type, name, description, price);
+                studentsItemsList.add(item);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return studentsItemsList;
+    }
+
 
 //    public List<ItemModel> getAllItemsCollection() {
 //        List<ItemModel> itemCollection = new ArrayList<>();

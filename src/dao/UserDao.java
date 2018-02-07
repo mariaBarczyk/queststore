@@ -115,5 +115,18 @@ public class UserDao implements UserDaoInterface {
         insertDataIntoTable(loginTable, loginColumns, loginValues);
 
     }
+
+    public ResultSet selectFromJoinedTablesWithCondition(String columns, String tableName, String joinTable, String joinStatement, String condition){
+        ResultSet result = null;
+        try {
+            String sql = "SELECT " + columns + " FROM " + tableName + " JOIN " + joinTable + " ON " + joinStatement + " WHERE " + condition +";";
+            System.out.println(sql);
+            result = statement.executeQuery(sql);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return result;
+    }
+
 }
 
