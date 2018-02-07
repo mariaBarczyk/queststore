@@ -15,10 +15,7 @@ public class MentorDao extends UserDao implements MentorDaoInterface {
         int idStatus = findStatusIdByName("Mentor");
         insertNewLogin(mentorEmail, mentorPassword, idStatus);
         int idLogin = findLoginId(mentorEmail, mentorPassword);
-        //here db connection is closed
         UserDao newDao = new UserDao();
-        //int id_group = 1;
-        int idGroup =
         String table = "Mentor";
         String columns = "(first_name, last_name, id_login, id_status, id_group)";
         String values = "('" + mentorName + "', '" + mentorLastName + "', " + idLogin +", "+ idStatus + ", " + idGroup + ");";
