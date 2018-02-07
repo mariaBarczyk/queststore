@@ -37,13 +37,8 @@ public class GroupDao extends UserDao{
         List<GroupModel> groupCollection = new ArrayList<>();
         try {
             while (result.next()) {
-                int id = result.getInt("id_student");
-                String firstName = result.getString("first_name");
-                String lastName = result.getString("last_name");
-                int idWallet = result.getInt("id_wallet");
-                int totalCoolcoins = result.getInt("total_coolcoins");
-                int balance = result.getInt("balance");
-                WalletModel wallet = new WalletModel(idWallet, totalCoolcoins, balance);
+                int id = result.getInt("id_group");
+                String name = result.getString("name");
                 StudentModel student = new StudentModel(id, firstName, lastName, email, password, wallet);
                 studentCollection.add(student);
             }
