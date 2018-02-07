@@ -21,7 +21,7 @@ public class GroupDao extends UserDao{
     }
 
     public ResultSet createGroupsResult() {
-        String sql = "FROM Group SELECT *";
+        String sql = "SELECT * FROM Groups";
         ResultSet result = null;
         try {
             Statement statement = connection.createStatement();
