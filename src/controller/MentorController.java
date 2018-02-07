@@ -144,25 +144,25 @@ public class MentorController {
 //        selectedStudent.setValuesInWallet(select edQuest.getValue());
 //    }
 
-    private ArtifactModel chooseArtifactToMark(){
+    private ItemModel chooseArtifactToMark(){
         List<ItemModel> artifactCollection = new ArrayList<>();
         //StudentModel selectedStudent = selectStudent();
         //int selectedStudentId = selectedStudent.getID();
         int selectedStudentId = 1;
         ItemDao itemDao = new ItemDao();
         int id_type = itemDao.findIdType("Artifact");
-        artifactCollection = itemDao.selectStudentsArtifacts(selectedStudentId, id_type);
+        artifactCollection = itemDao.selectStudentsItems(selectedStudentId, id_type);
         view.displayItemCollection(artifactCollection);
         int id = inputController.getIntInput("Enter id of item: ");
         ItemModel matchedItem = null;
-        for (Model item: artifactCollection)
+        for (ItemModel item: artifactCollection)
             if (item.getID() == id)
                 matchedItem = item;
         return matchedItem;
     }
 
     private void markArtifact() {
-        ArtifactModel artifactToMark = chooseArtifactToMark();
+        ItemModel artifactToMark = chooseArtifactToMark();
         ItemDao itemDao = new ItemDao();
         itemDao.updateStatusOfItem(artifactToMark);
 

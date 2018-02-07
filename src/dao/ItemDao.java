@@ -67,14 +67,14 @@ public class ItemDao extends UserDao {
         dao.updateDataInTable("Item", "value='"+value +"'", "name ='" + name+"'");
     }
 
-    public List<ArtifactModel> selectStudentsArtifacts(int selectedStudentId, int id_type) {
-        List<ArtifactModel> studentsArtifactsList = new ArrayList<>();
+    public List<ItemModel> selectStudentsItems(int selectedStudentId, int id_type) {
+        List<ItemModel> studentsItemsList = new ArrayList<>();
         String columns = "Transaction.id_item, Transaction.id_student, Transaction.used, name, description, value, id_type";
         String joinStatement = "Transaction.id_item = Item.id_item";
         String condition = "id_student = " + selectedStudentId + "AND id_type =" + id_type ;
         //Created new method to getFromJoinedTables  with condition
         ResultSet result = selectFromJoinedTablesWithCondition(columns, "Item", "Transaction", joinStatement, condition);
-        ArtifactModel artifact = null;
+        ItemModel item = null;
         try {
             while (result.next()) {
                 int id = result.getInt("id_item");
@@ -82,13 +82,13 @@ public class ItemDao extends UserDao {
                 String name = result.getString("name");
                 String description = result.getString("description");
                 int value = result.getInt("value");
-                artifact = (ArtifactModel) createItemObject(id, type, name, description, value);
-                studentsArtifactsList.add(artifact);
+                item = createItemObject(id, type, name, description, value);
+                studentsItemsList.add(item);
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        return studentsArtifactsList;
+        return studentsItemsList;
     }
 
 
