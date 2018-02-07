@@ -45,7 +45,9 @@ public class AdminController {
     }
 
     private GroupModel selectGroup() {
-        // List<GroupModel> allGroups = AdminModel.getGroupList();
+        GroupDao groupDao = new GroupDao();
+        List<GroupModel> allGroups =groupDao.getGroupsCollection();
+
         return new GroupModel("A");
     }
 

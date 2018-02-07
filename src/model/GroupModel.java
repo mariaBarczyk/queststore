@@ -15,4 +15,6 @@ public class GroupModel {
     public String getGroupName() {
         return this.groupName;
     }
+
+    public int getId () {return this.id; }
 }
