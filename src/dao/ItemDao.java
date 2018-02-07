@@ -69,11 +69,11 @@ public class ItemDao extends UserDao {
 
     public List<ItemModel> selectStudentsItems(int selectedStudentId, int id_type) {
         List<ItemModel> studentsItemsList = new ArrayList<>();
-        String columns = "Transaction.id_item, Transaction.id_student, Transaction.used, name, description, value, id_type";
-        String joinStatement = "Transaction.id_item = Item.id_item";
-        String condition = "id_student = " + selectedStudentId + "AND id_type =" + id_type ;
+        String columns = "Transactions.id_item, Transactions.id_student, Transactions.used, name, description, price, id_type";
+        String joinStatement = "Transactions.id_item = Item.id_item";
+        String condition = "id_student = " + selectedStudentId + " AND id_type =" + id_type ;
         //Created new method to getFromJoinedTables  with condition
-        ResultSet result = selectFromJoinedTablesWithCondition(columns, "Item", "Transaction", joinStatement, condition);
+        ResultSet result = selectFromJoinedTablesWithCondition(columns, "Item", "Transactions", joinStatement, condition);
         ItemModel item = null;
         try {
             while (result.next()) {
@@ -81,8 +81,8 @@ public class ItemDao extends UserDao {
                 String type = "Artifact"; //zmienic
                 String name = result.getString("name");
                 String description = result.getString("description");
-                int value = result.getInt("value");
-                item = createItemObject(id, type, name, description, value);
+                int price = result.getInt("price");
+                item = createItemObject(id, type, name, description, price);
                 studentsItemsList.add(item);
             }
         }catch (SQLException e) {
@@ -94,7 +94,7 @@ public class ItemDao extends UserDao {
 
     public void updateStatusOfItem(ItemModel item) {
         int itemId = item.getID();
-        updateDataInTable("Transaction", "used = 1", "id_item="+itemId);
+        updateDataInTable("Transactions", "used = 1", "id_item="+itemId);
     }
 
 //    public List<ItemModel> getAllItemsCollection() {
