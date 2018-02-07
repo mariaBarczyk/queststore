@@ -164,7 +164,7 @@ public class MentorController {
     private void markArtifact() {
         ItemModel artifactToMark = chooseArtifactToMark();
         ItemDao itemDao = new ItemDao();
-        itemDao.updateStatusOfItem(artifactToMark);
+        itemDao.updateStatusOfTransaction(artifactToMark);
 
     }
 

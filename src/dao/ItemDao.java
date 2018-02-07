@@ -92,7 +92,7 @@ public class ItemDao extends UserDao {
     }
 
 
-    public void updateStatusOfItem(ItemModel item) {
+    public void updateStatusOfTransaction(ItemModel item) {
         int itemId = item.getID();
         updateDataInTable("Transactions", "used = 1", "id_item="+itemId);
     }
