@@ -1,5 +1,6 @@
 package dao;
 
+import model.ItemModel;
 import model.ArtifactModel;
 
 import java.sql.*;
@@ -13,6 +14,12 @@ public class TransactionDao extends UserDao implements TransationDaoInterface {
         String values =  "("+ idStudent +", " + idItem+ "," + 0 + ")";
         insertDataIntoTable("Transactions ", "(id_student, id_item, used)", values);
     }
+
+    public void updateStatusOfTransaction(ItemModel item) {
+        int itemId = item.getID();
+        updateDataInTable("Transactions", "used = 1", "id_item="+itemId);
+    }
+  
 
     private String prepareGetArtifactsSql(int idStudent) {
         String columns = "Item.id_item, item_name, description, price, used";
@@ -43,4 +50,6 @@ public class TransactionDao extends UserDao implements TransationDaoInterface {
 //    public createArtifactObject() {
 //
 //    }
+
+
 }
