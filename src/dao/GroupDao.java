@@ -9,4 +9,6 @@ public class GroupDao{
         String values = "('"+groupName+"')";
         dao.insertDataIntoTable(table, columns, values);
     }
+
+    public List<GroupModel> getStudentsCollection() {
 }

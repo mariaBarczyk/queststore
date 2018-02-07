@@ -11,16 +11,17 @@ import model.MentorModel;
 
 public class MentorDao extends UserDao implements MentorDaoInterface {
 
-    public void insertNewMentor(String mentorName, String mentorLastName, String mentorEmail, String mentorPassword) {
+    public void insertNewMentor(String mentorName, String mentorLastName, String mentorEmail, String mentorPassword, int idGroup) {
         int idStatus = findStatusIdByName("Mentor");
         insertNewLogin(mentorEmail, mentorPassword, idStatus);
         int idLogin = findLoginId(mentorEmail, mentorPassword);
         //here db connection is closed
         UserDao newDao = new UserDao();
-        int id_group = 1;
+        //int id_group = 1;
+        int idGroup =
         String table = "Mentor";
         String columns = "(first_name, last_name, id_login, id_status, id_group)";
-        String values = "('" + mentorName + "', '" + mentorLastName + "', " + idLogin +", "+ idStatus + ", " + id_group + ");";
+        String values = "('" + mentorName + "', '" + mentorLastName + "', " + idLogin +", "+ idStatus + ", " + idGroup + ");";
         newDao.insertDataIntoTable(table, columns, values);
     }
 
