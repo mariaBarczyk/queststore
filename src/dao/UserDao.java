@@ -2,7 +2,7 @@ package dao;
 
 import java.sql.*;
 
-public class UserDao {
+public class UserDao implements UserDaoInterface {
 
     private DatabaseConnection database = DatabaseConnection.getInstance();
     public Connection connection;

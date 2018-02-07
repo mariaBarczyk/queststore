@@ -53,7 +53,7 @@ public class MentorController {
                     markArtifact();
                     break;    
                 case 8:
-//                    displayStudentWallet();
+                    displayStudentWallet();
                     break;                                                            
                 case 9:
                     exit = true;
@@ -116,6 +116,19 @@ public class MentorController {
 //        int newPrice = inputController.getIntInput("Enter new price: ");
 //        item.setValue(newPrice);
 //    }
+
+    private StudentModel selectStudent() {
+        StudentDao studentDao = new StudentDao();
+        List<StudentModel> allStudents = studentDao.getStudentsCollection();
+        view.displayAllStudents(allStudents);
+        int id = inputController.getIntInput("Enter student id to edit: ");
+        StudentModel matchedStudent = null;
+        for (StudentModel student: allStudents)
+            if (student.getID().equals(id))
+                matchedStudent = student;
+        return matchedStudent;
+    }
+
     private void changePriceOfItem(String type) {
         ItemModel item = selectItem(type);
         int newPrice = inputController.getIntInput("Enter new price: ");
@@ -168,6 +181,17 @@ public class MentorController {
         transactionDao.updateStatusOfTransaction(artifactToMark);
 
     }
+  
+    private List<ArtifactModel> getStudentArtifacts(int id) {
+        TransactionDao transactionDao = new TransactionDao();
+        return transactionDao.getStudentArtifact(id);
 
+    }
+
+    private void  displayStudentWallet() {
+        StudentModel student = selectStudent();
+        List<ArtifactModel> studentArtifacts = getStudentArtifacts(student.getID());
+        view.displayStudentWallet(student.getWallet());
+    }
 
 }

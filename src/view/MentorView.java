@@ -29,7 +29,7 @@ public class MentorView {
 
     public void displayAllStudents(List<StudentModel> studentsCollection) {
         for (StudentModel student: studentsCollection) {
-            System.out.println(student.getFullName());
+            System.out.println(student.getID() + ". " + student.getFullName());
         }
     }
     public void displayStudentWallet(WalletModel wallet) {

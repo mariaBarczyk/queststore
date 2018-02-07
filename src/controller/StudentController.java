@@ -22,7 +22,7 @@ public class StudentController {
 
     private StudentModel getStudent(int idLogin) {
         StudentDao studentDao = new StudentDao();
-        return studentDao.selectStudent(idLogin);
+        return studentDao.getStudentsCollection().get(0);
     }
 
     private ItemModel selectArtifact() {
