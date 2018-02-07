@@ -15,6 +15,11 @@ public class MentorModel extends UserModel {
         this.group = null;
     }
 
+    public MentorModel( String firstName, String lastName, String email, String password) {
+        super(firstName, lastName, email, password);
+        this.group = null;
+    }
+
     public GroupModel getGroup() {
         return this.group;
     }

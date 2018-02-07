@@ -34,16 +34,12 @@ public class TransactionDao extends UserDao implements TransationDaoInterface {
         return sql;
     }
 
+
+
     public List<ArtifactModel> getStudentArtifact(int idStudent) {
         List<ArtifactModel> artifactCollection = new ArrayList<>();
         String sql = prepareGetArtifactsSql(idStudent);
-        ResultSet result = null;
-        try {
-            Statement statement  = connection.createStatement();
-            result = statement.executeQuery(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        ResultSet result = executeSelect(sql);
         return artifactCollection;
     }
 

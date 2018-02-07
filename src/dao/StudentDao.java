@@ -25,9 +25,11 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
     }
 
     public void insertNewStudent(String studentName, String studentLastName, String studentEmail, String studentPassword) {
-        int idStatus = findStatusIdByName("Student");
-        insertNewLogin(studentEmail, studentPassword, idStatus);
-        int idLogin = findLoginId(studentEmail, studentPassword);
+
+        LoginDao loginDao = new LoginDao();
+        int idStatus = loginDao.findStatusIdByName("Student");
+        loginDao.insertNewLogin(studentEmail, studentPassword, idStatus);
+        int idLogin = loginDao.findLoginId(studentEmail, studentPassword);
         UserDao newDao = new UserDao();
         int id_group = 1;
         String table = "Student";
@@ -65,16 +67,9 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
     }
 
     public ResultSet createStudentsResult() {
-            String sql = prepareGetAllStudentsSql();
-            ResultSet result = null;
-            try {
-                Statement statement = connection.createStatement();
-                result = statement.executeQuery(sql);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return result;
-        }
+        String sql = prepareGetAllStudentsSql();
+        return executeSelect(sql);
+    }
 
     public List<StudentModel> getStudentsCollection() {
         ResultSet result =  createStudentsResult();

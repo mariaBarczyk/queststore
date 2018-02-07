@@ -14,21 +14,14 @@ public class ItemDao extends UserDao implements ItemDaoInterface {
     public void insertNewItem(ItemModel item) {
         String table = "Item";
         String columns = " ('item_name', 'description', 'price', 'id_type')";
-        String values = "('"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType()) +")";
+        String values = "('"+ item.getName() + "','"+ item.getDescription()+"',"+item.getValue()+", "+findIdType(item.getType())+")";
         UserDao dao = new UserDao();
         dao.insertDataIntoTable(table, columns, values);
     }
 
     public int findIdType(String typeName) {
-        UserDao dao = new UserDao();
-        ResultSet result = dao.selectDataFromTable("ItemType", "id_type", "type_name='"+typeName+"'");
-        int idType = 0;
-        try {
-            idType = result.getInt("id_type");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return idType;
+        ResultSet result = selectDataFromTable("ItemType", "id_type", "name='"+typeName+"'");
+        return getIntFromResult(result, "id_type");
     }
 
     private ItemModel createItemObject(int idItem, String typeName, String itemName, String description, int price) {
@@ -61,10 +54,9 @@ public class ItemDao extends UserDao implements ItemDaoInterface {
     }
 
     public void updateValueOfItem(ItemModel item) {
-        UserDao dao = new UserDao();
         int value = item.getValue();
         String name = item.getName();
-        dao.updateDataInTable("Item", "value='"+value +"'", "name ='" + name+"'");
+        updateDataInTable("Item", "value='"+value +"'", "name ='" + name+"'");
     }
 
     public List<ItemModel> selectStudentsItems(int selectedStudentId, int id_type) {
