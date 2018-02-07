@@ -39,13 +39,13 @@ public class GroupDao extends UserDao{
             while (result.next()) {
                 int id = result.getInt("id_group");
                 String name = result.getString("name");
-                StudentModel student = new StudentModel(id, firstName, lastName, email, password, wallet);
-                studentCollection.add(student);
+                GroupModel group = new GroupModel(id, name);
+                groupCollection.add(group);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return studentCollection;
+        return groupCollection;
     }
 }
     }
