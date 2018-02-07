@@ -1,6 +1,8 @@
 package controller;
 
 import java.util.List;
+
+import model.ItemModel;
 import view.AdminView;
 import model.MentorModel;
 import model.GroupModel;
@@ -47,8 +49,13 @@ public class AdminController {
     private GroupModel selectGroup() {
         GroupDao groupDao = new GroupDao();
         List<GroupModel> allGroups =groupDao.getGroupsCollection();
-
-        return new GroupModel("A");
+        view.displayAllGroups(allGroups);
+        int id = inputController.getIntInput("Enter id of item: ");
+        GroupModel selectedGroup = null;
+        for (GroupModel group: allGroups)
+            if (group.getId() == id)
+                selectedGroup = group;
+        return selectedGroup;
     }
 
     private void createMentor() {
@@ -57,10 +64,7 @@ public class AdminController {
         String mentorEmail = inputController.getStringInput("Enter mentor email: ");
         String mentorPassword = inputController.getStringInput("Enter mentor password: ");
         GroupModel selectedGroup = selectGroup();
-        selectedGroup.getGroupName();
-        //int idGroup = selectGroup().getGroupName();
-
-        int IdGroup = findGroupID(GroupName);
+        int idGroup = selectedGroup.getId();
         MentorDao mentorDao = new MentorDao();
         mentorDao.insertNewMentor(mentorName, mentorLastName, mentorEmail, mentorPassword, idGroup);
     }
