@@ -16,7 +16,7 @@ public class UserDao {
             e.printStackTrace();
         }
     }
-    private ResultSet executeQuery(String sql) {
+    private ResultSet executeSelect(String sql) {
         ResultSet result = null;
         try {
             result = statement.executeQuery(sql);
@@ -56,13 +56,13 @@ public class UserDao {
 
     public ResultSet selectDataFromTable(String tableName, String columns, String condition) {
         String sql = "SELECT " + columns + " FROM " + tableName + " WHERE " + condition + ";";
-        return executeQuery(sql);
+        return executeSelect(sql);
 
     }
 
     public ResultSet selectFromJoinedTables(String columns, String tableName, String joinTable, String joinStatement) {
         String sql = "SELECT " + columns + " FROM " + tableName + " JOIN " + joinTable + " ON " + joinStatement + ";";
-        return  executeQuery(sql);
+        return  executeSelect(sql);
 
     }
     
