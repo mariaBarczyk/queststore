@@ -21,7 +21,7 @@ public class ItemDao extends UserDao {
 
     public int findIdType(String typeName) {
         UserDao dao = new UserDao();
-        ResultSet result = dao.selectDataFromTable("ItemType", "id_type", "name='"+typeName+"'");
+        ResultSet result = dao.selectDataFromTable("ItemType", "id_type", "type_name='"+typeName+"'");
         int idType = 0;
         try {
             idType = result.getInt("id_type");
