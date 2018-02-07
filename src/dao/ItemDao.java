@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.sql.SQLException;
 
-public class ItemDao extends UserDao {
+public class ItemDao extends UserDao implements ItemDaoInterface {
 
     public void insertNewItem(ItemModel item) {
         String table = "Item";

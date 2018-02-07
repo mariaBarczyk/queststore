@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDao extends UserDao{
+public class StudentDao extends UserDao implements StudentDaoInterface {
 
     private void insertNewWallet(int idLogin){
         String condition ="id_login = "+idLogin;

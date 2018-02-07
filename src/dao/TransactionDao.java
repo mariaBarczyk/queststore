@@ -2,13 +2,12 @@ package dao;
 
 import model.ArtifactModel;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionDao extends UserDao {
+
+public class TransactionDao extends UserDao implements TransationDaoInterface {
 
     public void insertTransaction(int idStudent, int idItem) {
         String values =  "("+ idStudent +", " + idItem+ "," + 0 + ")";
