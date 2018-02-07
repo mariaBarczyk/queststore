@@ -48,5 +48,3 @@ public class GroupDao extends UserDao{
         return groupCollection;
     }
 }
-    }
-}
