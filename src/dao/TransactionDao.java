@@ -24,28 +24,43 @@ public class TransactionDao extends UserDao implements TransationDaoInterface {
     private String prepareGetArtifactsSql(int idStudent) {
         String columns = "Item.id_item, item_name, description, price, used";
         String joinStmt1 = "Item.id_item = Transactions.id_item";
-        String joinStmt2 = "ItemType.id_type = ItemType.id_type";
+        String joinStmt2 = "Item.id_type = ItemType.id_type";
 
         String sql = "SELECT " + columns + " FROM Transactions " +
                 " JOIN Item ON " + joinStmt1 +
                 " JOIN ItemType ON " + joinStmt2 +
-                " WHERE id_student= '" + idStudent + "' AND ItemType.name='Artifact'";
+                " WHERE id_student= '" + idStudent + "' AND ItemType.name='Artifact' AND used=0";
         System.out.println(sql);
         return sql;
     }
 
-
-
-    public List<ArtifactModel> getStudentArtifact(int idStudent) {
-        List<ArtifactModel> artifactCollection = new ArrayList<>();
-        String sql = prepareGetArtifactsSql(idStudent);
-        ResultSet result = executeSelect(sql);
-        return artifactCollection;
+    public ItemModel getItemObject(ResultSet result) {
+        ArtifactModel artifact = null;
+        try {
+            int id = result.getInt("id_item");
+            String name = result.getString("item_name");
+            String description = result.getString("description");
+            int price = result.getInt("price");
+            artifact = new ArtifactModel(id, "Artifact", name, description, price);
+            System.out.println(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return artifact;
     }
 
-//    public createArtifactObject() {
-//
-//    }
-
-
+    public List<ItemModel> getStudentArtifact(int idStudent) {
+        List<ItemModel> artifactsCollection = new ArrayList<>();
+        String sql = prepareGetArtifactsSql(idStudent);
+        ResultSet result = executeSelect(sql);
+        try {
+            while (result.next()) {
+                ItemModel artifact = getItemObject(result);
+                artifactsCollection.add(artifact);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return artifactsCollection;
+    }
 }
