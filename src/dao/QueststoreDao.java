@@ -2,13 +2,14 @@ package dao;
 
 import java.sql.*;
 
-public class UserDao {
+
+public class QueststoreDao {
 
     private DatabaseConnection database = DatabaseConnection.getInstance();
     public Connection connection;
     private Statement statement;
 
-    public UserDao(){
+    public QueststoreDao(){
         connection = database.getConnection();
         try {
             this.statement = connection.createStatement();
@@ -115,18 +116,5 @@ public class UserDao {
         insertDataIntoTable(loginTable, loginColumns, loginValues);
 
     }
-
-    public ResultSet selectFromJoinedTablesWithCondition(String columns, String tableName, String joinTable, String joinStatement, String condition){
-        ResultSet result = null;
-        try {
-            String sql = "SELECT " + columns + " FROM " + tableName + " JOIN " + joinTable + " ON " + joinStatement + " WHERE " + condition +";";
-            System.out.println(sql);
-            result = statement.executeQuery(sql);
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        }
-        return result;
-    }
-
 }
 

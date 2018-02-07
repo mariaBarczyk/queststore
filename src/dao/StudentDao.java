@@ -5,10 +5,10 @@ import model.WalletModel;
 
 import java.sql.*;
 
-public class StudentDao extends UserDao{
+public class StudentDao extends QueststoreDao{
 
     private void insertNewWallet(int idLogin){
-        UserDao newDao = new UserDao();
+        QueststoreDao newDao = new QueststoreDao();
         String condition ="id_login = "+idLogin;
         int idStudent = 0;
         ResultSet idStudentResult = newDao.selectDataFromTable("Student","id_student", condition);
@@ -27,7 +27,7 @@ public class StudentDao extends UserDao{
         int idStatus = findStatusIdByName("Student");
         insertNewLogin(studentEmail, studentPassword, idStatus);
         int idLogin = findLoginId(studentEmail, studentPassword);
-        UserDao newDao = new UserDao();
+        QueststoreDao newDao = new QueststoreDao();
         int id_group = 1;
         String table = "Student";
         String columns = "(first_name, last_name, id_login, id_status, id_group)";
