@@ -2,7 +2,7 @@ package dao;
 
 import java.sql.*;
 
-public class UserDao {
+public class UserDao implements UserDaoInterface {
 
     private DatabaseConnection database = DatabaseConnection.getInstance();
     private Connection connection;
@@ -16,7 +16,7 @@ public class UserDao {
             e.printStackTrace();
         }
     }
-    private ResultSet executeSelect(String sql) {
+    public ResultSet executeSelect(String sql) {
         ResultSet result = null;
         try {
             result = statement.executeQuery(sql);
@@ -26,7 +26,7 @@ public class UserDao {
         return result;
     }
 
-    private void executeUpdate(String sql) {
+    public void executeUpdate(String sql) {
         try {
             statement.executeUpdate(sql);
         } catch (Exception e) {
