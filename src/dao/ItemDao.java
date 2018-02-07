@@ -3,7 +3,6 @@ package dao;
 import model.ArtifactModel;
 import model.ItemModel;
 import model.QuestModel;
-import model.WalletModel;
 
 import java.sql.ResultSet;
 import java.util.List;
@@ -95,9 +94,8 @@ public class ItemDao extends UserDao {
 
 
     public void updateStatusOfItem(ItemModel item) {
-        UserDao dao = new UserDao();
         int itemId = item.getID();
-        dao.updateDataInTable("Transaction", "used = 1", "id_item="+itemId);
+        updateDataInTable("Transaction", "used = 1", "id_item="+itemId);
     }
 
 //    public List<ItemModel> getAllItemsCollection() {
