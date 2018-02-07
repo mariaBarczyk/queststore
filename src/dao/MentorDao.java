@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 import model.MentorModel;
 
-public class MentorDao extends UserDao{
+public class MentorDao extends QueststoreDao{
 
     public void insertNewMentor(String mentorName, String mentorLastName, String mentorEmail, String mentorPassword) {
         int idStatus = findStatusIdByName("Mentor");
         insertNewLogin(mentorEmail, mentorPassword, idStatus);
         int idLogin = findLoginId(mentorEmail, mentorPassword);
         //here db connection is closed
-        UserDao newDao = new UserDao();
+        QueststoreDao newDao = new QueststoreDao();
         int id_group = 1;
         String table = "Mentor";
         String columns = "(first_name, last_name, id_login, id_status, id_group)";
@@ -39,7 +39,7 @@ public class MentorDao extends UserDao{
 
     public void updateMentorData(MentorModel mentor) {
 
-        UserDao dao = new UserDao();
+        QueststoreDao dao = new QueststoreDao();
         String name = mentor.getFirstName();
         String lastName = mentor.getLastName();
         String email = mentor.getEmail();
@@ -54,7 +54,7 @@ public class MentorDao extends UserDao{
     public List<MentorModel> getAllMentorsCollection() {
 
         List<MentorModel> mentorCollection = new ArrayList<>();
-        UserDao dao = new UserDao();
+        QueststoreDao dao = new QueststoreDao();
         String columns = "email, password, Mentor.first_name, Mentor.last_name, Mentor.id_mentor";
         String joinStatement = "Mentor.id_login = Login.id_login";
         ResultSet result = dao.selectFromJoinedTables(columns, "Login", "Mentor", joinStatement);
