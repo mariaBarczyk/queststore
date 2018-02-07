@@ -92,11 +92,6 @@ public class ItemDao extends UserDao {
     }
 
 
-    public void updateStatusOfTransaction(ItemModel item) {
-        int itemId = item.getID();
-        updateDataInTable("Transactions", "used = 1", "id_item="+itemId);
-    }
-
 //    public List<ItemModel> getAllItemsCollection() {
 //        List<ItemModel> itemCollection = new ArrayList<>();
 //        UserDao dao = new UserDao();

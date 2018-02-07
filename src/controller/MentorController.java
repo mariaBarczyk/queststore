@@ -2,6 +2,7 @@ package controller;
 
 import dao.ItemDao;
 import dao.StudentDao;
+import dao.TransactionDao;
 import view.MentorView;
 import model.StudentModel;
 import model.WalletModel;
@@ -163,8 +164,8 @@ public class MentorController {
 
     private void markArtifact() {
         ItemModel artifactToMark = chooseArtifactToMark();
-        ItemDao itemDao = new ItemDao();
-        itemDao.updateStatusOfTransaction(artifactToMark);
+        TransactionDao transactionDao = new TransactionDao();
+        transactionDao.updateStatusOfTransaction(artifactToMark);
 
     }
 
