@@ -72,10 +72,9 @@ public class ItemDao extends UserDao {
         String columns = "Transaction.id_item, Transaction.id_student, Transaction.used, name, description, value, id_type";
         String joinStatement = "Transaction.id_item = Item.id_item";
         String condition = "id_student = " + selectedStudentId + "AND id_type =" + id_type ;
-        //Create new method to getFromJoinedTables  with condition
+        //Created new method to getFromJoinedTables  with condition
         ResultSet result = selectFromJoinedTablesWithCondition(columns, "Item", "Transaction", joinStatement, condition);
         ArtifactModel artifact = null;
-        //int id, String type, String name, String description, int value)
         try {
             while (result.next()) {
                 int id = result.getInt("id_item");

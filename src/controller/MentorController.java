@@ -155,7 +155,7 @@ public class MentorController {
         view.displayItemCollection(artifactCollection);
         int id = inputController.getIntInput("Enter id of item: ");
         ItemModel matchedItem = null;
-        for (ItemModel item: artifactCollection)
+        for (Model item: artifactCollection)
             if (item.getID() == id)
                 matchedItem = item;
         return matchedItem;
