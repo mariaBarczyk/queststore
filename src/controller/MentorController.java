@@ -149,7 +149,7 @@ public class MentorController {
         List<ItemModel> artifactCollection = new ArrayList<>();
         //StudentModel selectedStudent = selectStudent();
         //int selectedStudentId = selectedStudent.getID();
-        int selectedStudentId = 1;
+        int selectedStudentId = 7;
         ItemDao itemDao = new ItemDao();
         int id_type = itemDao.findIdType("Artifact");
         artifactCollection = itemDao.selectStudentsItems(selectedStudentId, id_type);
