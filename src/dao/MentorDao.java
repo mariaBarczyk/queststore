@@ -11,23 +11,31 @@ import model.MentorModel;
 
 public class MentorDao extends UserDao implements MentorDaoInterface {
 
-    public void insertNewMentor(String mentorName, String mentorLastName, String mentorEmail, String mentorPassword) {
+    private int getIdStatus() {
+        ResultSet result = selectDataFromTable("Status", "id_status", "name='Mentor'");
+        return getIntFromResult(result, "id_status");
+    }
+
+    private int getIdLogin(int idMentor) {
+        ResultSet result = selectDataFromTable("Login", "id_login", "id_login='"+ idMentor + "'");
+        return getIntFromResult(result, "id_login");
+    }
+
+    private int insertNewLogin(String email, String password) {
         LoginDao loginDao = new LoginDao();
         int idStatus = loginDao.findStatusIdByName("Mentor");
-        loginDao.insertNewLogin(mentorEmail, mentorPassword, idStatus);
-        int idLogin = loginDao.findLoginId(mentorEmail, mentorPassword);
-        //here db connection is closed
-        UserDao newDao = new UserDao();
+        loginDao.insertNewLogin(email, password, idStatus);
+        return loginDao.findLoginId(email, password);
+    }
+
+    public void insertNewMentor(MentorModel mentor) {
+        int idLogin = insertNewLogin(mentor.getEmail(), mentor.getPassword());
         int id_group = 1;
         String table = "Mentor";
         String columns = "(first_name, last_name, id_login, id_status, id_group)";
-        String values = "('" + mentorName + "', '" + mentorLastName + "', " + idLogin +", "+ idStatus + ", " + id_group + ");";
-        newDao.insertDataIntoTable(table, columns, values);
-    }
-
-    private int getIdLogin(int id_mentor) {
-        ResultSet result = selectDataFromTable("Mentor", "id_login", "id_mentor=" + id_mentor);
-        return getIntFromResult(result, "id_login");
+        int idStatus = getIdStatus();
+        String values = "('" + mentor.getFirstName() + "', '" + mentor.getLastName() + "', " + idLogin +", "+ idStatus + ", " + id_group + ");";
+        insertDataIntoTable(table, columns, values);
     }
 
     public void updateMentorData(MentorModel mentor) {
