@@ -18,6 +18,7 @@ public class UserDao implements UserDaoInterface {
     }
     public ResultSet executeSelect(String sql) {
         ResultSet result = null;
+        System.out.println(sql);
         try {
             result = statement.executeQuery(sql);
         } catch (SQLException e) {

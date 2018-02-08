@@ -48,7 +48,7 @@ public class MentorController {
                     changePriceOfItem("Artifact");
                     break; 
                 case 6:
-//                    markQuest();
+//                  markItem();
                     break;  
                 case 7:
                     markItem();
@@ -161,28 +161,27 @@ public class MentorController {
 
     private ItemModel chooseItemToMark(){
         List<ItemModel> itemCollection = new ArrayList<>();
-        //StudentModel selectedStudent = selectStudent();
+        StudentModel selectedStudent = selectStudent();
         //int selectedStudentId = selectedStudent.getID();
         int selectedStudentId = 1;
         String typeName = inputController.getStringInput("Please type the name of the item (Artefact or Quest): ");
-            if(typeName.equals("Artefact")){
+            if(typeName.equalsIgnoreCase("Artifact")){
                 ItemDao itemDao = new ItemDao();
                 int id_type = itemDao.findIdType(typeName);
                 itemCollection = itemDao.selectStudentsItems(selectedStudentId, id_type);
                 view.displayItemCollection(itemCollection);
-            } else {
-                typeName.equals("Quest");
+            } else if (typeName.equalsIgnoreCase("Quest")){
                 ItemDao itemDao = new ItemDao();
                 int id_type = itemDao.findIdType(typeName);
                 itemCollection = itemDao.selectStudentsItems(selectedStudentId, id_type);
                 view.displayItemCollection(itemCollection);
             }
-        int id = inputController.getIntInput("Enter id of item: ");
-        ItemModel matchedItem = null;
-        for (ItemModel item: itemCollection)
-            if (item.getID() == id)
-                matchedItem = item;
-        return matchedItem;
+            int id = inputController.getIntInput("Enter id of item: ");
+            ItemModel matchedItem = null;
+            for (ItemModel item: itemCollection)
+                if (item.getID() == id)
+                    matchedItem = item;
+            return matchedItem;
     }
 
     private void markItem() {

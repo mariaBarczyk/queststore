@@ -20,7 +20,7 @@ public class ItemDao extends UserDao implements ItemDaoInterface {
     }
 
     public int findIdType(String typeName) {
-        ResultSet result = selectDataFromTable("ItemType", "id_type", "type_name='"+typeName+"'");
+        ResultSet result = selectDataFromTable("ItemType", "id_type", "name='"+typeName+"'");
         return getIntFromResult(result, "id_type");
     }
 
@@ -63,7 +63,7 @@ public class ItemDao extends UserDao implements ItemDaoInterface {
         List<ItemModel> studentsItemsList = new ArrayList<>();
         String columns = "Transactions.id_item, Transactions.id_student, Transactions.used, item_name, description, price, id_type";
         String joinStatement = "Transactions.id_item = Item.id_item";
-        String condition = "id_student = " + selectedStudentId;
+        String condition = "id_student = " + selectedStudentId + " AND id_type= " + id_type;
         //Created new method to getFromJoinedTables  with condition
         ResultSet result = selectFromJoinedTablesWithCondition(columns, "Item", "Transactions", joinStatement, condition);
         ItemModel item = null;
