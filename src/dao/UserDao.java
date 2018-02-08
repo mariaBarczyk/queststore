@@ -28,10 +28,11 @@ public class UserDao implements UserDaoInterface {
     }
 
     public void executeUpdate(String sql) {
+        System.out.println(sql);
         try {
             statement.executeUpdate(sql);
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getStackTrace());
         }
     }
 
@@ -40,7 +41,7 @@ public class UserDao implements UserDaoInterface {
         try {
             intData = result.getInt(columnName);
         } catch (SQLException e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            e.printStackTrace();
         }
         return intData;
     }
@@ -58,13 +59,11 @@ public class UserDao implements UserDaoInterface {
     public ResultSet selectDataFromTable(String tableName, String columns, String condition) {
         String sql = "SELECT " + columns + " FROM " + tableName + " WHERE " + condition + ";";
         return executeSelect(sql);
-
     }
 
     public ResultSet selectFromJoinedTables(String columns, String tableName, String joinTable, String joinStatement) {
         String sql = "SELECT " + columns + " FROM " + tableName + " JOIN " + joinTable + " ON " + joinStatement + ";";
         return  executeSelect(sql);
-
     }
     
     public void insertDataIntoTable(String tableName, String columns, String values) {
@@ -78,15 +77,8 @@ public class UserDao implements UserDaoInterface {
     }
 
     public ResultSet selectFromJoinedTablesWithCondition(String columns, String tableName, String joinTable, String joinStatement, String condition){
-        ResultSet result = null;
-        try {
-            String sql = "SELECT " + columns + " FROM " + tableName + " JOIN " + joinTable + " ON " + joinStatement + " WHERE " + condition +";";
-            System.out.println(sql);
-            result = statement.executeQuery(sql);
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        }
-        return result;
+        String sql = "SELECT " + columns + " FROM " + tableName + " JOIN " + joinTable + " ON " + joinStatement + " WHERE " + condition +";";
+        return executeSelect(sql);
     }
 
 }
