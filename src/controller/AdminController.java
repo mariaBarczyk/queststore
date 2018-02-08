@@ -77,8 +77,20 @@ public class AdminController {
         return matchedMentor;
     }
 
+    private void updateMentorData(MentorModel mentor) {
+        MentorDao mentorDao = new MentorDao();
+        mentorDao.updateMentorTable(mentor);
+    }
+
+    private void updateLoginData(MentorModel mentor, String login, String password) {
+        LoginDao loginDao = new LoginDao();
+        loginDao.updateLoginTable(mentor, login, password);
+    }
+
     private void editMentorDataPanel() {
         MentorModel mentorToEdit = selectMentor();
+        String mentorLogin = mentorToEdit.getEmail();
+        String mentorPassword = mentorToEdit.getPassword();
         int userChoice = 0;
         while (userChoice != 5) {
             view.displayEditMentorMenu();
@@ -104,8 +116,9 @@ public class AdminController {
                     break;
             }
         }
-        MentorDao mentorDao = new MentorDao();
-        mentorDao.updateMentorData(mentorToEdit);
+        updateMentorData(mentorToEdit);
+        updateLoginData(mentorToEdit, mentorLogin, mentorPassword);
+
     }
 
     private void displayMentorData() {

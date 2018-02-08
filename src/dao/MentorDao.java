@@ -16,10 +16,10 @@ public class MentorDao extends UserDao implements MentorDaoInterface {
         return getIntFromResult(result, "id_status");
     }
 
-    private int getIdLogin(int idMentor) {
-        ResultSet result = selectDataFromTable("Login", "id_login", "id_login='"+ idMentor + "'");
-        return getIntFromResult(result, "id_login");
-    }
+//    private int getIdLogin(int idMentor) {
+//        ResultSet result = selectDataFromTable("Login", "id_login", "id_login='"+ idMentor + "'");
+//        return getIntFromResult(result, "id_login");
+//    }
 
     private int insertNewLogin(String email, String password) {
         LoginDao loginDao = new LoginDao();
@@ -38,16 +38,13 @@ public class MentorDao extends UserDao implements MentorDaoInterface {
         insertDataIntoTable(table, columns, values);
     }
 
-    public void updateMentorData(MentorModel mentor) {
+    public void updateMentorTable(MentorModel mentor) {
         String name = mentor.getFirstName();
         String lastName = mentor.getLastName();
-        String email = mentor.getEmail();
-        String password = mentor.getPassword();
         int idMentor = mentor.getID();
-        int idLogin = getIdLogin(idMentor);
         updateDataInTable("Mentor", "first_name='"+name+"', last_name='"+lastName+"'", "id_mentor=" + idMentor);
-        updateDataInTable("Login", "email='"+email+"', password='"+password+"'", "id_login="+idLogin);
     }
+
 
     public List<MentorModel> getAllMentorsCollection() {
 
