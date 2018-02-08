@@ -1,26 +1,23 @@
 package dao;
 
 import model.GroupModel;
-import model.StudentModel;
-import model.WalletModel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupDao extends UserDao{
+public class GroupDao extends ManipulationDao implements GroupDaoInterface {
 
     public void addNewGroup(String groupName){
-        UserDao dao = new UserDao();
+        ManipulationDao dao = new ManipulationDao();
         String table = "Groups";
         String columns = "('name')";
         String values = "('"+groupName+"')";
         dao.insertDataIntoTable(table, columns, values);
     }
 
-    public ResultSet createGroupsResult() {
+    private ResultSet createGroupsResult() {
         String sql = "SELECT * FROM Groups";
         ResultSet result = executeSelect(sql);
         return result;

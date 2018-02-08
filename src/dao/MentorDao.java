@@ -7,10 +7,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-import model.GroupModel;
 import model.MentorModel;
 
-public class MentorDao extends UserDao implements MentorDaoInterface {
+public class MentorDao extends ManipulationDao implements MentorDaoInterface {
 
     private int getIdStatus() {
         ResultSet result = selectDataFromTable("Status", "id_status", "name='Mentor'");
@@ -40,7 +39,6 @@ public class MentorDao extends UserDao implements MentorDaoInterface {
         updateDataInTable("Mentor", "first_name='"+name+"', last_name='"+lastName+"'", "id_mentor=" + idMentor);
     }
 
-
     public List<MentorModel> getAllMentorsCollection() {
 
         List<MentorModel> mentorCollection = new ArrayList<>();
@@ -65,4 +63,5 @@ public class MentorDao extends UserDao implements MentorDaoInterface {
     }
 
 }
+
 

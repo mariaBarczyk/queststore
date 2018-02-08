@@ -5,7 +5,7 @@ import model.UserModel;
 import java.sql.ResultSet;
 
 
-public class LoginDao extends UserDao {
+public class LoginDao extends ManipulationDao {
 
 
     public int findStatusId(String login, String password) {

@@ -6,13 +6,13 @@ import java.sql.Statement;
 import java.sql.SQLException;
 
 
-public class UserDao implements UserDaoInterface {
+public class ManipulationDao implements UserDaoInterface {
 
     private DatabaseConnection database = DatabaseConnection.getInstance();
     private Connection connection;
     private Statement statement;
 
-    public UserDao(){
+    public ManipulationDao(){
         connection = database.getConnection();
         try {
             this.statement = connection.createStatement();

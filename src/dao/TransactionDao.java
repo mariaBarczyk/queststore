@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TransactionDao extends UserDao implements TransationDaoInterface {
+public class TransactionDao extends ManipulationDao implements TransationDaoInterface {
 
     public void insertTransaction(int idStudent, int idItem) {
         String values =  "("+ idStudent +", " + idItem+ "," + 0 + ")";
@@ -19,7 +19,6 @@ public class TransactionDao extends UserDao implements TransationDaoInterface {
         int itemId = item.getID();
         updateDataInTable("Transactions", "used = 1", "id_item="+itemId);
     }
-  
 
     private String prepareGetArtifactsSql(int idStudent) {
         String columns = "Item.id_item, item_name, description, price, used";
@@ -30,7 +29,6 @@ public class TransactionDao extends UserDao implements TransationDaoInterface {
                 " JOIN Item ON " + joinStmt1 +
                 " JOIN ItemType ON " + joinStmt2 +
                 " WHERE id_student= '" + idStudent + "' AND ItemType.name='Artifact' AND used=0";
-        System.out.println(sql);
         return sql;
     }
 
@@ -42,7 +40,6 @@ public class TransactionDao extends UserDao implements TransationDaoInterface {
             String description = result.getString("description");
             int price = result.getInt("price");
             artifact = new ArtifactModel(id, "Artifact", name, description, price);
-            System.out.println(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

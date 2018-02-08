@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface MentorDaoInterface {
 
-//    void insertNewMentor(String mentorName, String mentorLastName, String mentorEmail, String mentorPassword);
-//    void updateMentorData(MentorModel mentor);
     List<MentorModel> getAllMentorsCollection();
+    void insertNewMentor(MentorModel mentor);
+    void updateMentorTable(MentorModel mentor);
+
 
 }
