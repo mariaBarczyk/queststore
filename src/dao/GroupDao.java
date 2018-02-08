@@ -22,13 +22,7 @@ public class GroupDao extends UserDao{
 
     public ResultSet createGroupsResult() {
         String sql = "SELECT * FROM Groups";
-        ResultSet result = null;
-        try {
-            Statement statement = connection.createStatement();
-            result = statement.executeQuery(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        ResultSet result = executeSelect(sql);
         return result;
     }
 
