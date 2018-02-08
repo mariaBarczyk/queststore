@@ -1,7 +1,6 @@
 package view;
 
 import model.WalletModel;
-import model.ArtifactModel;
 import model.ItemModel;
 
 import java.util.List;
@@ -16,6 +15,7 @@ public class StudentView {
     }
 
     public void displayCollectionOfItem(List<ItemModel> itemCollection) {
+        System.out.println("STUDENT ARTIFACTS: ");
         for (ItemModel item: itemCollection) {
             System.out.println(item.getID() + ". " + item.getName() + item.getValue());
         }
@@ -24,6 +24,5 @@ public class StudentView {
     public void displayWallet(WalletModel wallet) {
         System.out.println("\nBALANCE: " + wallet.getBalance() +
                            "\nTOTAL COOLCOINS: " + wallet.getTotalCoolcoins());
-//        displayCollectionOfItem(wallet.getArtifactCollection());
     }
 }
