@@ -12,7 +12,7 @@ public class UserController {
         view = new UserView();
     }
 
-    private String loginUser(String login, String password) {
+    private String logInUser(String login, String password) {
         LoginDao loginDao = new LoginDao();
         int idStatus = loginDao.findStatusId(login, password);
         if (idStatus == 0) {
@@ -32,7 +32,7 @@ public class UserController {
         InputController inputController = new InputController();
         String login = inputController.getStringInput("Enter login: ");
         String password = inputController.getStringInput("Enter password: ");
-        String userStatus = loginUser(login, password);
+        String userStatus = logInUser(login, password);
         if (userStatus.equals(0)) {
             System.out.println("Wrong login or password! ");
             System.exit(0);
