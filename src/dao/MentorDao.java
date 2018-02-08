@@ -30,7 +30,7 @@ public class MentorDao extends UserDao implements MentorDaoInterface {
 
     public void insertNewMentor(MentorModel mentor) {
         int idLogin = insertNewLogin(mentor.getEmail(), mentor.getPassword());
-        int id_group = 1;
+        int id_group = mentor.getGroup();
         String table = "Mentor";
         String columns = "(first_name, last_name, id_login, id_status, id_group)";
         int idStatus = getIdStatus();
@@ -52,7 +52,7 @@ public class MentorDao extends UserDao implements MentorDaoInterface {
     public List<MentorModel> getAllMentorsCollection() {
 
         List<MentorModel> mentorCollection = new ArrayList<>();
-        String columns = "email, password, Mentor.first_name, Mentor.last_name, Mentor.id_mentor";
+        String columns = "email, password, Mentor.first_name, Mentor.last_name, Mentor.id_mentor, Mentor.id_group";
         String joinStatement = "Mentor.id_login = Login.id_login";
         ResultSet result = selectFromJoinedTables(columns, "Login", "Mentor", joinStatement);
         try {
@@ -62,7 +62,8 @@ public class MentorDao extends UserDao implements MentorDaoInterface {
                 String email = result.getString("email");
                 String password = result.getString("password");
                 int id = result.getInt("id_mentor");
-                MentorModel mentor = new MentorModel(id, firstName, lastName, email, password);
+                int idGroup = result.getInt("id_group");
+                MentorModel mentor = new MentorModel(id, firstName, lastName, email, password, idGroup);
                 mentorCollection.add(mentor);
             }
         } catch (SQLException e) {
