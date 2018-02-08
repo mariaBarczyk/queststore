@@ -8,23 +8,23 @@ import java.util.ArrayList;
 public class MentorModel extends UserModel {
 
     private static String status = "Mentor";
-    private GroupModel group;
+    private int idGroup;
 
-    public MentorModel(int id, String firstName, String lastName, String email, String password) {
+    public MentorModel(int id, String firstName, String lastName, String email, String password, int idGroup) {
         super(id, firstName, lastName, email, password);
-        this.group = null;
+        this.idGroup = idGroup;
     }
 
-    public MentorModel( String firstName, String lastName, String email, String password) {
+    public MentorModel( String firstName, String lastName, String email, String password, int idGroup) {
         super(firstName, lastName, email, password);
-        this.group = null;
+        this.idGroup =idGroup ;
     }
 
-    public GroupModel getGroup() {
-        return this.group;
+    public int getGroup() {
+        return this.idGroup;
     }
 
-    public void setGroup(GroupModel newGroup) {
-        this.group = newGroup;
-    }
+    //public void setGroup(GroupModel newGroup) {
+        //this.idGroup = newGroup;
+    //}
 }
