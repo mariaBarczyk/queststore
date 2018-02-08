@@ -43,6 +43,7 @@ public class UserController {
 
 
     private void displayUserMenu(int loginId, String statusName) {
+        view.displayWelcomeMessage();
         switch (statusName) {
             case "Admin":
                 AdminController adminController = new AdminController();

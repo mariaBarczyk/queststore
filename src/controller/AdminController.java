@@ -2,11 +2,12 @@ package controller;
 
 import java.util.List;
 
-import model.ItemModel;
 import view.AdminView;
 import model.MentorModel;
 import model.GroupModel;
-import dao.*;
+import dao.MentorDao;
+import dao.GroupDao;
+import dao.LoginDao;
 
 
 public class AdminController {
@@ -20,10 +21,10 @@ public class AdminController {
     }
 
     public void controlMenuOptions() {
-        boolean exit = false;
-        while (!exit) {
+        int userChoice = 0;
+        while (userChoice != 5) {
             view.displayAdminMenu();
-            int userChoice = inputController.getIntInput("SELECT AN OPTION: ");
+            userChoice = inputController.getIntInput("SELECT AN OPTION: ");
             switch (userChoice) {
                 case 1:
                     createMentor();
@@ -37,11 +38,8 @@ public class AdminController {
                 case 4:
                     displayMentorData();
                     break;
-                case 5:
-                    exit = true;
-                    break;
                 default:
-                    System.out.println("Wrong number!");
+                    break;
             }
         }
     }
@@ -83,7 +81,6 @@ public class AdminController {
         int id = inputController.getIntInput("Enter mentor id to edit: ");
         MentorModel matchedMentor = null;
         for (MentorModel mentor : allMentors) {
-            System.out.println(mentor.getID());
             if (mentor.getID().equals(id))
                 matchedMentor = mentor;
         }

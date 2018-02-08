@@ -1,6 +1,10 @@
 package dao;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.SQLException;
+
 
 public class UserDao implements UserDaoInterface {
 
@@ -18,7 +22,6 @@ public class UserDao implements UserDaoInterface {
     }
     public ResultSet executeSelect(String sql) {
         ResultSet result = null;
-        System.out.println(sql);
         try {
             result = statement.executeQuery(sql);
         } catch (SQLException e) {
@@ -28,7 +31,6 @@ public class UserDao implements UserDaoInterface {
     }
 
     public void executeUpdate(String sql) {
-        System.out.println(sql);
         try {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
