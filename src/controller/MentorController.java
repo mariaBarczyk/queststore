@@ -64,9 +64,6 @@ public class MentorController {
         }
     }
 
-    private GroupModel selectGroup() { //HARDCODED
-        return new GroupModel("A");
-    }
 
     private void createStudent() {
         String studentName = inputController.getStringInput("Enter student name: ");
@@ -159,10 +156,9 @@ public class MentorController {
 //    }
 
     private ItemModel chooseArtifactToMark(){
-        List<ItemModel> artifactCollection = new ArrayList<>();
-        //StudentModel selectedStudent = selectStudent();
-        //int selectedStudentId = selectedStudent.getID();
-        int selectedStudentId = 7;
+        List<ItemModel> artifactCollection;
+        StudentModel selectedStudent = selectStudent();
+        int selectedStudentId = selectedStudent.getID();
         ItemDao itemDao = new ItemDao();
         int id_type = itemDao.findIdType("Artifact");
         artifactCollection = itemDao.selectStudentsItems(selectedStudentId, id_type);
