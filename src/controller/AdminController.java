@@ -50,7 +50,7 @@ public class AdminController {
         GroupDao groupDao = new GroupDao();
         List<GroupModel> allGroups =groupDao.getGroupsCollection();
         view.displayAllGroups(allGroups);
-        int id = inputController.getIntInput("Enter id of item: ");
+        int id = inputController.getIntInput("Enter id of the chosen group: ");
         GroupModel selectedGroup = null;
         for (GroupModel group: allGroups)
             if (group.getId() == id)
@@ -66,7 +66,8 @@ public class AdminController {
         GroupModel selectedGroup = selectGroup();
         int idGroup = selectedGroup.getId();
         MentorDao mentorDao = new MentorDao();
-        mentorDao.insertNewMentor(mentorName, mentorLastName, mentorEmail, mentorPassword, idGroup);
+        MentorModel mentor = new MentorModel(mentorName, mentorLastName, mentorEmail, mentorPassword, idGroup);
+        mentorDao.insertNewMentor(mentor);
     }
 
     private void createGroup() {
