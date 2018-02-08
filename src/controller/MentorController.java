@@ -13,6 +13,7 @@ import model.ArtifactModel;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class MentorController {
@@ -50,7 +51,7 @@ public class MentorController {
 //                    markQuest();
                     break;  
                 case 7:
-                    markArtifact();
+                    markItem();
                     break;    
                 case 8:
                     displayStudentWallet();
@@ -158,27 +159,36 @@ public class MentorController {
 //        selectedStudent.setValuesInWallet(select edQuest.getValue());
 //    }
 
-    private ItemModel chooseArtifactToMark(){
-        List<ItemModel> artifactCollection = new ArrayList<>();
+    private ItemModel chooseItemToMark(){
+        List<ItemModel> itemCollection = new ArrayList<>();
         //StudentModel selectedStudent = selectStudent();
         //int selectedStudentId = selectedStudent.getID();
-        int selectedStudentId = 7;
-        ItemDao itemDao = new ItemDao();
-        int id_type = itemDao.findIdType("Artifact");
-        artifactCollection = itemDao.selectStudentsItems(selectedStudentId, id_type);
-        view.displayItemCollection(artifactCollection);
+        int selectedStudentId = 1;
+        String typeName = inputController.getStringInput("Please type the name of the item (Artefact or Quest): ");
+            if(typeName.equals("Artefact")){
+                ItemDao itemDao = new ItemDao();
+                int id_type = itemDao.findIdType(typeName);
+                itemCollection = itemDao.selectStudentsItems(selectedStudentId, id_type);
+                view.displayItemCollection(itemCollection);
+            } else {
+                typeName.equals("Quest");
+                ItemDao itemDao = new ItemDao();
+                int id_type = itemDao.findIdType(typeName);
+                itemCollection = itemDao.selectStudentsItems(selectedStudentId, id_type);
+                view.displayItemCollection(itemCollection);
+            }
         int id = inputController.getIntInput("Enter id of item: ");
         ItemModel matchedItem = null;
-        for (ItemModel item: artifactCollection)
+        for (ItemModel item: itemCollection)
             if (item.getID() == id)
                 matchedItem = item;
         return matchedItem;
     }
 
-    private void markArtifact() {
-        ItemModel artifactToMark = chooseArtifactToMark();
+    private void markItem() {
+        ItemModel itemToMark = chooseItemToMark();
         TransactionDao transactionDao = new TransactionDao();
-        transactionDao.updateStatusOfTransaction(artifactToMark);
+        transactionDao.updateStatusOfTransaction(itemToMark);
 
     }
   
