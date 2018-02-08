@@ -1,6 +1,5 @@
 package dao;
 
-import model.GroupModel;
 import model.StudentModel;
 import model.WalletModel;
 
@@ -8,46 +7,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDao extends UserDao implements StudentDaoInterface {
+public class StudentDao extends ManipulationDao implements StudentDaoInterface {
 
-    private void insertNewWallet(int idLogin){
-        String condition ="id_login = "+idLogin;
-        int idStudent = 0;
-        ResultSet idStudentResult = selectDataFromTable("Student","id_student", condition);
-        try{
-            idStudent = idStudentResult.getInt("id_student");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String tableName = "Wallet";
-        String columns = "(total_coolcoins, balance, id_student)";
-        String values = "("+0 +", "+ 0 +", " + idStudent + ")";
-        insertDataIntoTable(tableName, columns, values);
-    }
 
     private int getIdStatus() {
         ResultSet result = selectDataFromTable("Status", "id_status", "name='Mentor'");
         return getIntFromResult(result, "id_status");
     }
 
-
-    public void insertNewStudent(String studentName, String studentLastName, String studentEmail, String studentPassword) {
-
-        LoginDao loginDao = new LoginDao();
-        int idStatus = loginDao.findStatusIdByName("Student");
-        loginDao.insertNewLogin(studentEmail, studentPassword, idStatus);
-        int idLogin = loginDao.findLoginId(studentEmail, studentPassword);
-        UserDao newDao = new UserDao();
-        int id_group = 1;
-        String table = "Student";
-        String columns = "(first_name, last_name, id_login, id_status, id_group)";
-        String values = "('" + studentName + "', '" + studentLastName + "', " + idLogin +", "+ idStatus + ", " + id_group + ");";
-        newDao.insertDataIntoTable(table, columns, values);
-        insertNewWallet(idLogin);
-    }
-
-
-    public String prepareGetAllStudentsSql() {
+    private String prepareGetAllStudentsSql() {
         String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, Groups.id_group, id_wallet, total_coolcoins, balance, Groups.name";
         String joinStmt1 = "Login.id_login=Student.id_login";
         String joinStmt2 = "Wallet.id_student=Student.id_student";
@@ -83,8 +51,7 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
             String lastName = result.getString("last_name");
             int idWallet = result.getInt("id_wallet");
             int totalCoolcoins = result.getInt("total_coolcoins");
-            //int GroupId = result.getInt("id_group");
-            String groupName = result.getString("name");
+            String groupName = result.getString("first_name");
             int balance = result.getInt("balance");
             WalletModel wallet = new WalletModel(idWallet, totalCoolcoins, balance);
             student = new StudentModel(id, firstName, lastName, email, password, groupName, wallet);
@@ -109,6 +76,13 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
         return studentCollection;
     }
 
+    private void insertNewWallet(int idStudent) {
+        String tableName = "Wallet";
+        String columns = "(total_coolcoins, balance, id_student)";
+        String values = "("+ 0 +", " + 0 +", " + idStudent + ")";
+        insertDataIntoTable(tableName, columns, values);
+    }
+
     private int insertNewLogin(String email, String password) {
         LoginDao loginDao = new LoginDao();
         int idStatus = loginDao.findStatusIdByName("Student");
@@ -124,14 +98,12 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
         int idStatus = getIdStatus();
         String values = "('" + student.getFirstName() + "', '" + student.getLastName() + "', " + idLogin +", "+ idStatus + ", " + id_group + ");";
         insertDataIntoTable(table, columns, values);
-        insertNewWallet(idLogin);
-
+        insertNewWallet(student.getID());
     }
 
     public void updateWallet(StudentModel student){
         int balance = student.getWallet().getBalance();
         int totalCoolcoins = student.getWallet().getTotalCoolcoins();
-        int idWallet = student.getWallet().getId();
         int idStudent = student.getID();
         updateDataInTable("Wallet", "balance="+ balance +", total_coolcoins=" + totalCoolcoins, "id_student=" + idStudent);
     }
