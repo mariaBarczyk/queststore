@@ -1,6 +1,7 @@
 package view;
 
 
+import model.GroupModel;
 import model.MentorModel;
 
 import java.util.List; 
@@ -34,5 +35,11 @@ public class AdminView {
                          + "\nemail: " + mentor.getEmail() 
                          + "\npassword: " + mentor.getPassword()
                          + "\ngroup name: " + mentor.getGroup().getGroupName() + '\n');
+    }
+
+    public void displayAllGroups(List<GroupModel> groupsCollection) {
+        for (GroupModel group: groupsCollection) {
+            System.out.println(group.getId() + ". "  +group.getGroupName());
+        }
     }
 }
