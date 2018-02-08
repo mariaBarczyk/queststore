@@ -12,7 +12,6 @@ import model.ItemModel;
 import model.QuestModel;
 import model.ArtifactModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,10 +26,10 @@ public class MentorController {
     }
 
     public void controlMenuOptions() {
-        boolean exit = false;
-        while (!exit) {
+        int userChoice = 0;
+        while (userChoice != 9) {
             view.displayMentorMenu();
-            int userChoice = inputController.getIntInput("SELECT AN OPTION: ");
+            userChoice = inputController.getIntInput("SELECT AN OPTION: ");
             switch (userChoice) {
                 case 1:
                     createStudent();
@@ -48,19 +47,16 @@ public class MentorController {
                     changePriceOfItem("Artifact");
                     break; 
                 case 6:
-                    addValueForQuest();
+                    addValueForQuest("Quest");
                     break;
                 case 7:
-                    markItem();
+                    markItem("Artifact");
                     break;
                 case 8:
                     displayStudentWallet();
-                    break;                                                            
-                case 9:
-                    exit = true;
                     break;
                 default:
-                    System.out.println("Wrong number!");
+                    break;
             }
         }
     }
@@ -77,6 +73,17 @@ public class MentorController {
         return selectedGroup;
     }
 
+    private ItemModel selectItem(String type) {
+        ItemDao itemDao = new ItemDao();
+        List<ItemModel> itemCollection = itemDao.getItemCollectionByType(type);
+        view.displayItemCollection(itemCollection);
+        int id = inputController.getIntInput("Enter id of item: ");
+        ItemModel matchedItem = null;
+        for (ItemModel item: itemCollection)
+            if (item.getID() == id)
+                matchedItem = item;
+        return matchedItem;
+    }
 
     private void createStudent() {
         String studentName = inputController.getStringInput("Enter student name: ");
@@ -109,18 +116,6 @@ public class MentorController {
         itemDao.insertNewItem(newArtifact);
     }
 
-    private ItemModel selectItem(String type) {
-        ItemDao itemDao = new ItemDao();
-        List<ItemModel> itemCollection = itemDao.getItemCollectionByType(type);
-        view.displayItemCollection(itemCollection);
-        int id = inputController.getIntInput("Enter id of item: ");
-        ItemModel matchedItem = null;
-        for (ItemModel item: itemCollection)
-            if (item.getID() == id)
-                matchedItem = item;
-        return matchedItem;
-    }
-
     private StudentModel selectStudent() {
         StudentDao studentDao = new StudentDao();
         List<StudentModel> allStudents = studentDao.getStudentsCollection();
@@ -141,36 +136,24 @@ public class MentorController {
         itemDao.updateValueOfItem(item);
     }
 
-    private ItemModel chooseItemToMark(){
-        List<ItemModel> itemCollection = new ArrayList<>();
+    private ItemModel chooseItemToMark(String typeName) {
         StudentModel selectedStudent = selectStudent();
-        //int selectedStudentId = selectedStudent.getID();
-        int selectedStudentId = 1;
-        String typeName = inputController.getStringInput("Please type the name of the item (Artifact or Quest): ");
-        if (typeName.equalsIgnoreCase("Artifact")) {
-            ItemDao itemDao = new ItemDao();
-            int id_type = itemDao.findIdType(typeName);
-            itemCollection = itemDao.selectStudentsItems(selectedStudentId, id_type);
-            view.displayItemCollection(itemCollection);
-        } else if (typeName.equalsIgnoreCase("Quest")) {
-            ItemDao itemDao = new ItemDao();
-            int id_type = itemDao.findIdType(typeName);
-            itemCollection = itemDao.selectStudentsItems(selectedStudentId, id_type);
-            view.displayItemCollection(itemCollection);
-        }
+        int studentId = selectedStudent.getID();
+        ItemDao itemDao = new ItemDao();
+        List<ItemModel> itemCollection = itemDao.selectStudentsItems(studentId, typeName);
+        view.displayItemCollection(itemCollection);
         int id = inputController.getIntInput("Enter id of item: ");
         ItemModel matchedItem = null;
-        for (ItemModel item : itemCollection)
+        for (ItemModel item: itemCollection)
             if (item.getID() == id)
                 matchedItem = item;
         return matchedItem;
     }
 
-    private void markItem() {
-        ItemModel itemToMark = chooseItemToMark();
+    private void markItem(String typeName) {
+        ItemModel itemToMark = chooseItemToMark(typeName);
         TransactionDao transactionDao = new TransactionDao();
         transactionDao.updateStatusOfTransaction(itemToMark);
-
     }
   
     private List<ItemModel> getStudentArtifacts(int id) {
@@ -185,35 +168,14 @@ public class MentorController {
         view.displayStudentArtifacts(studentArtifacts);
     }
 
-
-    private void addValueForQuest() {
+    private void addValueForQuest(String typeName) {
         StudentDao studentDao = new StudentDao();
-        List<StudentModel> allStudents = studentDao.getStudentsCollection();
-        view.displayAllStudents(allStudents);
-        int idStudent = inputController.getIntInput("Enter student id to add value for quest: ");
-        List<ItemModel> itemCollection = new ArrayList<>();
         StudentModel selectedStudent = selectStudent();
-        //int selectedStudentId = 1;
-        String typeName = "Quest";
-        ItemDao itemDao = new ItemDao();
-        int id_type = itemDao.findIdType(typeName);
-        itemCollection = itemDao.selectStudentsItems(selectedStudent.getID(), id_type);
-        view.displayItemCollection(itemCollection);
-        int id = inputController.getIntInput("Enter id of quest: ");
-        int value = 0;
-        for (ItemModel item : itemCollection) {
-            if (item.getID() == id){
-                System.out.println(itemCollection.get(id).getValue());
-                value = item.getValue();
-            }
-        }
-        selectedStudent.updateAcountBalance(value);
+        ItemModel item = selectItem(typeName);
+        int itemValue = item.getValue();
+        selectedStudent.updateAccountBalance(itemValue);
         studentDao.updateWallet(selectedStudent);
-
-        //System.out.println(selectedStudent.getWallet().getBalance());
-
-
-
-            //return selectItem().getValue()
+        TransactionDao transactionDao = new TransactionDao();
+        transactionDao.insertTransaction(selectedStudent.getID(), item.getID());
     }
 }
