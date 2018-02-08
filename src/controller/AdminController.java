@@ -82,9 +82,11 @@ public class AdminController {
         view.displayAllMentors(allMentors);
         int id = inputController.getIntInput("Enter mentor id to edit: ");
         MentorModel matchedMentor = null;
-        for (MentorModel mentor: allMentors)
+        for (MentorModel mentor : allMentors) {
+            System.out.println(mentor.getID());
             if (mentor.getID().equals(id))
                 matchedMentor = mentor;
+        }
         return matchedMentor;
     }
 

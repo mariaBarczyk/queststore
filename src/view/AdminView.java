@@ -1,10 +1,13 @@
 package view;
 
 
+import dao.GroupDao;
+import dao.MentorDao;
 import model.GroupModel;
 import model.MentorModel;
 
-import java.util.List; 
+import java.security.acl.Group;
+import java.util.List;
 
 public class AdminView {
 
@@ -30,11 +33,14 @@ public class AdminView {
         }
     }
     public void displayMentorData(MentorModel mentor) {
+        int groupId = mentor.getIdGroup();
+        GroupDao dao = new GroupDao();
+        String groupName = dao.getGroupNameById(groupId);
         System.out.println("\n===MENTOR DATA==\n"
                          + mentor.getFullName() 
                          + "\nemail: " + mentor.getEmail() 
                          + "\npassword: " + mentor.getPassword()
-                         + "\ngroup id: " + mentor.getGroup() + '\n');
+                         + "\ngroup name: " + groupName + '\n');
     }
 
     public void displayAllGroups(List<GroupModel> groupsCollection) {

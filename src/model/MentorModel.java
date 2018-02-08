@@ -17,14 +17,18 @@ public class MentorModel extends UserModel {
 
     public MentorModel( String firstName, String lastName, String email, String password, int idGroup) {
         super(firstName, lastName, email, password);
+        //this.groupName = groupName;
         this.idGroup =idGroup ;
     }
 
-    public int getGroup() {
-        return this.idGroup;
+    public int getIdGroup() {
+        return idGroup;
+    }
+
+    //public int getGroup() {
+        //return this.idGroup;
     }
 
     //public void setGroup(GroupModel newGroup) {
         //this.idGroup = newGroup;
     //}
-}

@@ -41,4 +41,10 @@ public class GroupDao extends UserDao{
         }
         return groupCollection;
     }
+
+    public String getGroupNameById(int groupId){
+        ResultSet result = selectDataFromTable("Groups","name","id_group ="+groupId);
+        String groupName = getStringFromResult(result,"name");
+        return groupName;
+    }
 }
