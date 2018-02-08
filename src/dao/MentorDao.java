@@ -16,11 +16,6 @@ public class MentorDao extends UserDao implements MentorDaoInterface {
         return getIntFromResult(result, "id_status");
     }
 
-//    private int getIdLogin(int idMentor) {
-//        ResultSet result = selectDataFromTable("Login", "id_login", "id_login='"+ idMentor + "'");
-//        return getIntFromResult(result, "id_login");
-//    }
-
     private int insertNewLogin(String email, String password) {
         LoginDao loginDao = new LoginDao();
         int idStatus = loginDao.findStatusIdByName("Mentor");

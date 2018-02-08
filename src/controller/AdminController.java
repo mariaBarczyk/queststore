@@ -129,7 +129,6 @@ public class AdminController {
         }
         updateMentorData(mentorToEdit);
         updateLoginData(mentorToEdit, mentorLogin, mentorPassword);
-
     }
 
     private void displayMentorData() {
