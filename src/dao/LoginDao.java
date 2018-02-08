@@ -1,5 +1,7 @@
 package dao;
 
+import model.UserModel;
+
 import java.sql.ResultSet;
 
 
@@ -31,6 +33,12 @@ public class LoginDao extends UserDao {
         String loginColumns = "(email, password, id_status)";
         String loginValues = "('"+email+"', '"+ password + "', " + idStatus + ");";
         insertDataIntoTable(loginTable, loginColumns, loginValues);
+    }
 
+    public void updateLoginTable(UserModel user, String email, String password) {
+        String newEmail = user.getEmail();
+        String newPassword = user.getPassword();
+        int idLogin = findLoginId(email, password);
+        updateDataInTable("Login", "email='"+newEmail+"', password='"+newPassword+"'", "id_login="+idLogin);
     }
 }
