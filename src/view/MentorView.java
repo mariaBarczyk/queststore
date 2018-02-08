@@ -1,5 +1,6 @@
 package view;
 
+import model.ArtifactModel;
 import model.ItemModel;
 import model.StudentModel;
 import model.WalletModel;
@@ -35,5 +36,12 @@ public class MentorView {
     public void displayStudentWallet(WalletModel wallet) {
         System.out.println("\nBALANCE: " + wallet.getBalance() +
                            "\nTOTAL COOLCOINS: " + wallet.getTotalCoolcoins());
+    }
+
+    public void displayStudentArtifacts(List<ItemModel> artifactsCollection) {
+        System.out.println("Students artifacts: \n");
+        for (ItemModel artifact : artifactsCollection) {
+            System.out.println(artifact.getID() + ". " + artifact.getName());
+        }
     }
 }

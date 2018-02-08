@@ -182,7 +182,7 @@ public class MentorController {
 
     }
   
-    private List<ArtifactModel> getStudentArtifacts(int id) {
+    private List<ItemModel> getStudentArtifacts(int id) {
         TransactionDao transactionDao = new TransactionDao();
         return transactionDao.getStudentArtifact(id);
 
@@ -190,8 +190,9 @@ public class MentorController {
 
     private void  displayStudentWallet() {
         StudentModel student = selectStudent();
-        List<ArtifactModel> studentArtifacts = getStudentArtifacts(student.getID());
+        List<ItemModel> studentArtifacts = getStudentArtifacts(student.getID());
         view.displayStudentWallet(student.getWallet());
+        view.displayStudentArtifacts(studentArtifacts);
     }
 
 
