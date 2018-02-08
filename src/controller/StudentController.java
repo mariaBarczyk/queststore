@@ -47,15 +47,15 @@ public class StudentController {
         view.displayWallet(student.getWallet());
         TransactionDao transactionDao = new TransactionDao();
         List<ItemModel> artifactsCollection = transactionDao.getStudentArtifact(student.getID());
-        view.displayCollectionOfItem(artifactsCollection);
+        view.displayBoughtArtifacts(artifactsCollection);
     }
 
     public void controlMenuOptions(int loginId) {
         StudentModel student = getStudent(loginId);
-        boolean exit = false;
-        while (!exit) {
+        int userChoice = 0;
+        while (userChoice != 5) {
             view.displayStudentMenu();
-            int userChoice = inputController.getIntInput("SELECT AN OPTION: ");
+            userChoice = inputController.getIntInput("SELECT AN OPTION: ");
             switch (userChoice) {
                 case 1:
                     displayWallet(student);
@@ -68,12 +68,9 @@ public class StudentController {
                     break;
                 case 4:
                     //4 - See your level of experience\n"; TEŻ MIELIŚMY CIĄĆ
-                    break;                                                         
-                case 9:
-                    exit = true;
                     break;
                 default:
-                    System.out.println("Wrong number!");
+                    break;
             }
         }
     }
