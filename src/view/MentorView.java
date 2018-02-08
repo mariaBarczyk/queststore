@@ -25,9 +25,10 @@ public class MentorView {
 
     public void displayItemCollection(List<ItemModel> itemCollection) {
         for (ItemModel item: itemCollection) 
-            System.out.println("\nId: " + item.getID()
-                            + "\nType: " + item.getType()
-                            + "\n NAME: " +item.getName());
+            System.out.println("\nid: " + item.getID()
+                            + "\ntype: " + item.getType()
+                            + "\nname: " +item.getName()
+                            + "\nvalue: " + item.getValue());
     }
 
     public void displayAllStudents(List<StudentModel> studentsCollection) {
