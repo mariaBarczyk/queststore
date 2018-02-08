@@ -20,7 +20,7 @@ public class ItemDao extends UserDao implements ItemDaoInterface {
     }
 
     public int findIdType(String typeName) {
-        ResultSet result = selectDataFromTable("ItemType", "id_type", "name='"+typeName+"'");
+        ResultSet result = selectDataFromTable("ItemType", "id_type", "type_name='"+typeName+"'");
         return getIntFromResult(result, "id_type");
     }
 
