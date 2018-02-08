@@ -1,5 +1,6 @@
 package model;
 
+
 public class UserModel {
 
     private int id;
