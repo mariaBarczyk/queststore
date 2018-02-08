@@ -97,4 +97,12 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
         }
         return studentCollection;
     }
+
+    public void updateWallet(StudentModel student){
+        int balance = student.getWallet().getBalance();
+        int totalCoolcoins = student.getWallet().getTotalCoolcoins();
+        int idWallet = student.getWallet().getId();
+        int idStudent = student.getID();
+        updateDataInTable("Wallet", "balance="+ balance +", total_coolcoins=" + totalCoolcoins, "id_student=" + idStudent);
+    }
 }

@@ -11,4 +11,6 @@ public class ArtifactModel extends ItemModel {
         super(type, name, description, value);
 
     }
+
+
 }
