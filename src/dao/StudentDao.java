@@ -1,5 +1,6 @@
 package dao;
 
+import model.GroupModel;
 import model.StudentModel;
 import model.WalletModel;
 
@@ -47,13 +48,15 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
 
 
     public String prepareGetAllStudentsSql() {
-        String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, id_wallet, total_coolcoins, balance";
+        String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, Groups.id_group, id_wallet, total_coolcoins, balance, Groups.name";
         String joinStmt1 = "Login.id_login=Student.id_login";
         String joinStmt2 = "Wallet.id_student=Student.id_student";
+        String joinStmt3 = "Student.id_group = Groups.id_group";
 
         String sql = "SELECT " + columns + " FROM Student " +
                 " JOIN Login  ON " + joinStmt1 +
-                " JOIN Wallet  ON " + joinStmt2;
+                " JOIN Wallet  ON " + joinStmt2 +
+                " JOIN Groups ON " + joinStmt3;
         return sql;
     }
 
@@ -67,9 +70,11 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
             String lastName = result.getString("last_name");
             int idWallet = result.getInt("id_wallet");
             int totalCoolcoins = result.getInt("total_coolcoins");
+            //int GroupId = result.getInt("id_group");
+            String groupName = result.getString("name");
             int balance = result.getInt("balance");
             WalletModel wallet = new WalletModel(idWallet, totalCoolcoins, balance);
-            student = new StudentModel(id, firstName, lastName, email, password, wallet);
+            student = new StudentModel(id, firstName, lastName, email, password, groupName, wallet);
         } catch (SQLException e) {
             e.printStackTrace();
         }

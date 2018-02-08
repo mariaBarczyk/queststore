@@ -124,7 +124,7 @@ public class MentorController {
         StudentDao studentDao = new StudentDao();
         List<StudentModel> allStudents = studentDao.getStudentsCollection();
         view.displayAllStudents(allStudents);
-        int id = inputController.getIntInput("Enter student id to edit: ");
+        int id = inputController.getIntInput("Enter id of student: ");
         StudentModel matchedStudent = null;
         for (StudentModel student: allStudents)
             if (student.getID().equals(id))

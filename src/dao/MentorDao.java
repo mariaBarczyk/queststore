@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 
+import model.GroupModel;
 import model.MentorModel;
 
 public class MentorDao extends UserDao implements MentorDaoInterface {
@@ -25,11 +26,10 @@ public class MentorDao extends UserDao implements MentorDaoInterface {
 
     public void insertNewMentor(MentorModel mentor) {
         int idLogin = insertNewLogin(mentor.getEmail(), mentor.getPassword());
-        int id_group = mentor.getGroup();
         String table = "Mentor";
         String columns = "(first_name, last_name, id_login, id_status, id_group)";
         int idStatus = getIdStatus();
-        String values = "('" + mentor.getFirstName() + "', '" + mentor.getLastName() + "', " + idLogin +", "+ idStatus + ", " + id_group + ");";
+        String values = "('" + mentor.getFirstName() + "', '" + mentor.getLastName() + "', " + idLogin +", "+ idStatus + ", " + mentor.getIdGroup() + ");";
         insertDataIntoTable(table, columns, values);
     }
 
