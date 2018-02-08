@@ -1,6 +1,5 @@
 package view;
 
-import model.ArtifactModel;
 import model.ItemModel;
 import model.StudentModel;
 import model.WalletModel;
@@ -25,7 +24,9 @@ public class MentorView {
 
     public void displayItemCollection(List<ItemModel> itemCollection) {
         for (ItemModel item: itemCollection) 
-            System.out.println("ID " + item.getID() + " TYPE: " + item.getType() + " NAME: " +item.getName());
+            System.out.println("\nId: " + item.getID()
+                            + "\nType: " + item.getType()
+                            + "\n NAME: " +item.getName());
     }
 
     public void displayAllStudents(List<StudentModel> studentsCollection) {
