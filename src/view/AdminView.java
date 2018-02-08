@@ -34,7 +34,7 @@ public class AdminView {
                          + mentor.getFullName() 
                          + "\nemail: " + mentor.getEmail() 
                          + "\npassword: " + mentor.getPassword()
-                         + "\ngroup name: " + mentor.getGroup().getGroupName() + '\n');
+                         + "\ngroup id: " + mentor.getGroup() + '\n');
     }
 
     public void displayAllGroups(List<GroupModel> groupsCollection) {
