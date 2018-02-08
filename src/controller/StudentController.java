@@ -15,14 +15,14 @@ public class StudentController {
     private StudentView view;
     private InputController inputController;
 
-    protected StudentController() {
+    public StudentController() {
         view = new StudentView();
         inputController = new InputController();
     }
 
     private StudentModel getStudent(int idLogin) {
         StudentDao studentDao = new StudentDao();
-        return studentDao.getStudentsCollection().get(0);
+        return studentDao.getStudentByIdLogin(idLogin);
     }
 
     private ItemModel selectArtifact() {
@@ -43,6 +43,13 @@ public class StudentController {
         transactionDao.insertTransaction(student.getID(), artifact.getID());
     }
 
+    private void  displayWallet(StudentModel student) {
+        view.displayWallet(student.getWallet());
+        TransactionDao transactionDao = new TransactionDao();
+        List<ItemModel> artifactsCollection = transactionDao.getStudentArtifact(student.getID());
+        view.displayCollectionOfItem(artifactsCollection);
+    }
+
     public void controlMenuOptions(int loginId) {
         StudentModel student = getStudent(loginId);
         boolean exit = false;
@@ -51,7 +58,7 @@ public class StudentController {
             int userChoice = inputController.getIntInput("SELECT AN OPTION: ");
             switch (userChoice) {
                 case 1:
-                    //view.displayWallet();
+                    displayWallet(student);
                     break;
                 case 2:
                     buyArtifact(student);

@@ -31,7 +31,7 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
     }
 
 
-    /*public void insertNewStudent(String studentName, String studentLastName, String studentEmail, String studentPassword) {
+    public void insertNewStudent(String studentName, String studentLastName, String studentEmail, String studentPassword) {
 
         LoginDao loginDao = new LoginDao();
         int idStatus = loginDao.findStatusIdByName("Student");
@@ -44,7 +44,7 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
         String values = "('" + studentName + "', '" + studentLastName + "', " + idLogin +", "+ idStatus + ", " + id_group + ");";
         newDao.insertDataIntoTable(table, columns, values);
         insertNewWallet(idLogin);
-    }*/
+    }
 
 
     public String prepareGetAllStudentsSql() {
@@ -58,6 +58,19 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
                 " JOIN Wallet  ON " + joinStmt2 +
                 " JOIN Groups ON " + joinStmt3;
         return sql;
+    }
+
+    public StudentModel  getStudentByIdLogin(int idLogin) {
+        String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, id_wallet, total_coolcoins, balance";
+        String joinStmt1 = "Login.id_login=Student.id_login";
+        String joinStmt2 = "Wallet.id_student=Student.id_student";
+        String condition = "Student.id_login=" +idLogin;
+
+        String sql = "SELECT " + columns + " FROM Student JOIN Login ON " +  joinStmt1 +
+                    " JOIN Wallet ON " + joinStmt2 +
+                    " WHERE " +  condition;
+        ResultSet result = executeSelect(sql);
+        return createStudentObject(result);
     }
 
     public StudentModel createStudentObject(ResultSet result) {
@@ -113,5 +126,13 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
         insertDataIntoTable(table, columns, values);
         insertNewWallet(idLogin);
 
+    }
+
+    public void updateWallet(StudentModel student){
+        int balance = student.getWallet().getBalance();
+        int totalCoolcoins = student.getWallet().getTotalCoolcoins();
+        int idWallet = student.getWallet().getId();
+        int idStudent = student.getID();
+        updateDataInTable("Wallet", "balance="+ balance +", total_coolcoins=" + totalCoolcoins, "id_student=" + idStudent);
     }
 }
