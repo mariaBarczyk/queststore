@@ -25,9 +25,11 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
     }
 
     public void insertNewStudent(String studentName, String studentLastName, String studentEmail, String studentPassword) {
-        int idStatus = findStatusIdByName("Student");
-        insertNewLogin(studentEmail, studentPassword, idStatus);
-        int idLogin = findLoginId(studentEmail, studentPassword);
+
+        LoginDao loginDao = new LoginDao();
+        int idStatus = loginDao.findStatusIdByName("Student");
+        loginDao.insertNewLogin(studentEmail, studentPassword, idStatus);
+        int idLogin = loginDao.findLoginId(studentEmail, studentPassword);
         UserDao newDao = new UserDao();
         int id_group = 1;
         String table = "Student";
@@ -37,21 +39,6 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
         insertNewWallet(idLogin);
     }
 
-    private WalletModel getStudentWallet(int idStudent) {
-        ResultSet result = selectDataFromTable("Wallet","id_wallet, total_coolcoins, balance", "id_student='"+idStudent+"'");
-        WalletModel wallet = null;
-        try {
-            while (result.next()) {
-                int idWallet = result.getInt("id_wallet");
-                int totalCoins = result.getInt("total_coolcoins");
-                int balance = result.getInt("balance");
-                wallet = new WalletModel(idWallet, totalCoins, balance);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return wallet;
-    }
 
     public String prepareGetAllStudentsSql() {
         String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, id_wallet, total_coolcoins, balance";
@@ -64,33 +51,32 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
         return sql;
     }
 
-    public ResultSet createStudentsResult() {
-            String sql = prepareGetAllStudentsSql();
-            ResultSet result = null;
-            try {
-                Statement statement = connection.createStatement();
-                result = statement.executeQuery(sql);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return result;
+    public StudentModel createStudentObject(ResultSet result) {
+        StudentModel student = null;
+        try {
+            String email = result.getString("email");
+            String password = result.getString("password");
+            int id = result.getInt("id_student");
+            String firstName = result.getString("first_name");
+            String lastName = result.getString("last_name");
+            int idWallet = result.getInt("id_wallet");
+            int totalCoolcoins = result.getInt("total_coolcoins");
+            int balance = result.getInt("balance");
+            WalletModel wallet = new WalletModel(idWallet, totalCoolcoins, balance);
+            student = new StudentModel(id, firstName, lastName, email, password, wallet);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return student;
+    }
 
     public List<StudentModel> getStudentsCollection() {
-        ResultSet result =  createStudentsResult();
+        String sql = prepareGetAllStudentsSql();
+        ResultSet result = executeSelect(sql);
         List<StudentModel> studentCollection = new ArrayList<>();
         try {
             while (result.next()) {
-                String email = result.getString("email");
-                String password = result.getString("password");
-                int id = result.getInt("id_student");
-                String firstName = result.getString("first_name");
-                String lastName = result.getString("last_name");
-                int idWallet = result.getInt("id_wallet");
-                int totalCoolcoins = result.getInt("total_coolcoins");
-                int balance = result.getInt("balance");
-                WalletModel wallet = new WalletModel(idWallet, totalCoolcoins, balance);
-                StudentModel student = new StudentModel(id, firstName, lastName, email, password, wallet);
+                StudentModel student = createStudentObject(result);
                 studentCollection.add(student);
             }
         } catch (SQLException e) {
