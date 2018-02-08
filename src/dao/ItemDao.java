@@ -61,17 +61,17 @@ public class ItemDao extends UserDao implements ItemDaoInterface {
 
     public List<ItemModel> selectStudentsItems(int selectedStudentId, int id_type) {
         List<ItemModel> studentsItemsList = new ArrayList<>();
-        String columns = "Transactions.id_item, Transactions.id_student, Transactions.used, name, description, price, id_type";
+        String columns = "Transactions.id_item, Transactions.id_student, Transactions.used, item_name, description, price, id_type";
         String joinStatement = "Transactions.id_item = Item.id_item";
-        String condition = "id_student = " + selectedStudentId + " AND id_type =" + id_type ;
+        String condition = "id_student = " + selectedStudentId;
         //Created new method to getFromJoinedTables  with condition
         ResultSet result = selectFromJoinedTablesWithCondition(columns, "Item", "Transactions", joinStatement, condition);
         ItemModel item = null;
         try {
             while (result.next()) {
                 int id = result.getInt("id_item");
-                String type = "Artifact"; //zmienic
-                String name = result.getString("name");
+                String type = result.getString("id_type");
+                String name = result.getString("item_name");
                 String description = result.getString("description");
                 int price = result.getInt("price");
                 item = createItemObject(id, type, name, description, price);
