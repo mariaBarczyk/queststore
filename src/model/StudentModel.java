@@ -3,28 +3,23 @@ package model;
 
 public class StudentModel extends UserModel {
 
-    private GroupModel myGroup;
-    private WalletModel myWallet;
+    private int myGroupId;
 
     
-    public StudentModel(int id, String firstName, String lastName, String email, String password,
-                        GroupModel group, WalletModel myWallet) {
-        super(id, firstName, lastName, email, password);
-        this.myGroup = group;
-        this.myWallet = myWallet;
+    public StudentModel(String firstName, String lastName, String email, String password,
+                        int groupId) {
+        super(firstName, lastName, email, password);
+        this.myGroupId = groupId;
     }
 
     public StudentModel(int id, String firstName, String lastName, String email, String password, WalletModel myWallet) {
         super(id, firstName, lastName, email, password);
-        this.myWallet = myWallet;
     }
 
-    public GroupModel getGroup() {
-        return this.myGroup;
+    public int getGroupId() {
+        return this.myGroupId;
     }
-    public void setGroup(GroupModel group) { this.myGroup=group; }
-    public WalletModel getWallet() {
-        return this.myWallet;
-    }
+    //public void setGroup(GroupModel group) { this.myGroup=group; }
+
 
 }

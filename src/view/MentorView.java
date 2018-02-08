@@ -1,9 +1,6 @@
 package view;
 
-import model.ArtifactModel;
-import model.ItemModel;
-import model.StudentModel;
-import model.WalletModel;
+import model.*;
 
 import java.util.List;
 
@@ -42,6 +39,11 @@ public class MentorView {
         System.out.println("Students artifacts: \n");
         for (ItemModel artifact : artifactsCollection) {
             System.out.println(artifact.getID() + ". " + artifact.getName());
+        }
+    }
+    public void displayAllGroups(List<GroupModel> groupsCollection) {
+        for (GroupModel group: groupsCollection) {
+            System.out.println(group.getId() + ". "  +group.getGroupName());
         }
     }
 }

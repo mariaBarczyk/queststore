@@ -1,15 +1,8 @@
 package controller;
 
-import dao.ItemDao;
-import dao.StudentDao;
-import dao.TransactionDao;
+import dao.*;
+import model.*;
 import view.MentorView;
-import model.StudentModel;
-import model.WalletModel;
-import model.GroupModel;
-import model.ItemModel;
-import model.QuestModel;
-import model.ArtifactModel;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -64,15 +57,29 @@ public class MentorController {
         }
     }
 
+    private GroupModel selectGroup() {
+        GroupDao groupDao = new GroupDao();
+        List<GroupModel> allGroups =groupDao.getGroupsCollection();
+        view.displayAllGroups(allGroups);
+        int id = inputController.getIntInput("Enter id of the chosen group: ");
+        GroupModel selectedGroup = null;
+        for (GroupModel group: allGroups)
+            if (group.getId() == id)
+                selectedGroup = group;
+        return selectedGroup;
+    }
+
 
     private void createStudent() {
         String studentName = inputController.getStringInput("Enter student name: ");
         String studentLastName = inputController.getStringInput("Enter student last name: ");
         String studentEmail = inputController.getStringInput("Enter student email: ");
         String studentPassword = inputController.getStringInput("Enter student password: ");
+        GroupModel selectedGroup = selectGroup();
+        int idGroup = selectedGroup.getId();
         StudentDao studentDao = new StudentDao();
-        studentDao.insertNewStudent(studentName, studentLastName, studentEmail, studentPassword);
-        //GroupModel group = selectGroup();
+        StudentModel student = new StudentModel(studentName, studentLastName, studentEmail, studentPassword, idGroup);
+        studentDao.insertNewStudent(student);
         //WalletModel wallet = new WalletModel();
         //StudentModel newStudent = new StudentModel(studentName, studentLastName, studentEmail, studentPassword, group, wallet);
     }
