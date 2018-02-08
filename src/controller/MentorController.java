@@ -78,10 +78,9 @@ public class MentorController {
         GroupModel selectedGroup = selectGroup();
         int idGroup = selectedGroup.getId();
         StudentDao studentDao = new StudentDao();
-        StudentModel student = new StudentModel(studentName, studentLastName, studentEmail, studentPassword, idGroup);
+        WalletModel wallet = new WalletModel();
+        StudentModel student = new StudentModel(studentName, studentLastName, studentEmail, studentPassword, idGroup, wallet);
         studentDao.insertNewStudent(student);
-        //WalletModel wallet = new WalletModel();
-        //StudentModel newStudent = new StudentModel(studentName, studentLastName, studentEmail, studentPassword, group, wallet);
     }
 
     private void createQuest() {
@@ -194,7 +193,7 @@ public class MentorController {
     private void  displayStudentWallet() {
         StudentModel student = selectStudent();
         List<ItemModel> studentArtifacts = getStudentArtifacts(student.getID());
-        view.displayStudentWallet(student.getWallet());
+        view.displayStudentWallet(student.getMyWallet());
         view.displayStudentArtifacts(studentArtifacts);
     }
 
