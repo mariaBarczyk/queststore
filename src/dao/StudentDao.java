@@ -51,6 +51,19 @@ public class StudentDao extends UserDao implements StudentDaoInterface {
         return sql;
     }
 
+    public StudentModel  getStudentByIdLogin(int idLogin) {
+        String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, id_wallet, total_coolcoins, balance";
+        String joinStmt1 = "Login.id_login=Student.id_login";
+        String joinStmt2 = "Wallet.id_student=Student.id_student";
+        String condition = "Student.id_login=" +idLogin;
+
+        String sql = "SELECT " + columns + " FROM Student JOIN Login ON " +  joinStmt1 +
+                    " JOIN Wallet ON " + joinStmt2 +
+                    " WHERE " +  condition;
+        ResultSet result = executeSelect(sql);
+        return createStudentObject(result);
+    }
+
     public StudentModel createStudentObject(ResultSet result) {
         StudentModel student = null;
         try {

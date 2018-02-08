@@ -12,7 +12,6 @@ import model.QuestModel;
 import model.ArtifactModel;
 
 import java.util.List;
-import java.util.ArrayList;
 
 
 public class MentorController {
@@ -72,9 +71,6 @@ public class MentorController {
         String studentPassword = inputController.getStringInput("Enter student password: ");
         StudentDao studentDao = new StudentDao();
         studentDao.insertNewStudent(studentName, studentLastName, studentEmail, studentPassword);
-        //GroupModel group = selectGroup();
-        //WalletModel wallet = new WalletModel();
-        //StudentModel newStudent = new StudentModel(studentName, studentLastName, studentEmail, studentPassword, group, wallet);
     }
 
     private void createQuest() {
@@ -107,13 +103,6 @@ public class MentorController {
         return matchedItem;
     }
 
-
-//    private void changePriceOfItem(String type) {
-//        ItemModel item = selectItem(type);
-//        int newPrice = inputController.getIntInput("Enter new price: ");
-//        item.setValue(newPrice);
-//    }
-
     private StudentModel selectStudent() {
         StudentDao studentDao = new StudentDao();
         List<StudentModel> allStudents = studentDao.getStudentsCollection();
@@ -133,27 +122,6 @@ public class MentorController {
         ItemDao itemDao = new ItemDao();
         itemDao.updateValueOfItem(item);
     }
-
-//    private StudentModel selectStudent() {
-//        //List<StudentModel> allStudents = StudentModel.getStudentsCollection();
-//        view.displayAllStudents(allStudents);
-//        String fullName = inputController.getStringInput("Enter student full name: ");
-//        StudentModel matchedStudent = null;
-//        for (StudentModel student: allStudents)
-//            if (student.getFullName().equals(fullName))
-//                matchedStudent = student;
-//        return matchedStudent;
-//    }
-//    private void displayStudentWallet() {
-//        StudentModel student = selectStudent();
-//        WalletModel wallet = student.getWallet();
-//        view.displayStudentWallet(wallet);
-//    }
-//    private void markQuest() {
-//        StudentModel selectedStudent = selectStudent();
-//        ItemModel selectedQuest = selectItem("Quest");
-//        selectedStudent.setValuesInWallet(select edQuest.getValue());
-//    }
 
     private ItemModel chooseArtifactToMark(){
         List<ItemModel> artifactCollection;
@@ -175,13 +143,11 @@ public class MentorController {
         ItemModel artifactToMark = chooseArtifactToMark();
         TransactionDao transactionDao = new TransactionDao();
         transactionDao.updateStatusOfTransaction(artifactToMark);
-
     }
   
     private List<ItemModel> getStudentArtifacts(int id) {
         TransactionDao transactionDao = new TransactionDao();
         return transactionDao.getStudentArtifact(id);
-
     }
 
     private void  displayStudentWallet() {
@@ -190,6 +156,10 @@ public class MentorController {
         view.displayStudentWallet(student.getWallet());
         view.displayStudentArtifacts(studentArtifacts);
     }
+<<<<<<< HEAD
 
 
 }
+=======
+}
+>>>>>>> f15ecad80558bea8291cdcdd4933fe688cba52c3
