@@ -155,7 +155,7 @@ public class MentorController {
         TransactionDao transactionDao = new TransactionDao();
         transactionDao.updateStatusOfTransaction(itemToMark);
     }
-  
+
     private List<ItemModel> getStudentArtifacts(int id) {
         TransactionDao transactionDao = new TransactionDao();
         return transactionDao.getStudentArtifact(id);
