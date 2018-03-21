@@ -7,7 +7,7 @@ public final class DatabaseConnection {
 
     private static DatabaseConnection instance = null;
     private Connection connection = null;
-    private final String DBNAME = "jdbc:sqlite:Queststore.db";
+    private String DBNAME = "jdbc:sqlite:Queststore.db";
 
     private DatabaseConnection() {
         getConnectionToDatabase();
@@ -17,6 +17,10 @@ public final class DatabaseConnection {
             instance = new DatabaseConnection();
         }
         return instance;
+    }
+
+    public void setDBNAME(String DBNAME) {
+        this.DBNAME = DBNAME;
     }
 
     private void getConnectionToDatabase () {
@@ -34,5 +38,15 @@ public final class DatabaseConnection {
 
     public Connection getConnection () {
         return connection;
+    }
+
+    public void closeConnection() {
+        if (this.connection != null){
+            try{
+                this.connection.close();
+            }catch (SQLException e){
+                System.out.println("Unable to close!");
+            }
+        }
     }
 }
