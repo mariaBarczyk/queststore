@@ -29,7 +29,7 @@ public class StudentDao extends ManipulationDao implements StudentDaoInterface {
         return sql;
     }
 
-    public StudentModel  getStudentByIdLogin(int idLogin) {
+    public StudentModel  getStudentByIdLogin(int idLogin) { // todo change method name, it's confusing becouse we get only id
         String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, id_wallet, total_coolcoins, balance, Student.id_group, Groups.name AS group_name";
         String joinStmt1 = "Login.id_login=Student.id_login";
         String joinStmt2 = "Wallet.id_student=Student.id_student";
@@ -44,7 +44,7 @@ public class StudentDao extends ManipulationDao implements StudentDaoInterface {
         return createStudentObject(result);
     }
 
-    public StudentModel createStudentObject(ResultSet result) {
+    private StudentModel createStudentObject(ResultSet result) {
         StudentModel student = null;
         try {
             String email = result.getString("email");

@@ -13,14 +13,14 @@ class StudentModelTest {
     private GroupModel groupModel = Mockito.mock(GroupModel.class);
 
     @Test
-    public void checkIfStudentModelHasWallet(){
+    void checkIfStudentModelHasWallet(){
         StudentModel studentModel = new StudentModel(1, "Adam", "Kruk", "adam@gmal.com",
                                                 "lala", groupModel, walletModel);
         assertEquals(walletModel, studentModel.getMyWallet());
     }
 
     @Test
-    public void checkIfStudentModelHasGroup(){
+    void checkIfStudentModelHasGroup(){
         StudentModel studentModel = new StudentModel(1, "Adam", "Kruk", "adam@gmal.com",
                 "lala", groupModel, walletModel);
         assertEquals(groupModel, studentModel.getGroup());

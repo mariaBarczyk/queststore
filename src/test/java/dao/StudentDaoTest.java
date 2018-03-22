@@ -1,17 +1,31 @@
 package dao;
 
+import model.StudentModel;
+import model.UserModel;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class StudentDaoTest {
 
+    private StudentDao studentDao = new StudentDao();
+
+
+    @Mock
+    private UserModel student = Mockito.mock(StudentModel.class);
+
+
     @Test
-    void getStudentByIdLogin() {
+    void checkIfIdReturnValueTest(){
+        Mockito.when(student.getID()).thenReturn(1);
+
     }
 
     @Test
-    void createStudentObject() {
+    void getStudentById() {
     }
 
     @Test
