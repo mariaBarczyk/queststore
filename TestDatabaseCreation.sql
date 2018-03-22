@@ -1,4 +1,3 @@
---BEGIN TRANSACTION;
 DROP TABLE IF EXISTS `Wallet`;
 CREATE TABLE IF NOT EXISTS `Wallet` (
 	`id_wallet`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -136,4 +135,4 @@ INSERT INTO `Groups` (id_group,name) VALUES (1,'A'),
  (2,'B'),
  (3,'C'),
  (4,'D');
-COMMIT ;
+COMMIT;
