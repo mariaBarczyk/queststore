@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StudentModelTest {
 
+    @Mock
     private WalletModel walletModel = Mockito.mock(WalletModel.class);
 
     @Test
