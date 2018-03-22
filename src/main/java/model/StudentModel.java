@@ -25,10 +25,6 @@ public class StudentModel extends UserModel {
         return myWallet;
     }
 
-    public WalletModel getWallet() {
-        return this.myWallet;
-    }
-
     public int getGroupId() {
         return this.myGroupId;
     }

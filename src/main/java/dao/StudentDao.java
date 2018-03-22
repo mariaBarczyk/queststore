@@ -102,8 +102,8 @@ public class StudentDao extends ManipulationDao implements StudentDaoInterface {
     }
 
     public void updateWallet(StudentModel student){
-        int balance = student.getWallet().getBalance();
-        int totalCoolcoins = student.getWallet().getTotalCoolcoins();
+        int balance = student.getMyWallet().getBalance();
+        int totalCoolcoins = student.getMyWallet().getTotalCoolcoins();
         int idStudent = student.getID();
         updateDataInTable("Wallet", "balance="+ balance +", total_coolcoins=" + totalCoolcoins, "id_student=" + idStudent);
     }
