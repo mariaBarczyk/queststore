@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class StudentDaoTest {
+class StudentDaoTest extends TestableDatabaseUnit{
 
     private StudentDao studentDao = new StudentDao();
 
@@ -19,9 +19,9 @@ class StudentDaoTest {
 
 
     @Test
-    void checkIfIdReturnValueTest(){
+    void getStudentByLoginIdReturnsGoodIdTest(){
         Mockito.when(student.getID()).thenReturn(1);
-
+        assertEquals(student.getID(), studentDao.getStudentByIdLogin(4).getID());
     }
 
     @Test
