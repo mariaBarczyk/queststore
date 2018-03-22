@@ -1,7 +1,9 @@
 package dao;
 
+import model.GroupModel;
 import model.StudentModel;
 import model.UserModel;
+import model.WalletModel;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -9,23 +11,21 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class StudentDaoTest {
+class StudentDaoTest extends TestableDatabaseUnit{
 
     private StudentDao studentDao = new StudentDao();
 
 
     @Mock
-    private UserModel student = Mockito.mock(StudentModel.class);
+    private StudentModel mockStudent = Mockito.mock(StudentModel.class);
 
-
-    @Test
-    void checkIfIdReturnValueTest(){
-        Mockito.when(student.getID()).thenReturn(1);
-
-    }
+    @Mock
+    private WalletModel wallet = Mockito.mock(WalletModel.class);
 
     @Test
-    void getStudentById() {
+    void getStudentByLoginIdReturnsGoodIdTest(){
+        Mockito.when(mockStudent.getID()).thenReturn(1);
+        assertEquals(mockStudent.getID(), studentDao.getStudentByIdLogin(4).getID());
     }
 
     @Test
@@ -38,5 +38,14 @@ class StudentDaoTest {
 
     @Test
     void updateWallet() {
+        Mockito.when(wallet.getTotalCoolcoins()).thenReturn(200);
+        Mockito.when(wallet.getBalance()).thenReturn(100);
+        Mockito.when(mockStudent.getID()).thenReturn(1);
+        Mockito.when(mockStudent.getMyWallet()).thenReturn(wallet);
+
+        studentDao.updateWallet(mockStudent);
+        StudentModel testStudent = studentDao.getStudentByIdLogin(4);
+
+        assertEquals(mockStudent.getMyWallet().getTotalCoolcoins(), testStudent.getMyWallet().getTotalCoolcoins());
     }
 }
