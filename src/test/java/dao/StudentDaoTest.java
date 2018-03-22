@@ -25,10 +25,6 @@ class StudentDaoTest extends TestableDatabaseUnit{
     }
 
     @Test
-    void getStudentById() {
-    }
-
-    @Test
     void getStudentsCollection() {
     }
 
