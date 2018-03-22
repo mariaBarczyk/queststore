@@ -31,10 +31,4 @@ class TestableDatabaseUnit {
     void afterEach() {
         dao.executeUpdate("ROLLBACK;");
     }
-
-    @Test
-    void testDatabaseCreation() {
-        System.out.println("==TEMPORARY TEST UNTIL OTHERS IMPLEMENTED==");
-    }
-
 }
