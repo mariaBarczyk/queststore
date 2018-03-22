@@ -14,7 +14,7 @@ class StudentModelTest {
     @Test
     public void checkIfStudentModelHasWallet(){
         StudentModel studentModel = new StudentModel(1, "Adam", "Kruk", "adam@gmal.com",
-                                                "lala", "2016.2", walletModel);
+                                                "lala", 1, walletModel);
         assertEquals(walletModel, studentModel.getMyWallet());
     }
 }

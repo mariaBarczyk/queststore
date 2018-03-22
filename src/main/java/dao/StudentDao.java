@@ -29,7 +29,7 @@ public class StudentDao extends ManipulationDao implements StudentDaoInterface {
     }
 
     public StudentModel  getStudentByIdLogin(int idLogin) {
-        String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, id_wallet, total_coolcoins, balance";
+        String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, id_wallet, total_coolcoins, balance, id_group";
         String joinStmt1 = "Login.id_login=Student.id_login";
         String joinStmt2 = "Wallet.id_student=Student.id_student";
         String condition = "Student.id_login=" +idLogin;
@@ -51,10 +51,10 @@ public class StudentDao extends ManipulationDao implements StudentDaoInterface {
             String lastName = result.getString("last_name");
             int idWallet = result.getInt("id_wallet");
             int totalCoolcoins = result.getInt("total_coolcoins");
-            String groupName = result.getString("first_name");
+            int groupId = result.getInt("id_group");
             int balance = result.getInt("balance");
             WalletModel wallet = new WalletModel(idWallet, totalCoolcoins, balance);
-            student = new StudentModel(id, firstName, lastName, email, password, groupName, wallet);
+            student = new StudentModel(id, firstName, lastName, email, password, groupId, wallet);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -15,10 +15,10 @@ public class StudentModel extends UserModel {
         this.myGroupId = myGroupId;
     }
 
-    public StudentModel(int id, String firstName, String lastName, String email, String password, String groupName, WalletModel myWallet) {
+    public StudentModel(int id, String firstName, String lastName, String email, String password, int myGroupId, WalletModel myWallet) {
         super(id, firstName, lastName, email, password);
         this.myWallet = myWallet;
-        this.groupName = groupName;
+        this.myGroupId = myGroupId;
     }
 
     public WalletModel getMyWallet() {
