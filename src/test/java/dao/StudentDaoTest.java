@@ -1,7 +1,9 @@
 package dao;
 
+import model.GroupModel;
 import model.StudentModel;
 import model.UserModel;
+import model.WalletModel;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -15,13 +17,15 @@ class StudentDaoTest extends TestableDatabaseUnit{
 
 
     @Mock
-    private UserModel student = Mockito.mock(StudentModel.class);
+    private StudentModel mockStudent = Mockito.mock(StudentModel.class);
 
+    @Mock
+    private WalletModel wallet = Mockito.mock(WalletModel.class);
 
     @Test
     void getStudentByLoginIdReturnsGoodIdTest(){
-        Mockito.when(student.getID()).thenReturn(1);
-        assertEquals(student.getID(), studentDao.getStudentByIdLogin(4).getID());
+        Mockito.when(mockStudent.getID()).thenReturn(1);
+        assertEquals(mockStudent.getID(), studentDao.getStudentByIdLogin(4).getID());
     }
 
     @Test
@@ -34,5 +38,14 @@ class StudentDaoTest extends TestableDatabaseUnit{
 
     @Test
     void updateWallet() {
+        Mockito.when(wallet.getTotalCoolcoins()).thenReturn(200);
+        Mockito.when(wallet.getBalance()).thenReturn(100);
+        Mockito.when(mockStudent.getID()).thenReturn(1);
+        Mockito.when(mockStudent.getMyWallet()).thenReturn(wallet);
+
+        studentDao.updateWallet(mockStudent);
+        StudentModel testStudent = studentDao.getStudentByIdLogin(4);
+
+        assertEquals(mockStudent.getMyWallet().getTotalCoolcoins(), testStudent.getMyWallet().getTotalCoolcoins());
     }
 }
