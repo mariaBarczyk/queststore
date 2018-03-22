@@ -2,12 +2,10 @@ package dao;
 
 
 import model.MentorModel;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,5 +37,29 @@ class MentorDaoTest extends TestableDatabaseUnit {
             e.printStackTrace();
         }
         assertTrue(insertionSuccessful);
+    }
+
+    @Test
+    void testSQLInjection() {
+        MentorModel mentor = new MentorModel(
+                "TestMan",
+                "SuperMan', 333, 444, 555); " +
+                        "  INSERT INTO Admin (first_name, last_name, id_login, id_status) " +
+                        "    VALUES ('Lord', 'Satan', 666,666);--",
+                "superman@test.com",
+                "superpassword",
+                1);
+
+        dao.insertNewMentor(mentor);
+        String query =
+                "SELECT * FROM Admin WHERE last_name LIKE 'Satan';";
+        ResultSet rs = dao.executeSelect(query);
+        boolean injectionSuccessful = false;
+        try {
+            injectionSuccessful = rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        assertFalse(injectionSuccessful);
     }
 }
