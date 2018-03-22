@@ -2,6 +2,7 @@ package dao;
 
 
 import model.MentorModel;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
@@ -11,7 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MentorDaoTest extends TestableDatabaseUnit {
 
-    private MentorDao dao = new MentorDao();
+    private static MentorDao dao = new MentorDao();
+
+    @AfterAll
+    static void afterAll() {
+        dao.executeUpdate("BEGIN TRANSACTION;");
+    }
 
     @Test
     void testMentorInsertion() {
