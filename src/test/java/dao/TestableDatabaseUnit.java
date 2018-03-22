@@ -1,30 +1,21 @@
 package dao;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class TestableDatabaseUnit {
 
-    private ManipulationDao dao;
+    private ManipulationDao dao = new ManipulationDao();
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeEach
+    void setup() {
         try {
             TestDatabase.prepareTestInstance();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @BeforeEach
-    void beforeEach() {
-        dao = new ManipulationDao();
     }
 
     @AfterEach
