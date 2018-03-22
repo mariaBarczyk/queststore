@@ -14,6 +14,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionDaoTest extends TestableDatabaseUnit{
 
+    private static TransactionDao transactionDao = new TransactionDao();
+
+    @AfterAll
+    static void afterAll(){
+        transactionDao.executeUpdate("BEGIN TRANSACTION;");
+    }
+
     @Test
     void testUpdateStatusOfTransaction() {
         ItemModel mockItem = Mockito.mock(ItemModel.class);
