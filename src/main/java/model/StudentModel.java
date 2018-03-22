@@ -3,7 +3,7 @@ package model;
 
 public class StudentModel extends UserModel {
 
-    private String groupName;
+    private GroupModel group;
     private int myGroupId;
     private WalletModel myWallet;
 
@@ -15,10 +15,10 @@ public class StudentModel extends UserModel {
         this.myGroupId = myGroupId;
     }
 
-    public StudentModel(int id, String firstName, String lastName, String email, String password, int myGroupId, WalletModel myWallet) {
+    public StudentModel(int id, String firstName, String lastName, String email, String password, GroupModel group, WalletModel myWallet) {
         super(id, firstName, lastName, email, password);
         this.myWallet = myWallet;
-        this.myGroupId = myGroupId;
+        this.group = group;
     }
 
     public WalletModel getMyWallet() {

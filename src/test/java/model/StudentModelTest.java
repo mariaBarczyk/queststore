@@ -10,11 +10,12 @@ class StudentModelTest {
 
     @Mock
     private WalletModel walletModel = Mockito.mock(WalletModel.class);
+    private GroupModel groupModel = Mockito.mock(GroupModel.class);
 
     @Test
     public void checkIfStudentModelHasWallet(){
         StudentModel studentModel = new StudentModel(1, "Adam", "Kruk", "adam@gmal.com",
-                                                "lala", 1, walletModel);
+                                                "lala", groupModel, walletModel);
         assertEquals(walletModel, studentModel.getMyWallet());
     }
 }
