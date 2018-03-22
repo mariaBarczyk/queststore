@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `Transactions` (
 	`used`	INTEGER NOT NULL
 );
 INSERT INTO `Transactions` (id_transaction,id_student,id_item,used) VALUES (1,1,5,1),
- (2,1,3,1),
+ (2,1,3,0),
  (3,1,1,0),
  (4,1,1,0),
  (5,1,3,1),
@@ -69,9 +69,9 @@ INSERT INTO `Transactions` (id_transaction,id_student,id_item,used) VALUES (1,1,
  (10,1,1,0),
  (11,1,5,1),
  (12,1,2,0),
- (13,1,3,1),
- (14,1,1,0),
- (15,1,2,0);
+ (13,2,5,0),
+ (14,2,1,0),
+ (15,2,3,0);
 DROP TABLE IF EXISTS `Login`;
 CREATE TABLE IF NOT EXISTS `Login` (
 	`id_login`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
