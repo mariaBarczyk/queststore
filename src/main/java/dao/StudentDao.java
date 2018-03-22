@@ -1,5 +1,6 @@
 package dao;
 
+import model.GroupModel;
 import model.StudentModel;
 import model.WalletModel;
 
@@ -16,7 +17,7 @@ public class StudentDao extends ManipulationDao implements StudentDaoInterface {
     }
 
     private String prepareGetAllStudentsSql() {
-        String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, Groups.id_group, id_wallet, total_coolcoins, balance, Groups.name";
+        String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, Groups.id_group, id_wallet, total_coolcoins, balance, Groups.name AS group_name";
         String joinStmt1 = "Login.id_login=Student.id_login";
         String joinStmt2 = "Wallet.id_student=Student.id_student";
         String joinStmt3 = "Student.id_group = Groups.id_group";
@@ -29,13 +30,15 @@ public class StudentDao extends ManipulationDao implements StudentDaoInterface {
     }
 
     public StudentModel  getStudentByIdLogin(int idLogin) {
-        String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, id_wallet, total_coolcoins, balance, id_group";
+        String columns = "Login.email, Login.password, Student.id_student, first_name, last_name, id_wallet, total_coolcoins, balance, Student.id_group, Groups.name AS group_name";
         String joinStmt1 = "Login.id_login=Student.id_login";
         String joinStmt2 = "Wallet.id_student=Student.id_student";
+        String joinStmt3 = "Groups.id_group = Student.id_group";
         String condition = "Student.id_login=" +idLogin;
 
         String sql = "SELECT " + columns + " FROM Student JOIN Login ON " +  joinStmt1 +
                     " JOIN Wallet ON " + joinStmt2 +
+                    " Join Groups ON " + joinStmt3 +
                     " WHERE " +  condition;
         ResultSet result = executeSelect(sql);
         return createStudentObject(result);
@@ -52,9 +55,11 @@ public class StudentDao extends ManipulationDao implements StudentDaoInterface {
             int idWallet = result.getInt("id_wallet");
             int totalCoolcoins = result.getInt("total_coolcoins");
             int groupId = result.getInt("id_group");
+            String groupName = result.getString("group_name");
             int balance = result.getInt("balance");
             WalletModel wallet = new WalletModel(idWallet, totalCoolcoins, balance);
-            student = new StudentModel(id, firstName, lastName, email, password, groupId, wallet);
+            GroupModel group = new GroupModel(groupId, groupName);
+            student = new StudentModel(id, firstName, lastName, email, password, group, wallet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
