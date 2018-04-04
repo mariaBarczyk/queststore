@@ -1,9 +1,8 @@
 package dao;
 
-import model.GroupModel;
 import model.StudentModel;
-import model.UserModel;
 import model.WalletModel;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -13,8 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StudentDaoTest extends TestableDatabaseUnit{
 
-    private StudentDao studentDao = new StudentDao();
+    private static StudentDao studentDao = new StudentDao();
 
+    @AfterAll
+    static void afterAll(){
+        studentDao.executeUpdate("BEGIN TRANSACTION;");
+    }
 
     @Mock
     private StudentModel mockStudent = Mockito.mock(StudentModel.class);
